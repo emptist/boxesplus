@@ -35,6 +35,7 @@ pres.writeFile({ fileName: "output.pptx" })
 | `timelineSlide(pres, opts)` | 时间线页 |
 | `endSlide(pres, opts)` | 结束页 |
 | `chartSlide(pres, opts)` | 通用图表页 |
+| `imageSlide(pres, opts)` | 图片页 |
 
 ### 图表类型
 
@@ -108,6 +109,15 @@ chartSlide pres,
     { name: "系列1", values: [10, 20, 30], labels: ["A", "B", "C"] }
     { name: "系列2", values: [15, 25, 35] }
   ]
+```
+
+#### imageSlide
+```coffee
+imageSlide pres,
+  title: "图片标题"
+  path: "./images/chart.png"  # 图片路径
+  x: 0.5, y: 1  # 位置
+  w: 9, h: 4     # 尺寸
 ```
 
 ## 运行 Demo
