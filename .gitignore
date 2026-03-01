@@ -3,3 +3,5 @@ outputs/
 *.log
 .DS_Store
 *.mp4
+reveal.js@3.9.2/
+reveal.js-3.9.2.tgz
