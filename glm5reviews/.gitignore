@@ -1,0 +1,56 @@
+# GLM5 Reviews - Gitignore
+
+# Ignore all files in glm5reviews folder (reviewer workspace)
+# This allows the reviewer to work independently without affecting the main project
+
+# All markdown files
+*.md
+
+# All coffee files
+*.coffee
+
+# All JSON files
+*.json
+
+# All generated files
+*.pptx
+*.html
+*.pdf
+
+# Sensitive files
+*.env
+*.env.local
+*.secret
+*.key
+*.pem
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor directories and files
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# Coverage reports
+coverage/
+
+# Build outputs
+dist/
+outputs/
+output/
