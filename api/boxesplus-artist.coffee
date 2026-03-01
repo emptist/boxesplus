@@ -251,6 +251,68 @@ timelineSlide = (pres, opts) ->
 
   slide
 
+# ============ Chart Functions ============
+
+barChartSlide = (pres, opts) ->
+  { title, data, subtitle } = opts
+  slide = pres.addSlide()
+  
+  if title
+    slide.addText title,
+      x: 0.5, y: 0.3, w: 9, h: 0.6
+      fontSize: 28, color: THEME.primary, bold: true
+  
+  slide.addChart pres.ChartType.BAR, data,
+    x: 0.5, y: 1, w: 9, h: 4
+    title: subtitle ? ""
+
+  slide
+
+lineChartSlide = (pres, opts) ->
+  { title, data, subtitle } = opts
+  slide = pres.addSlide()
+  
+  if title
+    slide.addText title,
+      x: 0.5, y: 0.3, w: 9, h: 0.6
+      fontSize: 28, color: THEME.primary, bold: true
+  
+  slide.addChart pres.ChartType.LINE, data,
+    x: 0.5, y: 1, w: 9, h: 4
+    title: subtitle ? ""
+
+  slide
+
+pieChartSlide = (pres, opts) ->
+  { title, data, subtitle } = opts
+  slide = pres.addSlide()
+  
+  if title
+    slide.addText title,
+      x: 0.5, y: 0.3, w: 9, h: 0.6
+      fontSize: 28, color: THEME.primary, bold: true
+  
+  slide.addChart pres.ChartType.PIE, data,
+    x: 1.5, y: 1, w: 7, h: 4
+    title: subtitle ? ""
+
+  slide
+
+radarChartSlide = (pres, opts) ->
+  { title, data, subtitle } = opts
+  slide = pres.addSlide()
+  
+  if title
+    slide.addText title,
+      x: 0.5, y: 0.3, w: 9, h: 0.6
+      fontSize: 28, color: THEME.primary, bold: true
+  
+  slide.addChart pres.ChartType.RADAR, data,
+    x: 1, y: 1, w: 8, h: 4
+    title: subtitle ? ""
+
+  slide
+
 endSlide = (pres, opts) ->
   { title, subtitle } = opts
   slide = pres.addSlide()
@@ -269,5 +331,7 @@ endSlide = (pres, opts) ->
   slide
 
 module.exports = {
-  titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide, THEME, GRADIENTS
+  titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide
+  barChartSlide, lineChartSlide, pieChartSlide, radarChartSlide
+  THEME, GRADIENTS
 }
