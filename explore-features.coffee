@@ -154,6 +154,12 @@ slide10.addChart pres.ChartType.SCATTER, scatterData,
   x: 0.5, y: 1, w: 9, h: 4
   title: "散点图示例"
 
+# 11. Slide with slide number
+slide11 = pres.addSlide()
+slide11.addText "Slide Number 示例", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+slide11.addText "This slide has a slide number at bottom right", x: 0.5, y: 2, w: 9, h: 0.5, fontSize: 16
+slide11.slideNumber = { x: "95%", y: "95%", fontSize: 10, color: "666666" }
+
 # Save
 pres.writeFile({ fileName: "outputs/explore-features.pptx" })
   .then -> console.log "✅ Created: outputs/explore-features.pptx"
