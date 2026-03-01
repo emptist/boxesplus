@@ -6,6 +6,7 @@
 # All markdown files (except documentation)
 *.md
 !README.md
+!.trae/**/*.md
 
 # All JSON files (except package.json)
 *.json
