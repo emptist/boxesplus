@@ -66,12 +66,34 @@ slide.addTable tableData,
   headerColor: "ffffff"
 ```
 
+## Now Also Verified
+
+### Text Formatting
+- bold: true
+- italic: true
+- underline: true
+- color: "hex"
+- align: "left" | "center" | "right"
+
+### Background
+- slide.background = { color: "hex" }
+
+### Transparency
+- fill: { color: "hex", transparency: 30 }
+
+### Outline
+- line: { color: "hex", width: 3 }
+
+### Slide Number
+- slide.slideNumber = { x: "95%", y: "95%", fontSize: 10, color: "666666" }
+
 ## Not Yet Explored
 - addImage (needs actual image file)
 - Slide Masters (defineSlideMaster)
 - addMedia (video/audio)
 - SVG support
 - HTML-to-PPTX conversion
+- DOUGHNUT chart
 
 ## Reference
 - hqcoffee cases/goodhospital2021/self.coffee - complex example
