@@ -89,7 +89,9 @@ html = """
     Reveal.initialize({
       hash: true,
       slideNumber: true,
-      transition: 'slide'
+      transition: 'slide',
+      center: true,
+      keyboard: true
     });
   </script>
 </body>
