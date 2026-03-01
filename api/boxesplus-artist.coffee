@@ -20,7 +20,7 @@ GRADIENTS =
   purple: ["#805ad5", "#553c9a"]
 
 titleSlide = (pres, opts) ->
-  { title, subtitle, gradient } = opts
+  { title, subtitle, gradient, slideNumber } = opts
   slide = pres.addSlide()
   
   if gradient
@@ -29,13 +29,45 @@ titleSlide = (pres, opts) ->
   
   if title
     slide.addText title,
-      x: 0.5, y: 2.5, w: 9, h: 1.5
+      x: 0.5, y: 2, w: 9, h: 1.5
       fontSize: 44, color: "ffffff", bold: true, align: "center"
   
   if subtitle
     slide.addText subtitle,
       x: 1, y: 4, w: 8, h: 0.8
       fontSize: 20, color: "ffffff", align: "center", transparency: 20
+
+  if slideNumber isnt false
+    slide.slideNumber = { x: "95%", y: "95%", fontSize: 10, color: "ffffff" }
+  
+  slide
+
+listSlide = (pres, opts) ->
+  { title, items, slideNumber } = opts
+  slide = pres.addSlide()
+  
+  slide.addText title,
+    x: 0.5, y: 0.3, w: 9, h: 0.7
+    fontSize: 28, color: THEME.primary, bold: true
+  
+  y = 1.2
+  for item, i in items
+    slide.addShape pres.ShapeType.rect,
+      x: 0.6, y: y, w: 0.4, h: 0.4
+      fill: { color: THEME.secondary }
+    
+    slide.addText "#{i + 1}",
+      x: 0.6, y: y + 0.05, w: 0.4, h: 0.3
+      fontSize: 12, color: "ffffff", align: "center"
+    
+    slide.addText item,
+      x: 1.2, y: y, w: 8, h: 0.5
+      fontSize: 16, color: THEME.text
+    
+    y += 0.6
+
+  if slideNumber isnt false
+    slide.slideNumber = { x: "95%", y: "95%", fontSize: 10, color: "666666" }
   
   slide
 
@@ -67,7 +99,7 @@ listSlide = (pres, opts) ->
   slide
 
 cardSlide = (pres, opts) ->
-  { title, cards, columns: cols = 2 } = opts
+  { title, cards, columns: cols = 2, slideNumber } = opts
   slide = pres.addSlide()
   
   slide.addText title,
@@ -255,7 +287,7 @@ timelineSlide = (pres, opts) ->
 
 # Generic chart slide - takes chart type as parameter
 chartSlide = (pres, opts) ->
-  { title, subtitle, data, type = "BAR" } = opts
+  { title, subtitle, data, type = "BAR", slideNumber } = opts
   slide = pres.addSlide()
   
   if title
@@ -271,6 +303,9 @@ chartSlide = (pres, opts) ->
     slide.addChart chartType, data, x: 1, y: 1, w: 8, h: 4, title: subtitle ? ""
   else
     slide.addChart chartType, data, x: 0.5, y: 1, w: 9, h: 4, title: subtitle ? ""
+
+  if slideNumber isnt false
+    slide.slideNumber = { x: "95%", y: "95%", fontSize: 10, color: "666666" }
 
   slide
 
