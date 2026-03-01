@@ -36,6 +36,8 @@ pres.writeFile({ fileName: "output.pptx" })
 | `endSlide(pres, opts)` | 结束页 |
 | `chartSlide(pres, opts)` | 通用图表页 |
 | `imageSlide(pres, opts)` | 图片页 |
+| `defineMaster(pres, opts)` | 定义幻灯片母版 |
+| `masterSlide(pres, opts)` | 使用母版创建幻灯片 |
 
 ### 图表类型
 
@@ -115,9 +117,26 @@ chartSlide pres,
 ```coffee
 imageSlide pres,
   title: "图片标题"
-  path: "./images/chart.png"  # 图片路径
-  x: 0.5, y: 1  # 位置
-  w: 9, h: 4     # 尺寸
+  path: "./images/chart.png"
+  x: 0.5, y: 1, w: 9, h: 4
+```
+
+#### defineMaster + masterSlide
+```coffee
+# Define master
+defineMaster pres,
+  name: "MyMaster"
+  background: { color: THEME.primary }
+  objects: [
+    { placeholder: { options: { name: "title", type: "title", x: 0.5, y: 0.3, w: 9, h: 0.8, fontSize: 32 } } }
+    { placeholder: { options: { name: "body", type: "body", x: 0.5, y: 1.3, w: 9, h: 4 } } }
+  ]
+
+# Use master
+masterSlide pres,
+  masterName: "MyMaster"
+  title: "标题"
+  body: "正文内容"
 ```
 
 ## 运行 Demo
