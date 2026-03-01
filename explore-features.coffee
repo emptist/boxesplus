@@ -127,6 +127,33 @@ slide7.addChart pres.ChartType.RADAR, radarData,
   x: 1, y: 1, w: 8, h: 4
   title: "科室综合评价"
 
+# 8. Slide Master example
+slide8 = pres.addSlide()
+slide8.addText "Slide Master - define custom layouts for consistent branding", 
+  x: 0.5, y: 2, w: 9, h: 1
+  fontSize: 20, color: "666666", align: "center"
+
+# 9. Image (placeholder - would need actual image file)
+# slide9 = pres.addSlide()
+# slide9.addText "Image 示例", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+# slide9.addImage({ path: "path/to/image.png", x: 1, y: 1, w: 8, h: 4 })
+
+# 10. Scatter Chart
+slide10 = pres.addSlide()
+slide10.addText "Scatter Chart", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+
+scatterData = [
+  {
+    name: "散点数据"
+    values: [[1,2], [2,3], [3,5], [4,4], [5,7], [6,6], [7,9], [8,8], [9,10], [10,9]]
+    labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+  }
+]
+
+slide10.addChart pres.ChartType.SCATTER, scatterData,
+  x: 0.5, y: 1, w: 9, h: 4
+  title: "散点图示例"
+
 # Save
 pres.writeFile({ fileName: "outputs/explore-features.pptx" })
   .then -> console.log "✅ Created: outputs/explore-features.pptx"
