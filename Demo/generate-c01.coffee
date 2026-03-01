@@ -166,6 +166,85 @@ chartSlide pres,
     { name: "妇产科", values: [90, 91, 93] }
   ]
 
+# ============ 1.3 管理趋势 ============
+sectionSlide pres,
+  number: "1.3"
+  title: "管理趋势"
+  gradient: "purple"
+
+# 发展趋势表格
+tableSlide pres,
+  title: "医疗质量管理发展趋势"
+  headers: ["趋势", "内容"]
+  rows: [
+    ["科学化", "数据驱动、循证决策"]
+    ["精细化", "精准诊疗、个体化"]
+    ["信息化", "智能质控、实时监测"]
+    ["以患者为中心", "体验、质量、安全"]
+  ]
+
+# ============ 第二章 ============
+sectionSlide pres,
+  number: "第二章"
+  title: "医疗质量管理体系"
+  gradient: "green"
+
+# ============ 2.1 质量管理体系架构 ============
+sectionSlide pres,
+  number: "2.1"
+  title: "质量管理体系架构"
+  gradient: "purple"
+
+# 质量管理原则
+cardSlide pres,
+  title: "质量管理原则"
+  columns: 2
+  cards: [
+    { title: "患者导向", content: "以患者安全为中心", color: THEME.accent }
+    { title: "领导重视", content: "最高管理者主导", color: THEME.success }
+    { title: "全员参与", content: "质量安全，人人有责", color: THEME.warning }
+    { title: "过程方法", content: "关注过程、关注结果", color: THEME.danger }
+    { title: "持续改进", content: "永无止境、追求卓越", color: THEME.accent }
+    { title: "循证决策", content: "数据支撑、科学管理", color: THEME.success }
+  ]
+
+# 体系文件层级
+listSlide pres,
+  title: "质量管理体系文件层级"
+  items: [
+    "第一层：质量手册（质量方针、目标、体系框架）"
+    "第二层：程序文件（管理制度、操作流程）"
+    "第三层：作业指导书（操作规范、技术标准）"
+    "第四层：质量记录（表单、报表、档案）"
+  ]
+
+# ============ 2.2 组织架构与职责 ============
+sectionSlide pres,
+  number: "2.2"
+  title: "组织架构与职责"
+  gradient: "purple"
+
+# 质量管理组织
+tableSlide pres,
+  title: "质量管理组织架构"
+  headers: ["组织", "职责"]
+  rows: [
+    ["质量管理委员会", "决策、统筹"]
+    ["质控部门", "日常管理"]
+    ["科室质控小组", "科室落实"]
+    ["全院职工", "具体执行"]
+  ]
+
+# 职责分工
+cardSlide pres,
+  title: "各层级质量职责"
+  columns: 2
+  cards: [
+    { title: "院级", content: "制定质量方针目标\n配置资源保障", color: THEME.accent }
+    { title: "科室级", content: "落实质量要求\n开展科室质控", color: THEME.success }
+    { title: "个人", content: "遵守质量规范\n执行操作标准", color: THEME.warning }
+  ]
+
 # ============ 结束页 ============
 titleSlide pres,
   title: "谢谢!"
