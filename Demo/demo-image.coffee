@@ -11,17 +11,17 @@ titleSlide pres, title: "Image Demo", subtitle: "Using resourses folder", gradie
 # Use images from resources folder (1, 10, 11, 12, 13, 14, 15 available)
 imageSlide pres,
   title: "图片 1"
-  path: "./resourses/1.png"
+  path: "./resources/1.png"
   x: 0.5, y: 0.8, w: 9, h: 4
 
 imageSlide pres,
   title: "图片 10"
-  path: "./resourses/10.png"
+  path: "./resources/10.png"
   x: 0.5, y: 0.8, w: 9, h: 4
 
 imageSlide pres,
   title: "图片 11"
-  path: "./resourses/11.png"
+  path: "./resources/11.png"
   x: 0.5, y: 0.8, w: 9, h: 4
 
 # Save

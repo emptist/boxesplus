@@ -97,7 +97,7 @@ chartSlide pres,
 # 9. Image Slide
 imageSlide pres,
   title: "图片示例"
-  path: "./resourses/1.png"
+  path: "./resources/1.png"
   x: 0.5, y: 0.8, w: 9, h: 4
 
 # 10. End Slide
