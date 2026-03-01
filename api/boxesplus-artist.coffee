@@ -354,6 +354,27 @@ imageSlide = (pres, opts) ->
 
   slide
 
+# ============ Master Slide Functions ============
+
+defineMaster = (pres, opts) ->
+  { name, background, slideNumber, objects } = opts
+  pres.defineSlideMaster
+    title: name
+    background: background ? { color: THEME.primary }
+    slideNumber: slideNumber ? { x: "95%", y: "95%", fontSize: 10, color: "ffffff" }
+    objects: objects
+
+masterSlide = (pres, opts) ->
+  { masterName, title, body } = opts
+  slide = pres.addSlide({ masterName: masterName })
+  
+  if title
+    slide.addText title, options: { name: "title" }
+  if body
+    slide.addText body, options: { name: "body" }
+  
+  slide
+
 endSlide = (pres, opts) ->
   { title, subtitle } = opts
   slide = pres.addSlide()
@@ -375,5 +396,6 @@ module.exports = {
   titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide
   chartSlide, barChartSlide, lineChartSlide, pieChartSlide, radarChartSlide
   imageSlide
+  defineMaster, masterSlide
   THEME, GRADIENTS
 }
