@@ -3,14 +3,13 @@
 # Ignore all files in glm5reviews folder (reviewer workspace)
 # This allows the reviewer to work independently without affecting the main project
 
-# All markdown files
+# All markdown files (except documentation)
 *.md
+!README.md
 
-# All coffee files
-*.coffee
-
-# All JSON files
+# All JSON files (except package.json)
 *.json
+!package.json
 
 # All generated files
 *.pptx
