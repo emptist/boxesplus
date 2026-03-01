@@ -7,7 +7,8 @@ revealConfig = {
   slideNumber: true
   transition: 'slide'
   backgroundTransition: 'fade'
-  center: false
+  center: true  # 解决两页同屏问题
+  keyboard: true  # 解决 Safari 方向键导航
   width: 1280
   height: 720
   margin: 0.04
@@ -131,29 +132,52 @@ slides.push
 slides.push
   content: '''
     <section>
-      <h2 style="color: #1a365d;">品牌持续改进 - PDCA循环</h2>
-      <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-        <div style="position: relative; width: 400px; height: 400px;">
-          <!-- PLAN -->
-          <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: #3182ce; color: white; padding: 15px 30px; border-radius: 50%;">
-            <strong>PLAN</strong><br><span style="font-size: 0.6em;">计划</span>
-          </div>
-          <!-- DO -->
-          <div style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); background: #38a169; color: white; padding: 15px 30px; border-radius: 50%;">
-            <strong>DO</strong><br><span style="font-size: 0.6em;">执行</span>
-          </div>
-          <!-- CHECK -->
-          <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); background: #d69e2e; color: white; padding: 15px 30px; border-radius: 50%;">
-            <strong>CHECK</strong><br><span style="font-size: 0.6em;">检查</span>
-          </div>
-          <!-- ACTION -->
-          <div style="position: absolute; top: 50%; left: 0; transform: translateY(-50%); background: #e53e3e; color: white; padding: 15px 30px; border-radius: 50%;">
-            <strong>ACTION</strong><br><span style="font-size: 0.6em;">处理</span>
-          </div>
-          <!-- 中心 -->
-          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a365d; color: white; padding: 20px; border-radius: 50%; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 0.8em;">
-            持续<br>改进
-          </div>
+      <h2 style="color: #1a365d; text-align: center;">品牌持续改进 - PDCA循环</h2>
+      <div style="position: relative; width: 600px; height: 400px; margin: 20px auto;">
+        <!-- 环形箭头 -->
+        <svg width="600" height="400" style="position: absolute; top: 0; left: 0;">
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#718096"/>
+            </marker>
+          </defs>
+          <!-- PLAN → DO -->
+          <path d="M 300 50 Q 450 50 500 150" stroke="#cbd5e0" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+          <!-- DO → CHECK -->
+          <path d="M 500 250 Q 500 350 400 380" stroke="#cbd5e0" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+          <!-- CHECK → ACTION -->
+          <path d="M 200 380 Q 100 350 100 250" stroke="#cbd5e0" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+          <!-- ACTION → PLAN -->
+          <path d="M 100 150 Q 150 50 300 50" stroke="#cbd5e0" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+        </svg>
+        
+        <!-- PLAN (右上) -->
+        <div style="position: absolute; top: 20px; right: 80px; width: 120px; height: 120px; background: linear-gradient(135deg, #3182ce, #2b6cb0); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 15px rgba(49,130,206,0.4);">
+          <strong style="font-size: 1.2em;">PLAN</strong>
+          <span style="font-size: 0.8em; opacity: 0.9;">计划</span>
+        </div>
+        
+        <!-- DO (右下) -->
+        <div style="position: absolute; bottom: 50px; right: 30px; width: 120px; height: 120px; background: linear-gradient(135deg, #38a169, #2f855a); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 15px rgba(56,161,105,0.4);">
+          <strong style="font-size: 1.2em;">DO</strong>
+          <span style="font-size: 0.8em; opacity: 0.9;">执行</span>
+        </div>
+        
+        <!-- CHECK (左下) -->
+        <div style="position: absolute; bottom: 50px; left: 30px; width: 120px; height: 120px; background: linear-gradient(135deg, #d69e2e, #b7791f); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 15px rgba(214,158,46,0.4);">
+          <strong style="font-size: 1.2em;">CHECK</strong>
+          <span style="font-size: 0.8em; opacity: 0.9;">检查</span>
+        </div>
+        
+        <!-- ACTION (左上) -->
+        <div style="position: absolute; top: 20px; left: 80px; width: 120px; height: 120px; background: linear-gradient(135deg, #e53e3e, #c53030); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 15px rgba(229,62,62,0.4);">
+          <strong style="font-size: 1.2em;">ACTION</strong>
+          <span style="font-size: 0.8em; opacity: 0.9;">处理</span>
+        </div>
+        
+        <!-- 中心 -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a365d; color: white; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9em; text-align: center; box-shadow: 0 4px 20px rgba(26,54,93,0.5);">
+          持续<br>改进
         </div>
       </div>
     </section>
@@ -352,8 +376,8 @@ html = """
 <head>
   <meta charset="utf-8">
   <title>医院品牌建设课程 - Reveal.js 完整版</title>
-  <link rel="stylesheet" href="reveal.js/css/reveal.css">
-  <link rel="stylesheet" href="reveal.js/css/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/white.css">
   <style>
     .reveal .slides section { text-align: left; }
     .reveal { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
@@ -370,14 +394,15 @@ for slide in slides
 html += """
     </div>
   </div>
-  <script src="reveal.js/js/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
       slideNumber: true,
       transition: 'slide',
       backgroundTransition: 'fade',
-      center: false,
+      center: true,
+      keyboard: true,
       width: 1280,
       height: 720,
       margin: 0.04
