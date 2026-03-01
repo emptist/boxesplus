@@ -389,6 +389,28 @@ imageSlide = (pres, opts) ->
 
   slide
 
+# ============ Media Functions ============
+
+mediaSlide = (pres, opts) ->
+  { title, path, type = "video", x: imgX = 1, y: imgY = 1, w: imgW = 8, h: imgH = 4 } = opts
+  slide = pres.addSlide()
+  
+  if title
+    slide.addText title,
+      x: 0.5, y: 0.3, w: 9, h: 0.6
+      fontSize: 28, color: THEME.primary, bold: true
+  
+  if path
+    slide.addMedia
+      type: type
+      path: path
+      x: imgX
+      y: imgY
+      w: imgW
+      h: imgH
+
+  slide
+
 # ============ Master Slide Functions ============
 
 defineMaster = (pres, opts) ->
@@ -430,7 +452,7 @@ endSlide = (pres, opts) ->
 module.exports = {
   titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide
   chartSlide, barChartSlide, lineChartSlide, pieChartSlide, radarChartSlide
-  imageSlide
+  imageSlide, mediaSlide
   defineMaster, masterSlide
   THEME, GRADIENTS
 }
