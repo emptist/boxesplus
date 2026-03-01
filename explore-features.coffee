@@ -55,8 +55,9 @@ slide3.addTable tableData,
   headerColor: "ffffff"
 
 # 4. Correct Chart format (based on hqcoffee)
+# Available: BAR, PIE, LINE, AREA, RADAR, SCATTER, DOUGHNUT
 slide4 = pres.addSlide()
-slide4.addText "Bar Chart (correct format)", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+slide4.addText "Bar Chart", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
 
 chartData = [
   {
@@ -73,6 +74,58 @@ chartData = [
 slide4.addChart pres.ChartType.BAR, chartData,
   x: 0.5, y: 1, w: 9, h: 4
   title: "医院质量指标对比"
+
+# 5. Line Chart
+slide5 = pres.addSlide()
+slide5.addText "Line Chart", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+
+lineData = [
+  {
+    name: "满意度"
+    values: [75, 78, 82, 85, 90]
+    labels: ["2020", "2021", "2022", "2023", "2024"]
+  }
+]
+
+slide5.addChart pres.ChartType.LINE, lineData,
+  x: 0.5, y: 1, w: 9, h: 4
+  title: "患者满意度趋势"
+
+# 6. Pie Chart
+slide6 = pres.addSlide()
+slide6.addText "Pie Chart", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+
+pieData = [
+  {
+    name: "科室收入"
+    labels: ["内科", "外科", "妇产科", "儿科", "其他"]
+    values: [30, 35, 15, 10, 10]
+  }
+]
+
+slide6.addChart pres.ChartType.PIE, pieData,
+  x: 1, y: 1, w: 8, h: 4
+  title: "科室收入占比"
+
+# 7. Radar Chart
+slide7 = pres.addSlide()
+slide7.addText "Radar Chart", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+
+radarData = [
+  {
+    name: "科室A"
+    labels: ["医疗质量", "服务效率", "患者满意度", "成本控制", "科研教学"]
+    values: [85, 90, 88, 75, 80]
+  }
+  {
+    name: "科室B"
+    values: [80, 85, 92, 82, 75]
+  }
+]
+
+slide7.addChart pres.ChartType.RADAR, radarData,
+  x: 1, y: 1, w: 8, h: 4
+  title: "科室综合评价"
 
 # Save
 pres.writeFile({ fileName: "outputs/explore-features.pptx" })
