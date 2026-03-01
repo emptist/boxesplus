@@ -36,6 +36,7 @@ pres.writeFile({ fileName: "output.pptx" })
 | `endSlide(pres, opts)` | 结束页 |
 | `chartSlide(pres, opts)` | 通用图表页 |
 | `imageSlide(pres, opts)` | 图片页 |
+| `mediaSlide(pres, opts)` | 视频/音频页 |
 | `defineMaster(pres, opts)` | 定义幻灯片母版 |
 | `masterSlide(pres, opts)` | 使用母版创建幻灯片 |
 
@@ -119,6 +120,15 @@ imageSlide pres,
   title: "图片标题"
   path: "./images/chart.png"
   x: 0.5, y: 1, w: 9, h: 4
+```
+
+#### mediaSlide
+```coffee
+mediaSlide pres,
+  title: "视频标题"
+  path: "./video.mp4"
+  type: "video"  # or "audio"
+  x: 1, y: 1, w: 8, h: 4
 ```
 
 #### defineMaster + masterSlide
