@@ -2,29 +2,31 @@
 # Exploring addImage functionality
 
 PptxGenJS = require "pptxgenjs"
-{ titleSlide, THEME } = require "../api/boxesplus-artist.coffee"
+{ titleSlide, imageSlide, chartSlide, THEME } = require "../api/boxesplus-artist.coffee"
 
 pres = new PptxGenJS()
 
 titleSlide pres, title: "Image Demo", subtitle: "Exploring addImage", gradient: "blue"
 
-# Image slide
-slide2 = pres.addSlide()
-slide2.addText "Image 示例", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+# Image slide using API - use correct path from boxesplus/
+imageSlide pres,
+  title: "图片示例"
+  path: "../pngs/上海市同仁医院战略规划（12.24）_slide_002.png"
+  x: 0.5
+  y: 1
+  w: 9
+  h: 4
 
-# Try adding image - requires actual image file
-# slide2.addImage({ path: "path/to/image.png", x: 1, y: 1, w: 8, h: 4 })
+# Another image
+imageSlide pres,
+  title: "第二张图片"
+  path: "../pngs/苍南县人民医院品牌建设诊断报告-打印版_slide_001.png"
+  x: 1
+  y: 1
+  w: 8
+  h: 4
 
-slide2.addText "addImage 需要实际图片文件", x: 1, y: 2, w: 8, h: 0.5, fontSize: 16, color: "666666", align: "center"
-
-# Syntax from pptxgenjs:
-# slide.addImage({
-#   path: "image.png",           # file path
-#   x: 1, y: 1, w: 8, h: 4,    # position and size
-#   sizing: { type: "contain", w: 8, h: 4 }  # optional sizing
-# })
-
-# Save (without actual image for now)
+# Save
 pres.writeFile({ fileName: "outputs/demo-image.pptx" })
   .then -> console.log "✅ Created: outputs/demo-image.pptx"
   .catch (err) -> console.error err
