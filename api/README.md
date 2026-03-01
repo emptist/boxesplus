@@ -34,6 +34,7 @@ pres.writeFile({ fileName: "output.pptx" })
 | `comparisonSlide(pres, opts)` | 对比页 |
 | `timelineSlide(pres, opts)` | 时间线页 |
 | `endSlide(pres, opts)` | 结束页 |
+| `sectionSlide(pres, opts)` | 章节/节次页 |
 | `chartSlide(pres, opts)` | 通用图表页 |
 | `imageSlide(pres, opts)` | 图片页 |
 | `mediaSlide(pres, opts)` | 视频/音频页 |
