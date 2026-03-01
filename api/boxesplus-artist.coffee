@@ -253,6 +253,27 @@ timelineSlide = (pres, opts) ->
 
 # ============ Chart Functions ============
 
+# Generic chart slide - takes chart type as parameter
+chartSlide = (pres, opts) ->
+  { title, subtitle, data, type = "BAR" } = opts
+  slide = pres.addSlide()
+  
+  if title
+    slide.addText title,
+      x: 0.5, y: 0.3, w: 9, h: 0.6
+      fontSize: 28, color: THEME.primary, bold: true
+  
+  chartType = pres.ChartType[type] ? pres.ChartType.BAR
+  
+  if type is "PIE" or type is "DOUGHNUT"
+    slide.addChart chartType, data, x: 1.5, y: 1, w: 7, h: 4, title: subtitle ? ""
+  else if type is "RADAR"
+    slide.addChart chartType, data, x: 1, y: 1, w: 8, h: 4, title: subtitle ? ""
+  else
+    slide.addChart chartType, data, x: 0.5, y: 1, w: 9, h: 4, title: subtitle ? ""
+
+  slide
+
 barChartSlide = (pres, opts) ->
   { title, data, subtitle } = opts
   slide = pres.addSlide()
@@ -332,6 +353,6 @@ endSlide = (pres, opts) ->
 
 module.exports = {
   titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide
-  barChartSlide, lineChartSlide, pieChartSlide, radarChartSlide
+  chartSlide, barChartSlide, lineChartSlide, pieChartSlide, radarChartSlide
   THEME, GRADIENTS
 }
