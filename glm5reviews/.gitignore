@@ -17,6 +17,12 @@
 *.html
 *.pdf
 
+# Mermaid related files (experimental, not used by main developer)
+*mermaid*.html
+*mermaid*.svg
+*mermaid*.png
+*.mermaid
+
 # Sensitive files
 *.env
 *.env.local
