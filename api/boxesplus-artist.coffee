@@ -432,6 +432,34 @@ masterSlide = (pres, opts) ->
   
   slide
 
+# Section/Chapter slide
+sectionSlide = (pres, opts) ->
+  { number, title, subtitle, gradient } = opts
+  slide = pres.addSlide()
+  
+  if gradient
+    [c1] = GRADIENTS[gradient] || [THEME.dark]
+    slide.background = { type: "solid", color: c1 }
+  else
+    slide.background = { type: "solid", color: THEME.primary }
+  
+  if number
+    slide.addText number,
+      x: 0.5, y: 1.5, w: 9, h: 1
+      fontSize: 60, color: "ffffff", bold: true, align: "center"
+  
+  if title
+    slide.addText title,
+      x: 0.5, y: 2.8, w: 9, h: 1.2
+      fontSize: 36, color: "ffffff", bold: true, align: "center"
+  
+  if subtitle
+    slide.addText subtitle,
+      x: 1, y: 4.2, w: 8, h: 0.6
+      fontSize: 18, color: "ffffff", align: "center", transparency: 30
+
+  slide
+
 endSlide = (pres, opts) ->
   { title, subtitle } = opts
   slide = pres.addSlide()
@@ -450,7 +478,7 @@ endSlide = (pres, opts) ->
   slide
 
 module.exports = {
-  titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide
+  titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide, sectionSlide
   chartSlide, barChartSlide, lineChartSlide, pieChartSlide, radarChartSlide
   imageSlide, mediaSlide
   defineMaster, masterSlide

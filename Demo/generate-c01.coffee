@@ -4,7 +4,7 @@
 PptxGenJS = require "pptxgenjs"
 { 
   titleSlide, listSlide, cardSlide, tableSlide, quoteSlide, 
-  chartSlide, THEME
+  chartSlide, sectionSlide, THEME
 } = require "../api/boxesplus-artist.coffee"
 
 pres = new PptxGenJS()
@@ -23,7 +23,7 @@ listSlide pres,
     "课程定位：医院管理核心模块课程"
     "课程时长：12小时（2天）"
     "课程对象：医院院长、分管副院长、质控部主任等"
-    "教学方法：理论讲授、方法演练、案例分析"
+    "教学方法：理论讲授，方法演练、案例分析"
   ]
 
 # ============ 课程目标 ============
@@ -75,9 +75,9 @@ listSlide pres,
   ]
 
 # ============ 章节：医疗质量管理概述 ============
-titleSlide pres,
-  title: "第一章"
-  subtitle: "医疗质量管理概述"
+sectionSlide pres,
+  number: "第一章"
+  title: "医疗质量管理概述"
   gradient: "green"
 
 # ============ 教学目标 ============
@@ -90,9 +90,9 @@ listSlide pres,
   ]
 
 # ============ 1.1 医疗质量概念 ============
-titleSlide pres,
-  title: "1.1"
-  subtitle: "医疗质量概念"
+sectionSlide pres,
+  number: "1.1"
+  title: "医疗质量概念"
   gradient: "purple"
 
 # 医疗质量内涵 - 作为 quote
@@ -128,9 +128,9 @@ tableSlide pres,
   ]
 
 # ============ 1.2 医疗质量管理体系 ============
-titleSlide pres,
-  title: "1.2"
-  subtitle: "医疗质量管理体系"
+sectionSlide pres,
+  number: "1.2"
+  title: "医疗质量管理体系"
   gradient: "purple"
 
 # 管理体系要素
