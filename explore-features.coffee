@@ -160,6 +160,40 @@ slide11.addText "Slide Number 示例", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 2
 slide11.addText "This slide has a slide number at bottom right", x: 0.5, y: 2, w: 9, h: 0.5, fontSize: 16
 slide11.slideNumber = { x: "95%", y: "95%", fontSize: 10, color: "666666" }
 
+# 12. Background color with transparency
+slide12 = pres.addSlide()
+slide12.background = { color: "1e3a5f" }
+slide12.addText "Background Color 示例", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true, color: "ffffff"
+slide12.addText "Dark blue background", x: 0.5, y: 2, w: 9, h: 0.5, fontSize: 18, color: "e2e8f0"
+
+# 13. Text with different formatting
+slide13 = pres.addSlide()
+slide13.addText "Text Formatting 示例", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+
+slide13.addText "Bold Text", x: 0.5, y: 1.2, w: 9, h: 0.5, fontSize: 20, bold: true
+slide13.addText "Italic Text", x: 0.5, y: 1.8, w: 9, h: 0.5, fontSize: 20, italic: true
+slide13.addText "Underlined Text", x: 0.5, y: 2.4, w: 9, h: 0.5, fontSize: 20, underline: true
+slide13.addText "Colored Text", x: 0.5, y: 3, w: 9, h: 0.5, fontSize: 20, color: "e53e3e"
+slide13.addText "Right Aligned", x: 0.5, y: 3.6, w: 9, h: 0.5, fontSize: 20, align: "right"
+
+# 14. Shape with outline
+slide14 = pres.addSlide()
+slide14.addText "Shape with Outline 示例", x: 0.5, y: 0.3, w: 9, h: 0.6, fontSize: 28, bold: true
+
+slide14.addShape pres.ShapeType.rect,
+  x: 0.5, y: 1.2, w: 3, h: 2
+  fill: { color: "3182ce" }
+  line: { color: "1a365d", width: 3 }
+
+slide14.addShape pres.ShapeType.roundRect,
+  x: 4, y: 1.2, w: 3, h: 2
+  fill: { color: "38a169", transparency: 30 }
+  line: { color: "276749", width: 2 }
+
+slide14.addShape pres.ShapeType.ellipse,
+  x: 7.5, y: 1.2, w: 2, h: 2
+  fill: { color: "d69e2e" }
+
 # Save
 pres.writeFile({ fileName: "outputs/explore-features.pptx" })
   .then -> console.log "✅ Created: outputs/explore-features.pptx"
