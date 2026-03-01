@@ -2,7 +2,7 @@
 # 用法: coffee demo-artist.coffee
 
 PptxGenJS = require "pptxgenjs"
-{ titleSlide, listSlide, cardSlide, flowSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide, THEME } = require "./boxesplus-artist.coffee"
+{ titleSlide, listSlide, cardSlide, flowSlide, tableSlide, quoteSlide, comparisonSlide, timelineSlide, endSlide, THEME } = require "../api/boxesplus-artist.coffee"
 
 pres = new PptxGenJS()
 
