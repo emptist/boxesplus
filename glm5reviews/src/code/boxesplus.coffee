@@ -41,6 +41,18 @@ console.log "📦 BoxesPlus v#{版本} - 医院管理课程PPTX生成工具"
   添加形状: (slide, 类型, 选项 = {}) ->
     slide.addShape 类型, 选项
   
+  添加图片: (slide, 图片路径, 选项 = {}) ->
+    slide.addImage
+      path: 图片路径
+      x: 选项.x ? 1
+      y: 选项.y ? 1.2
+      w: 选项.w ? 8
+      h: 选项.h ? 4
+      sizing:
+        type: 'contain'
+        w: 选项.w ? 8
+        h: 选项.h ? 4
+  
   保存文件: (pptx, 文件名) ->
     pptx.writeFile({ fileName: 文件名 })
 
@@ -96,6 +108,19 @@ console.log "📦 BoxesPlus v#{版本} - 医院管理课程PPTX生成工具"
         options: fontSize: 16, breakLine: true
       基础API.添加文本 slide, 文本列表,
         x: 0.5, y: 1.2, w: 9, h: 4
+    this
+  
+  图片页: (标题, 图片路径, 说明 = "") ->
+    slide = 基础API.添加幻灯片 @当前演示
+    基础API.添加文本 slide, 标题,
+      x: 0.5, y: 0.3, w: 9, h: 0.7
+      fontSize: 28, bold: true, color: "2B579A", align: "center"
+    基础API.添加图片 slide, 图片路径,
+      x: 1.5, y: 1.2, w: 7, h: 4
+    if 说明
+      基础API.添加文本 slide, 说明,
+        x: 0.5, y: 5.4, w: 9, h: 0.6
+        fontSize: 16, color: "666666", align: "center"
     this
   
   结束: (文件名) ->

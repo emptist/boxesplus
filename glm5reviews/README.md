@@ -1,140 +1,150 @@
-# GLM5 Reviews - 代码审查与工具开发
+# GLM5 Reviews - 代码审查与工具开发工作空间
 
 ## 📋 项目概述
 
-本项目是代码审查和工具开发的工作空间，专注于PPTX和RevealJS演示文稿的自动生成。
+本项目是AI Assistant的代码审查和工具开发工作空间，专注于PPTX和RevealJS演示文稿的自动生成，以及Mermaid图表的增强实现。
 
-## 🚀 核心工具链
+## 🎯 工作内容
 
-```
-Markdown教案 → 自动判断 → CSON数据 → PPTX输出
-     ↓
-  自动选择：
-  - 内容少 → 卡片页（固定布局）
-  - 内容多 → 表格页（自动调整）
-```
+### 1. 代码审查
+对主项目 `/Users/jk/gits/hub/consult_strategy/boxesplus/` 进行深入全面的代码审查，包括：
+- 核心API文件审查
+- Demo示例审查
+- 工具和辅助文件审查
+- 文档和配置审查
+- 性能分析和优化建议
+
+### 2. 工具开发
+在 `my-workspace/` 中实践和开发工具：
+- Mermaid图表生成器（支持多种图表类型）
+- ASCII框图增强版
+- HTML/PPTX/RevealJS输出
+- 多种API风格（诗式、双侧编程、数据驱动）
 
 ## 📂 目录结构
 
 ```
 glm5reviews/
-├── src/                          # 源代码
-│   ├── code/                     # 核心代码
-│   │   ├── markdown转换器.coffee    # Markdown到CSON转换器
-│   │   ├── boxesplus.coffee         # 统一API入口
-│   │   ├── 中文表达.coffee           # 中文API
-│   │   ├── 双侧编程.coffee           # 双侧编程实现
-│   │   ├── 真正的诗式PPTX.coffee    # 诗式API
-│   │   ├── 散文式PPTX.coffee        # 散文式API
-│   │   ├── 极简诗式PPTX.coffee      # 极简诗式API
-│   │   ├── JSON定义解析.coffee       # JSON解析器
-│   │   ├── 自然语言表达.coffee       # 自然语言解析
-│   │   ├── csv-to-json.coffee        # CSV到JSON转换
-│   │   ├── json-to-pptx.coffee       # JSON到PPTX转换
-│   │   └── revealjs生成器.coffee      # RevealJS生成器
-│   └── examples/                  # 示例代码
-│       ├── 生成C01课程.coffee        # C01课程生成脚本
-│       ├── 双侧编程-数据驱动.coffee   # 双侧编程示例
-│       └── ...
-├── reviewer-workspace/            # 审查工作区
-│   ├── data/                    # 数据文件（JSON格式）
-│   └── data2/                   # 数据文件（CSON格式）
-│       ├── A01医院管理总览课程.coffee
-│       ├── C01医疗质量与安全管理课程.coffee
-│       └── ...
-├── notes/                        # 笔记和教案
-│   ├── C01医疗质量与安全管理课程详细教案.md
-│   └── ...
-├── output/                       # 输出文件
-│   ├── *.pptx                    # 生成的PPTX文件
-│   ├── *.html                    # 生成的HTML文件
-│   └── *.pdf                    # 生成的PDF文件
-└── .gitignore                    # Git忽略规则
+├── AI_REVIEWS/                  # 代码审查报告
+│   ├── README.md               # 审查报告索引
+│   ├── boxesplus-comprehensive-review.md  # 深入全面审查
+│   ├── review-methodology.md   # 审查方法论
+│   └── html-conversion-methods.md  # HTML转换方法
+├── my-workspace/               # 工具开发工作区
+│   ├── api/                   # API实现
+│   │   ├── mermaid-enhanced.coffee      # 核心Mermaid API
+│   │   └── mermaid-enhanced-fixed.coffee # 修复版HTML生成器
+│   ├── demo/                  # 演示代码
+│   │   ├── C01课程图表-修复版v2.coffee
+│   │   └── C01课程图表-简化测试版.coffee
+│   ├── output/                # 输出文件
+│   │   ├── *.html            # 生成的HTML文件
+│   │   └── *.pptx           # 生成的PPTX文件
+│   └── README.md             # 工具开发文档
+├── reviewer-workspace/         # 审查工作区
+│   ├── data/                 # 数据文件
+│   └── data2/                # CSON数据文件
+├── notes/                    # 笔记和教案
+├── issues/                   # 问题追踪
+├── templates/                # 模板文件
+└── README.md                # 本文件
 ```
 
-## 🎨 使用方法
+## 🎨 主要成果
 
-### 1. Markdown到CSON转换
+### 代码审查成果
+
+#### 1. 深入全面审查
+- **文件**: [AI_REVIEWS/boxesplus-comprehensive-review.md](AI_REVIEWS/boxesplus-comprehensive-review.md)
+- **内容**: 对主项目的全面深入分析
+- **评分**: ⭐⭐⭐⭐ (4/5)
+- **关键发现**:
+  - ✅ 架构设计优秀，分层清晰
+  - ✅ 功能完整，支持多种输出格式
+  - ⚠️ 代码重复，需要重构
+  - ⚠️ 错误处理不足，稳定性待提高
+  - ⚠️ 缺少单元测试，质量无法保证
+
+#### 2. 审查方法论
+- **文件**: [AI_REVIEWS/review-methodology.md](AI_REVIEWS/review-methodology.md)
+- **内容**: 实践驱动的代码审查方法论
+- **核心理念**: "实践出真知"
+
+### 工具开发成果
+
+#### 1. Mermaid图表生成器
+- **文件**: [my-workspace/api/mermaid-enhanced.coffee](my-workspace/api/mermaid-enhanced.coffee)
+- **功能**: 支持流程图、时序图、类图、状态图
+- **特性**:
+  - ✅ 自动生成Mermaid语法
+  - ✅ 生成增强版ASCII框图
+  - ✅ 支持子图、自定义样式
+  - ✅ 链式调用API
+
+#### 2. HTML生成器（修复版）
+- **文件**: [my-workspace/api/mermaid-enhanced-fixed.coffee](my-workspace/api/mermaid-enhanced-fixed.coffee)
+- **功能**: 生成HTML和RevealJS演示文稿
+- **关键修复**:
+  - ✅ 使用 `startOnLoad: true` 自动渲染Mermaid
+  - ✅ 修复子图节点生成
+  - ✅ 添加流程图形状支持（parallelogram）
+  - ✅ 支持时序图虚线消息
+  - ✅ 修复类图方法括号问题
+  - ✅ 修复状态图语法错误
+
+#### 3. 多种API风格
+- **诗式API**: 极简语法，像写诗一样
+- **双侧编程API**: 类一侧定义模板，实例一侧填充内容
+- **数据驱动API**: 使用数据定义驱动图表生成
+
+## 📊 支持的图表类型
+
+| 图表类型 | Mermaid语法 | 状态 |
+|---------|-------------|------|
+| 流程图 | flowchart | ✅ 完整 |
+| 时序图 | sequenceDiagram | ✅ 完整 |
+| 类图 | classDiagram | ✅ 完整 |
+| 状态图 | stateDiagram-v2 | ✅ 完整 |
+
+## 🎯 使用方法
+
+### 查看代码审查
 
 ```bash
-cd src/code
-coffee markdown转换器.coffee \
-  "/path/to/教案.md" \
-  "/path/to/输出.coffee"
+# 查看深入全面审查
+cat AI_REVIEWS/boxesplus-comprehensive-review.md
+
+# 查看审查方法论
+cat AI_REVIEWS/review-methodology.md
 ```
 
-### 2. CSON到PPTX生成
+### 运行Mermaid图表生成器
 
 ```bash
-cd src/examples
-coffee 生成C01课程.coffee
+# 进入demo目录
+cd my-workspace/demo
+
+# 运行修复版演示
+coffee C01课程图表-修复版v2.coffee
+
+# 运行简化测试版
+coffee C01课程图表-简化测试版.coffee
 ```
 
-### 3. 直接使用API
+### 查看生成的文件
 
-```coffee
-# 引入API
-{演示文稿, 幻灯片} = require "../code/boxesplus.coffee"
+```bash
+# 查看HTML输出
+open my-workspace/output/C01课程图表-修复版-简化HTML.html
 
-# 创建演示文稿
-演示 = 演示文稿.开始 "课程标题"
-
-# 添加幻灯片
-演示.添加
-  类型: "封面页"
-  标题: "课程标题"
-  副标题: "副标题"
-
-# 保存
-演示.保存 "output/课程.pptx"
-```
-
-## 📊 页面类型
-
-### 封面页
-- 用于课程封面
-- 支持标题、副标题、渐变背景
-
-### 章节页
-- 用于章节分隔
-- 支持编号、标题、副标题
-
-### 列表页
-- 用于列表内容
-- 自动调整项目数量和字体大小
-
-### 表格页
-- 用于表格内容
-- 自动调整行高
-- 适合内容多的页面
-
-### 卡片页
-- 用于卡片内容
-- 固定布局（高度1.8，字体12）
-- 适合内容少的页面
-
-## 🎯 自动判断规则
-
-### Markdown转换器自动判断
-
-```coffee
-# 规则1：超过5行 → 表格页
-if 内容行数 > 5
-  类型: "表格页"
-
-# 规则2：单行超过50字 → 表格页
-if 内容行数 == 1 and 总字数 > 50
-  类型: "表格页"
-
-# 规则3：其他情况 → 卡片页
-else
-  类型: "卡片页"
+# 查看RevealJS输出
+open my-workspace/output/C01课程图表-修复版-HTML.html
 ```
 
 ## 🔧 技术栈
 
 - **CoffeeScript**: 主要开发语言
-- **PptxGenJS**: PPTX生成库
+- **Mermaid**: 图表生成库
 - **RevealJS**: HTML演示框架
 - **Node.js**: 运行环境
 
@@ -142,39 +152,71 @@ else
 
 1. **代码风格**: 使用CoffeeScript，中文变量名
 2. **注释**: 代码中不添加注释
-3. **提交**: 重要更改后及时提交代码
-4. **文档**: 完成任务后更新文档
+3. **文档**: 完成任务后更新文档
+4. **实践**: 通过实践验证理论
 
-## 🎓 学习资源
+## 📈 进度跟踪
 
-- [PptxGenJS文档](https://gitbrent.github.io/PptxGenJS/)
-- [RevealJS文档](https://revealjs.com/)
-- [CoffeeScript文档](https://coffeescript.org/)
+### 代码审查
+- ✅ 深入全面审查完成
+- ✅ 审查方法论文档完成
+- ✅ HTML转换方法研究完成
 
-## 📌 最近更新
+### 工具开发
+- ✅ Mermaid核心API完成
+- ✅ HTML生成器完成
+- ✅ 修复版完成（解决渲染问题）
+- ✅ 简化测试版完成
+- ✅ 多种API风格实现完成
 
-### 2026-03-01
-- ✅ 优化卡片页实现（固定高度和字体）
-- ✅ 添加自动判断规则（超过5行或单行超过50字）
-- ✅ 改进Markdown转换器
-- ✅ 成功转换C01课程（37页PPTX）
-- ✅ 修复.gitignore（移除.coffee排除规则）
-- ✅ 探索Mermaid图表集成
+### 待办事项
+- [ ] 添加PDF导出功能
+- [ ] 支持更多图表类型（甘特图、时间线、ER图）
+- [ ] 添加单元测试
+- [ ] 性能优化
+- [ ] 完善文档
 
-## 🚧 待办事项
+## 📚 文档索引
 
-- [ ] 集成Mermaid图表到PPTX
-- [ ] 支持更多页面类型
-- [ ] 优化表格页样式
-- [ ] 添加图片支持
-- [ ] 支持动画效果
+### 代码审查文档
+- [AI_REVIEWS/README.md](AI_REVIEWS/README.md) - 审查报告索引
+- [AI_REVIEWS/boxesplus-comprehensive-review.md](AI_REVIEWS/boxesplus-comprehensive-review.md) - 深入全面审查
+- [AI_REVIEWS/review-methodology.md](AI_REVIEWS/review-methodology.md) - 审查方法论
+- [AI_REVIEWS/html-conversion-methods.md](AI_REVIEWS/html-conversion-methods.md) - HTML转换方法
+
+### 工具开发文档
+- [my-workspace/README.md](my-workspace/README.md) - Mermaid图表生成器文档
+- [my-workspace/README-修复版.md](my-workspace/README-修复版.md) - 修复版说明
+
+### 其他文档
+- [README.md](README.md) - 本文件
+- [project_rules.md](project_rules.md) - 项目规则
+
+## 🚀 快速开始
+
+### 对于新来的AI Reviewer
+
+1. **阅读审查报告**: 查看 `AI_REVIEWS/boxesplus-comprehensive-review.md`
+2. **理解方法论**: 查看 `AI_REVIEWS/review-methodology.md`
+3. **实践验证**: 在 `my-workspace/` 中实践
+4. **补充报告**: 根据新发现更新审查报告
+
+### 对于项目维护者
+
+1. **查看审查报告**: 了解项目现状和问题
+2. **参考改进建议**: 按优先级实施改进
+3. **使用最佳实践**: 提高代码质量
+4. **跟踪进度**: 使用问题追踪表格
 
 ## 📞 联系方式
 
 如有问题或建议，请通过以下方式联系：
 - 提交Issue
 - 发送Pull Request
+- 更新文档
 
 ---
 
-**最后更新**: 2026-03-01
+**最后更新**: 2026-03-02  
+**维护者**: AI Assistant  
+**版本**: 2.0.0
