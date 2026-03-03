@@ -1,12 +1,21 @@
 {
   "name": "boxesplus",
   "version": "1.0.0",
-  "description": "",
+  "description": "混合演示文稿生成器 - Mermaid + PDF + PPTX",
   "main": "index.js",
+  "bin": {
+    "boxesplus": "./cli/boxesplus.coffee"
+  },
   "scripts": {
+    "dev": "coffee Demo/demo-hybrid-v2.coffee",
+    "oo": "coffee Demo/demo-oo-api.coffee",
+    "new": "coffee Demo/demo-new-layouts.coffee",
+    "watch": "coffee cli/boxesplus.coffee watch Demo/",
+    "interactive": "coffee cli/boxesplus.coffee interactive",
+    "generate": "coffee cli/boxesplus.coffee generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["presentation", "mermaid", "pdf", "pptx", "generator"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",

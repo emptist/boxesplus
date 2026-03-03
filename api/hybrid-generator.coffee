@@ -129,6 +129,119 @@ flowchart LR
     style 治愈,感染,论文,课题,学历,带头,任职,满意 fill:#f7fafc,stroke:#ccc
 """
 
+  # 时间线
+  timeline: """
+gantt
+    title 项目时间线
+    dateFormat  YYYY-MM-DD
+    section 阶段一
+    需求分析       :a1, 2024-01-01, 30d
+    设计方案       :a2, after a1, 20d
+    section 阶段二
+    开发实现       :b1, after a2, 45d
+    测试验收       :b2, after b1, 15d
+    section 阶段三
+    部署上线       :c1, after b2, 10d
+    培训支持       :c2, after c1, 7d
+"""
+
+  # 思维导图
+  mindmap: """
+mindmap
+  root((中心主题))
+    分支一
+      子主题A
+      子主题B
+    分支二
+      子主题C
+      子主题D
+    分支三
+      子主题E
+"""
+
+  # 甘特图简化版
+  ganttSimple: """
+gantt
+    title 工作计划
+    dateFormat  HH:mm
+    09:00-12:00 : task1, 09:00, 3h
+    14:00-17:00 : task2, 14:00, 3h
+    18:00-20:00 : task3, 18:00, 2h
+"""
+
+  # 流程图 - 决策
+  decision: """
+flowchart TD
+    A[开始] --> B{条件判断}
+    B -->|是| C[处理A]
+    B -->|否| D[处理B]
+    C --> E[输出结果]
+    D --> E
+    E --> F[结束]
+    style A fill:#3182ce,color:#fff
+    style B fill:#d69e2e,color:#fff
+    style E fill:#38a169,color:#fff
+    style F fill:#e53e3e,color:#fff
+"""
+
+  # 用户旅程
+  userJourney: """
+journey
+    title 用户旅程
+    section 阶段一
+      访问网站: 5: 用户1, 用户2
+      浏览产品: 4: 用户1, 用户2
+    section 阶段二
+      加入购物车: 3: 用户1
+      填写订单: 3: 用户1
+    section 阶段三
+      支付: 2: 用户1
+      收到商品: 5: 用户1
+"""
+
+  # Git图
+  gitGraph: """
+gitGraph
+   commit id: "初始版本"
+   branch feature1
+   commit id: "功能开发"
+   commit id: "功能完成"
+   checkout main
+   commit id: "合并分支"
+   commit id: "发布v1.0"
+"""
+
+  # 架构图
+  architecture: """
+flowchart TB
+    subgraph Client[客户端]
+        Web[网页端]
+        Mobile[移动端]
+    end
+    
+    subgraph Server[服务端]
+        API[API网关]
+        Auth[认证服务]
+        Biz[业务服务]
+    end
+    
+    subgraph Data[数据层]
+        DB[(数据库)]
+        Cache[(缓存)]
+    end
+    
+    Web --> API
+    Mobile --> API
+    API --> Auth
+    API --> Biz
+    Biz --> DB
+    Biz --> Cache
+    
+    style Client fill:#e6ffed,stroke:#38a169
+    style Server fill:#bee3f8,stroke:#3182ce
+    style Data fill:#feebc8,stroke:#d69e2e
+"""
+
 # ============================================
 # 课程数据生成器
 # ============================================
@@ -150,6 +263,18 @@ class CourseGenerator
     @slides.push { type: "list", title, items }
     this
 
+  addTwoCol: (title, leftTitle, leftItems, rightTitle, rightItems) ->
+    @slides.push { type: "two-col", title, leftTitle, leftItems, rightTitle, rightItems }
+    this
+
+  addImage: (title, imagePath, caption = "") ->
+    @slides.push { type: "image", title, imagePath, caption }
+    this
+
+  addCode: (title, code, language = "") ->
+    @slides.push { type: "code", title, code, language }
+    this
+
 # ============================================
 # HTML 生成器（用于 Mermaid 图表）
 # ============================================
@@ -165,13 +290,12 @@ generateHtml = (data, outputPath) ->
       """
     else if slide.type is "mermaid"
       scale = slide.scale || "1.0"
+      chartHtml = slide.chart?.trim()
       """
       <div class="slide">
         <h3>#{slide.title}</h3>
         <div class="mermaid-container" style="transform: scale(#{scale});">
-          <pre class="mermaid">
-#{slide.chart}
-          </pre>
+          <pre class="mermaid">#{chartHtml}</pre>
         </div>
       </div>
       """
@@ -184,6 +308,43 @@ generateHtml = (data, outputPath) ->
         <ul>#{itemsHtml.join('')}</ul>
       </div>
       """
+    else if slide.type is "two-col"
+      leftHtml = for item in slide.leftItems
+        "<li>#{item}</li>"
+      rightHtml = for item in slide.rightItems
+        "<li>#{item}</li>"
+      """
+      <div class="slide">
+        <h3>#{slide.title}</h3>
+        <div class="two-col">
+          <div class="col">
+            <h4>#{slide.leftTitle}</h4>
+            <ul>#{leftHtml.join('')}</ul>
+          </div>
+          <div class="col">
+            <h4>#{slide.rightTitle}</h4>
+            <ul>#{rightHtml.join('')}</ul>
+          </div>
+        </div>
+      </div>
+      """
+    else if slide.type is "image"
+      """
+      <div class="slide">
+        <h3>#{slide.title}</h3>
+        <div class="image-container">
+          <img src="#{slide.imagePath}" alt="#{slide.title}">
+          <p class="caption">#{slide.caption || ''}</p>
+        </div>
+      </div>
+      """
+    else if slide.type is "code"
+      """
+      <div class="slide">
+        <h3>#{slide.title}</h3>
+        <pre class="code"><code class="language-#{slide.language}">#{slide.code}</code></pre>
+      </div>
+      """
   
   html = """
 <!doctype html>
@@ -191,24 +352,7 @@ generateHtml = (data, outputPath) ->
 <head>
   <meta charset="utf-8">
   <title>#{data.title}</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.14.0/mermaid.min.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    @page { size: 1280px 720px; margin: 0; }
-    body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background: white; width: 1280px; height: 720px; overflow: hidden; }
-    .slide { width: 1280px; height: 720px; padding: 40px 60px; display: flex; flex-direction: column; border-bottom: 1px dashed #eee; }
-    .title-slide { justify-content: center; align-items: center; background: linear-gradient(135deg, #1a365d, #2c5282); }
-    .title-slide h1 { color: white; font-size: 48px; }
-    .title-slide p { color: #90cdf4; font-size: 24px; margin-top: 20px; }
-    h3 { color: #1a365d; border-bottom: 3px solid #3182ce; padding-bottom: 15px; width: 100%; font-size: 32px; margin-bottom: 30px; }
-    .mermaid-container { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; }
-    ul { list-style: none; padding: 0; }
-    li { font-size: 28px; padding: 15px 0; border-bottom: 1px solid #eee; color: #2d3748; }
-    li:before { content: "•"; color: #3182ce; margin-right: 15px; }
-  </style>
-</head>
-<body>
-#{slidesHtml.join('\n')}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
   <script>
     mermaid.initialize({ 
       startOnLoad: true,
@@ -275,37 +419,47 @@ htmlToPptx = (htmlPath, pptxPath) ->
   outputDir = path.join(path.dirname(pptxPath), "temp-slides-#{Date.now()}")
   fs.mkdirSync(outputDir, { recursive: true })
   
-  browser = await puppeteer.launch({
-    headless: "new"
-    executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-  })
+  try
+    browser = await puppeteer.launch({
+      headless: "new"
+      executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    })
   
-  page = await browser.newPage()
-  await page.setViewport({ width: 1280, height: 720 })
-  
-  fileUrl = "file://" + fs.realpathSync(htmlPath)
-  await page.goto(fileUrl, { waitUntil: 'networkidle0', timeout: 60000 })
-  await new Promise (resolve) -> setTimeout(resolve, 3000)
-  
-  slides = await page.$$(".slide")
-  console.log "   找到 #{slides.length} 张幻灯片"
-  
-  pres = new PptxGenJS()
-  
-  for slide, i in slides
-    imgPath = path.join(outputDir, "slide-#{i}.png")
-    await slide.screenshot({ path: imgPath, width: 1280, height: 720 })
+    page = await browser.newPage()
+    await page.setViewport({ width: 1280, height: 720 })
     
-    pptxSlide = pres.addSlide()
-    pptxSlide.addImage({ path: imgPath, x: 0, y: 0, w: 10, h: 5.625 })
-    console.log "   导出 #{i+1}/#{slides.length}"
-  
-  await pres.writeFile({ fileName: pptxPath })
-  await browser.close()
-  
-  # 清理临时文件
-  fs.rmSync(outputDir, { recursive: true })
-  console.log "✅ PPTX: #{pptxPath}"
+    fileUrl = "file://" + fs.realpathSync(htmlPath)
+    await page.goto(fileUrl, { waitUntil: 'networkidle0', timeout: 60000 })
+    await new Promise (resolve) -> setTimeout(resolve, 3000)
+    
+    slides = await page.$$(".slide")
+    console.log "   找到 #{slides.length} 张幻灯片"
+    
+    pres = new PptxGenJS()
+    
+    for slide, i in slides
+      imgPath = path.join(outputDir, "slide-#{i}.png")
+      await slide.screenshot({ path: imgPath, width: 1280, height: 720 })
+      
+      pptxSlide = pres.addSlide()
+      pptxSlide.addImage({ path: imgPath, x: 0, y: 0, w: 10, h: 5.625 })
+      console.log "   导出 #{i+1}/#{slides.length}"
+    
+    await pres.writeFile({ fileName: pptxPath })
+    await browser.close()
+    
+    # 清理临时文件
+    fs.rmSync(outputDir, { recursive: true })
+    console.log "✅ PPTX: #{pptxPath}"
+  catch e
+    console.log "   ⚠️ PPTX 生成失败: #{e.message}"
+    console.log "   错误详情: #{e.stack}"
+    try
+      await browser?.close()
+      fs.rmSync(outputDir, { recursive: true, force: true })
+    catch
+      null
+    throw e
 
 # ============================================
 # 完整工作流

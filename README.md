@@ -37,6 +37,17 @@ coffee Demo/demo-hybrid-v2.coffee
 await generate(课程, "output-name")
 ```
 
+## 布局类型
+
+```coffee
+.addTitle("标题", "副标题")      # 标题页
+.addMermaid("标题", chart)      # Mermaid 图表
+.addList("标题", [items])       # 列表
+.addTwoCol("标题", leftTitle, leftItems, rightTitle, rightItems)  # 双栏对比
+.addImage("标题", imagePath)    # 图片
+.addCode("标题", code, lang)    # 代码块
+```
+
 ## 图表模板 (LR布局优化)
 
 ```coffee
@@ -59,6 +70,74 @@ CHARTS.evaluation     # 学科评估
 .addMermaid("标题", chart, "0.9") # 缩小10%
 .addMermaid("标题", chart, "1.2") # 放大20%
 ```
+
+## 高级 OO API
+
+### 方式 1: 实例方式
+
+```coffee
+{ Slide, Section, Presentation, MermaidSlide, ListSlide, CHARTS } = require "./api/oo-api.coffee"
+
+slide = new MermaidSlide("PDCA", CHARTS.pdca)
+section = new Section("质量管理").add(slide)
+presentation = new Presentation("课程").addSection(section)
+await presentation.generate("output")
+```
+
+### 方式 2: 类继承 (Class-as-Slide 模式)
+
+```coffee
+# 继承创建自定义幻灯片
+class QualityChart extends MermaidSlide
+  @scale: "0.85"
+
+class PdcaSlide extends QualityChart
+  constructor: ->
+    super("PDCA循环", CHARTS.pdca)
+
+# 类侧定义章节
+class QualitySection extends Section
+  @title: "质量管理"
+  constructor: ->
+    super("质量管理")
+    @add(new PdcaSlide())
+
+# 类侧定义演示文稿
+class CoursePresentation extends Presentation
+  @title: "医疗质量课程"
+  @sections: [QualitySection]
+
+# 使用
+课程 = new CoursePresentation()
+await 课程.generate("output")
+```
+
+### 方式 3: 数据驱动
+
+```coffee
+class DataDrivenSection extends Section
+  @createSlides: (dataArray) ->
+    for data in dataArray
+      new ListSlide(data.title, data.items)
+
+数据 = [
+  { title: "目标1", items: ["项A", "项B"] }
+  { title: "目标2", items: ["项C", "项D"] }
+]
+
+章节 = new DataDrivenSection("数据章节", 数据)
+```
+
+### 核心类
+
+| 类 | 说明 |
+|---|---|
+| `Slide` | 基类,所有幻灯片继承自此 |
+| `MermaidSlide` | Mermaid 图表幻灯片 |
+| `ListSlide` | 列表幻灯片 |
+| `TwoColSlide` | 双栏对比幻灯片 |
+| `Section` | 章节,包含多个幻灯片 |
+| `Presentation` | 完整演示文稿 |
 
 ## 手动导出
 
@@ -122,3 +201,16 @@ flowchart TB
 
 - **AI朋友探索**: 纵横交换技巧、混合生成器
 - **我们的实践**: puppeteer 渲染、PDF/PPTX导出
+
+## CLI 工具
+
+```bash
+# 监听文件变化自动生成
+npm run watch
+
+# 交互式创建
+npm run interactive
+
+# 一次性生成
+npm run generate Demo/demo-hybrid-v2.coffee
+```
