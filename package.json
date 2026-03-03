@@ -10,9 +10,12 @@
     "dev": "coffee Demo/demo-hybrid-v2.coffee",
     "oo": "coffee Demo/demo-oo-api.coffee",
     "new": "coffee Demo/demo-new-layouts.coffee",
+    "cso": "coffee Demo/demo-cso-fixed.coffee",
+    "quick": "coffee Demo/demo-quick.coffee",
     "watch": "coffee cli/boxesplus.coffee watch Demo/",
     "interactive": "coffee cli/boxesplus.coffee interactive",
     "generate": "coffee cli/boxesplus.coffee generate",
+    "serve": "coffee scripts/serve.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["presentation", "mermaid", "pdf", "pptx", "generator"],

@@ -188,8 +188,32 @@ flowchart TB
 | 文件 | 说明 |
 |------|------|
 | `api/hybrid-generator.coffee` | 核心生成器 |
-| `Demo/demo-hybrid-v2.coffee` | 演示示例 |
-| `outputs/hybrid-demo-v2.pdf` | 演示结果 |
+| `api/oo-api.coffee` | OO API (Class-as-Slide) |
+| `cli/boxesplus.coffee` | CLI 工具 |
+| `Demo/demo-*.coffee` | 演示示例 |
+| `outputs/` | 生成的文件 |
+| `scripts/` | 工具脚本 |
+
+## 项目结构
+
+```
+boxesplus/
+├── api/                    # 核心 API
+│   ├── hybrid-generator.coffee   # 主生成器
+│   └── oo-api.coffee            # OO API
+├── cli/                    # CLI 工具
+│   └── boxesplus.coffee
+├── Demo/                   # 演示文件
+│   ├── demo-hybrid-v2.coffee
+│   ├── demo-oo-api.coffee
+│   └── demo-cso-fixed.coffee
+├── outputs/                # 生成的文件
+├── scripts/                # 工具脚本
+│   └── serve.coffee        # 本地服务器
+├── resources/              # 资源文件
+├── Deprecated/              # 已废弃的文件
+└── package.json
+```
 
 ## 演进历史
 
