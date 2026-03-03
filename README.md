@@ -238,3 +238,26 @@ npm run interactive
 # 一次性生成
 npm run generate Demo/demo-hybrid-v2.coffee
 ```
+
+## CoffeeScript 模式
+
+### 1. 类名自动作为标题
+```coffee
+class PDCA循环 extends MermaidSlide
+# @constructor.name → "PDCA循环"
+```
+
+### 2. @cso: @dataPrepare?() 模式
+类定义时自动运行数据准备:
+```coffee
+class 章节 extends Section
+  @dataPrepare: ->
+    slides: [
+      { type: MermaidSlide, title: "PDCA", chart: CHARTS.pdca }
+    ]
+  @cso: @dataPrepare?()
+```
+
+### 3. 双侧编程
+- `@` (类侧) - 模板/共享配置
+- `this` (实例侧) - 具体数据
