@@ -134,6 +134,30 @@ class Mindmap extends MermaidSlide
 class Gantt extends MermaidSlide
   @chart: CHARTS.ganttSimple
 
+class HospitalReview extends MermaidSlide
+  @chart: CHARTS.hospitalReview
+
+class DoctorPatient extends MermaidSlide
+  @chart: CHARTS.doctorPatient
+
+class Performance extends MermaidSlide
+  @chart: CHARTS.performance
+
+class Training extends MermaidSlide
+  @chart: CHARTS.training
+
+class Research extends MermaidSlide
+  @chart: CHARTS.research
+
+class TalentTeam extends MermaidSlide
+  @chart: CHARTS.talentTeam
+
+class Decision extends MermaidSlide
+  @chart: CHARTS.decision
+
+class Architecture extends MermaidSlide
+  @chart: CHARTS.architecture
+
 # ============================================
 # 复合幻灯片类型
 # ============================================
@@ -257,6 +281,14 @@ module.exports = {
   Timeline
   Mindmap
   Gantt
+  HospitalReview
+  DoctorPatient
+  Performance
+  Training
+  Research
+  TalentTeam
+  Decision
+  Architecture
   SWOTSlide
   TimelineSlide
   ProcessSlide

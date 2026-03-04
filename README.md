@@ -52,15 +52,23 @@ await generate(课程, "output-name")
 
 ```coffee
 CHARTS.pdca           # PDCA循环
-CHARTS.pareto         # 饼图
-CHARTS.qualitySystem  # 质量管理体系
-CHARTS.eventLoop      # 事件闭环
-CHARTS.dataLifecycle  # 数据生命周期
-CHARTS.brandPyramid  # 品牌金字塔
-CHARTS.patientSafety  # 患者安全目标
-CHARTS.swot           # SWOT分析
-CHARTS.surgery        # 围手术期
-CHARTS.evaluation     # 学科评估
+CHARTS.pareto          # 饼图
+CHARTS.qualitySystem   # 质量管理体系
+CHARTS.eventLoop       # 事件闭环
+CHARTS.dataLifecycle   # 数据生命周期
+CHARTS.brandPyramid    # 品牌金字塔
+CHARTS.patientSafety   # 患者安全目标
+CHARTS.swot            # SWOT分析
+CHARTS.surgery         # 围手术期
+CHARTS.evaluation      # 学科评估
+CHARTS.hospitalReview  # 医院等级评审
+CHARTS.doctorPatient   # 医患沟通
+CHARTS.performance     # 绩效管理
+CHARTS.training        # 教学培训
+CHARTS.research        # 科研项目
+CHARTS.talentTeam      # 人才梯队
+CHARTS.decision        # 决策流程
+CHARTS.architecture    # 系统架构
 ```
 
 ## 缩放参数
@@ -304,10 +312,18 @@ QualitySystem  # 质量管理体系
 PatientSafety  # 患者安全目标
 SWOT           # SWOT分析
 Surgery        # 围手术期
-Evaluation     # 学科评估
-Timeline       # 时间线
-Mindmap        # 思维导图
-Gantt          # 甘特图
+Evaluation      # 学科评估
+Timeline        # 时间线
+Mindmap         # 思维导图
+Gantt           # 甘特图
+HospitalReview  # 医院等级评审
+DoctorPatient   # 医患沟通
+Performance     # 绩效管理
+Training        # 教学培训
+Research        # 科研项目
+TalentTeam      # 人才梯队
+Decision        # 决策流程
+Architecture    # 系统架构
 ```
 
 ### 运行
