@@ -1056,6 +1056,42 @@ class MatrixSlide extends Slide
                 fontSize: fontSize
 
 # ============================================
+# MermaidSlide - Mermaid图表页
+# ============================================
+
+class MermaidSlide extends Slide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addText @name,
+            x: 0.5, y: 0.3, w: 9, h: 0.6
+            fontSize: 28, bold: true, color: "366092"
+        
+        properties = @getProperties()
+        diagram = properties.diagram || properties.图表 || ""
+        
+        slide.addText "Mermaid Diagram (HTML Output Required)",
+            x: 0.5, y: 2.5, w: 9, h: 1
+            fontSize: 18, color: "999999", align: "center"
+        
+        slide.addText diagram.substring(0, 200) + (if diagram.length > 200 then "..." else ""),
+            x: 0.5, y: 3.5, w: 9, h: 2
+            fontSize: 10, color: "666666", align: "left"
+    
+    @toHtml: ->
+        properties = @getProperties()
+        diagram = properties.diagram || properties.图表 || ""
+        
+        """
+        <section>
+            <h3 style="color: #1a365d; margin-bottom: 20px;">#{@name}</h3>
+            <div class="mermaid" style="font-size: 24px;">
+#{diagram}
+            </div>
+        </section>
+        """
+
+# ============================================
 # Section - 节类（声明式）
 # ============================================
 
@@ -1119,6 +1155,83 @@ class Presentation
     
     @newPresentation: ->
         setImmediate => @generate()
+    
+    @generateHtml: ->
+        try
+            outputPath = "outputs/#{@name}.html"
+            
+            console.log "\n🌐 Generating HTML presentation: #{@name}\n"
+            
+            slidesHtml = []
+            
+            sections = if typeof @sections is 'function' then @sections() else @sections ? []
+            
+            for section in sections
+                continue unless section?.幻灯片
+                slides = if typeof section.幻灯片 is 'function' then section.幻灯片() else section.幻灯片 ? []
+                
+                for slide in slides
+                    if slide?.toHtml
+                        slidesHtml.push slide.toHtml()
+                    else if slide?.name
+                        slidesHtml.push """
+                        <section>
+                            <h2>#{slide.name}</h2>
+                        </section>
+                        """
+            
+            html = """
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>#{@name}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/white.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        .reveal .slides section { text-align: center; }
+        .reveal { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+        .mermaid { display: flex; justify-content: center; margin: 20px 0; }
+        .reveal .mermaid svg { max-width: 100%; height: auto; }
+        .reveal h1, .reveal h2, .reveal h3 { color: #1a365d; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            #{slidesHtml.join("\n")}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#3182ce',
+                edgeLabelBackground: '#ffffff',
+                tertiaryColor: '#f7fafc'
+            }
+        });
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            transition: 'slide',
+            center: true,
+            width: 1280,
+            height: 720
+        });
+    </script>
+</body>
+</html>
+            """
+            
+            fs.writeFileSync(outputPath, html)
+            console.log "✅ Generated: #{outputPath}\n"
+        catch error
+            console.error "❌ Error in HTML generation '#{@name}':", error.message
+            process.exit(1)
 
 # ============================================
 # 导出
@@ -1148,6 +1261,7 @@ module.exports = {
     OrgChartSlide
     BoxSlide
     MatrixSlide
+    MermaidSlide
     Section
     Chapter
     Presentation
