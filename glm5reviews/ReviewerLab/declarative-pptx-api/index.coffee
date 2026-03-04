@@ -386,9 +386,10 @@ class NumberSlide extends Slide
             value = properties[key]
             x = 0.75 + i * itemWidth
             
+            valueFontSize = @autoFontSize(value, itemWidth, 1)
             slide.addText value,
                 x: x, y: 1.5, w: itemWidth, h: 1
-                fontSize: 48, bold: true, color: "366092", align: "center"
+                fontSize: valueFontSize, bold: true, color: "366092", align: "center"
             
             labelFontSize = @autoFontSize(key, itemWidth, 0.5)
             slide.addText key,
