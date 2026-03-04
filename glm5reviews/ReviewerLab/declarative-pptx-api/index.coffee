@@ -389,7 +389,7 @@ class NumberSlide extends Slide
             numberMatch = value.match(/(\d+\.?\d*\s*%?|\d+\s*[万千万亿]+[+]?)$/)
             displayValue = if numberMatch then numberMatch[1] else value
             
-            valueFontSize = @autoFontSize(displayValue, itemWidth, 1)
+            valueFontSize = Math.max(@autoFontSize(displayValue, itemWidth, 1), 32)
             slide.addText displayValue,
                 x: x, y: 1.5, w: itemWidth, h: 1
                 fontSize: valueFontSize, bold: true, color: "366092", align: "center"
