@@ -3,6 +3,7 @@
 
 fs = require "fs"
 pptxgen = require "pptxgenjs"
+SmartLayout = require "./smart-layout"
 
 # ============================================
 # Slide - 幻灯片基类（声明式）
