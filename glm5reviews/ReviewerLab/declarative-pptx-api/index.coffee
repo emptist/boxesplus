@@ -355,9 +355,10 @@ class QuoteSlide extends Slide
                 x: 0.5, y: y, w: 9, h: 1.5
                 fill: { color: "F5F5F5" }
             
+            fontSize = @autoFontSize(value, 8, 0.8)
             slide.addText "\"#{value}\"",
                 x: 1, y: y + 0.3, w: 8, h: 0.8
-                fontSize: 18, italic: true, color: "666666"
+                fontSize: fontSize, italic: true, color: "666666"
             
             slide.addText "— #{key}",
                 x: 1, y: y + 1.1, w: 8, h: 0.3
@@ -389,9 +390,10 @@ class NumberSlide extends Slide
                 x: x, y: 1.5, w: itemWidth, h: 1
                 fontSize: 48, bold: true, color: "366092", align: "center"
             
+            labelFontSize = @autoFontSize(key, itemWidth, 0.5)
             slide.addText key,
                 x: x, y: 2.6, w: itemWidth, h: 0.5
-                fontSize: 16, color: "666666", align: "center"
+                fontSize: labelFontSize, color: "666666", align: "center"
 
 # ============================================
 # ProcessSlide - 流程图页
@@ -1058,7 +1060,12 @@ class Section
         # 支持函数和数组两种方式
         slides = if typeof @幻灯片 is 'function' then @幻灯片() else @幻灯片 ? []
         
+        unless slides.length > 0
+            console.warn "⚠️  Warning: Section '#{@name}' has no slides defined"
+        
         for slide in slides
+            unless slide?.toPptx
+                console.warn "⚠️  Warning: '#{slide?.name or slide}' in Section '#{@name}' is not a valid Slide class (did you forget to extend Slide?)"
             slide.toPptx?(pptx)
 
 # ============================================
@@ -1090,7 +1097,12 @@ class Presentation
             
             sections = if typeof @sections is 'function' then @sections() else @sections ? []
             
+            unless sections.length > 0
+                console.warn "⚠️  Warning: Presentation '#{@name}' has no sections defined"
+            
             for section in sections
+                unless section?.toPptx
+                    console.warn "⚠️  Warning: '#{section?.name or section}' in Presentation '#{@name}' is not a valid Section class (did you forget to extend Section?)"
                 section.toPptx?(pptx)
             
             pptx.writeFile({ fileName: outputPath })
