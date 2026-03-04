@@ -111,7 +111,7 @@ class 医院品牌的内涵 extends TableSlide
     @文化品牌: "价值理念、精神，如救死扶伤"
     @公益品牌: "社会责任担当，如健康扶贫"
 
-class 品牌对医院的价值 extends NumberSlide
+class 品牌对医院的价值 extends CardSlide
     @吸引患者: "品牌吸引患者选择"
     @吸引人才: "品牌吸引优秀人才"
     @提升信任: "增强患者信任度"
@@ -200,7 +200,7 @@ class 医院品牌定位类型 extends TableSlide
     @价格实惠型: "以性价比著称，如基层医院"
     @便捷高效型: "以效率著称，如某互联网医院"
 
-class 差异化定位方法 extends ContentSlide
+class 差异化定位方法 extends CardSlide
     @目标人群差异化: "定位特定人群，如妇儿医院"
     @服务差异化: "独特服务模式，如VIP门诊"
     @区域差异化: "填补区域空白，如新建医院"
@@ -223,7 +223,7 @@ class 视觉识别VI extends TwoColumnSlide
     @基础识别: "院徽、院名标准字、院旗、标准色彩"
     @应用识别: "标识系统、办公用品、宣传物料、医护人员服装"
 
-class 行为识别BI extends ContentSlide
+class 行为识别BI extends CardSlide
     @医护行为: "诊疗规范、沟通礼仪"
     @服务行为: "导医服务、投诉处理"
     @公益行为: "义诊活动、健康教育"
@@ -301,7 +301,7 @@ class 微信公众号运营 extends CardSlide
     @患者故事: "10%，口碑传播"
     @互动活动: "5%，粉丝互动"
 
-class 短视频运营 extends ContentSlide
+class 短视频运营 extends CardSlide
     @内容类型: "科普短视频（60%）、医护日常（20%）、暖心故事（15%）、互动话题（5%）"
     @制作要点: "内容通俗易懂、画面清晰美观、时长控制（1-3分钟）、标题吸引"
     @运营技巧: "固定更新时间、评论区互动、数据分析优化、达人合作"
@@ -322,7 +322,7 @@ class 院内品牌展示节 extends Section
         标识系统
     ]
 
-class 院史馆建设 extends ContentSlide
+class 院史馆建设 extends CardSlide
     @历史沿革: "医院发展历程"
     @名医名家: "学科带头人"
     @科研成果: "课题、论文、专利"
@@ -335,7 +335,7 @@ class 文化长廊 extends TableSlide
     @党建园地: "党建工作展示"
     @医护人员风采: "医护团队照片"
 
-class 标识系统 extends ContentSlide
+class 标识系统 extends CardSlide
     @户外标识: "楼体标识、道路指引"
     @科室标识: "科室牌、门牌"
     @宣传标识: "展板、海报"
