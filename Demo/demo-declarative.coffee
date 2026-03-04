@@ -4,7 +4,7 @@
 { 
   Slide, TitleSlide, ContentSlide, ListSlide, MermaidSlide,
   Section, Presentation, CHARTS,
-  PDCA, SWOT, Timeline
+  PDCA, SWOT, Timeline, ComparisonSlide
 } = require "../api/declarative-api.coffee"
 
 # ============================================
@@ -36,7 +36,15 @@ class 品牌金字塔 extends MermaidSlide
   @chart: CHARTS.brandPyramid
 
 # ============================================
-# 方式3: 函数延迟解析 (声明式核心!)
+# 方式3: 对比页
+# ============================================
+
+class 方案对比 extends ComparisonSlide
+  @方案A: "优势：成本低、效率高\n劣势：功能较少"
+  @方案B: "优势：功能全面\n劣势：成本较高"
+
+# ============================================
+# 方式4: 函数延迟解析 (声明式核心!)
 # ============================================
 
 class 第一章 extends Section
@@ -44,6 +52,7 @@ class 第一章 extends Section
     品牌定义
     品牌要素
     PDCA循环
+    方案对比
   ]
 
 class 第二章 extends Section

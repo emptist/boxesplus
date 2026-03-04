@@ -312,18 +312,26 @@ QualitySystem  # 质量管理体系
 PatientSafety  # 患者安全目标
 SWOT           # SWOT分析
 Surgery        # 围手术期
-Evaluation      # 学科评估
-Timeline        # 时间线
-Mindmap         # 思维导图
-Gantt           # 甘特图
-HospitalReview  # 医院等级评审
-DoctorPatient   # 医患沟通
-Performance     # 绩效管理
-Training        # 教学培训
-Research        # 科研项目
-TalentTeam      # 人才梯队
-Decision        # 决策流程
-Architecture    # 系统架构
+Evaluation     # 学科评估
+Timeline       # 时间线
+Mindmap        # 思维导图
+Gantt          # 甘特图
+HospitalReview # 医院等级评审
+DoctorPatient  # 医患沟通
+Performance    # 绩效管理
+Training       # 教学培训
+Research       # 科研项目
+TalentTeam     # 人才梯队
+Decision       # 决策流程
+Architecture   # 系统架构
+```
+
+### 对比页 (ComparisonSlide)
+
+```coffee
+class 方案对比 extends ComparisonSlide
+  @方案A: "优势：成本低\n劣势：功能少"
+  @方案B: "优势：功能全\n劣势：成本高"
 ```
 
 ### 运行

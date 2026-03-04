@@ -449,6 +449,33 @@ generateHtml = (data, outputPath) ->
         <pre class="code"><code class="language-#{slide.language}">#{slide.code}</code></pre>
       </div>
       """
+    else if slide.type is "comparison"
+      """
+      <div class="slide">
+        <h3>#{slide.title}</h3>
+        <div class="comparison">
+          <div class="comparison-left">
+            <h4>#{slide.leftTitle}</h4>
+            <p>#{slide.leftContent}</p>
+          </div>
+          <div class="comparison-vs">VS</div>
+          <div class="comparison-right">
+            <h4>#{slide.rightTitle}</h4>
+            <p>#{slide.rightContent}</p>
+          </div>
+        </div>
+      </div>
+      """
+    else if slide.type is "quote"
+      """
+      <div class="slide">
+        <h3>#{slide.title}</h3>
+        <div class="quote-container">
+          <blockquote>"#{slide.quote}"</blockquote>
+          <p class="quote-author">— #{slide.author}</p>
+        </div>
+      </div>
+      """
   
   slidesHtmlStr = slidesHtml.join('')
   
@@ -474,6 +501,15 @@ generateHtml = (data, outputPath) ->
     .title-slide h1 { font-size: 48px; }
     .title-slide p { font-size: 24px; color: #666; }
     ul { padding-left: 20px; }
+    .comparison { display: flex; align-items: center; justify-content: center; margin-top: 20px; }
+    .comparison-left, .comparison-right { flex: 1; padding: 20px; margin: 10px; border-radius: 10px; }
+    .comparison-left { background: #E8F4FD; }
+    .comparison-right { background: #FFF4E6; }
+    .comparison-left h4, .comparison-right h4 { margin: 0 0 10px 0; color: #366092; }
+    .comparison-vs { font-size: 24px; font-weight: bold; color: #FF6B6B; margin: 0 10px; }
+    .quote-container { margin: 40px auto; max-width: 800px; text-align: center; }
+    .quote-container blockquote { font-size: 28px; font-style: italic; color: #666; border-left: 4px solid #366092; padding-left: 20px; margin: 20px 0; }
+    .quote-author { font-size: 18px; color: #999; }
   </style>
 </head>
 <body>

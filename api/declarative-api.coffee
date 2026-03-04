@@ -74,8 +74,45 @@ class TwoColSlide extends Slide
     leftItems: @leftItems or []
     rightItems: @rightItems or []
 
+# ============================================
+# ComparisonSlide - 对比页
+# ============================================
+
+class ComparisonSlide extends Slide
+  @layout: "comparison"
+  
+  @toData: ->
+    props = @getProperties()
+    keys = Object.keys(props)
+    leftKey = keys[0] or "方案A"
+    rightKey = keys[1] or "方案B"
+    leftValue = props[leftKey] or ""
+    rightValue = props[rightKey] or ""
+    type: "comparison"
+    title: @getTitle()
+    leftTitle: leftKey
+    rightTitle: rightKey
+    leftContent: leftValue
+    rightContent: rightValue
+
 class ImageSlide extends Slide
   @layout: "image"
+
+# ============================================
+# QuoteSlide - 引用页
+# ============================================
+
+class QuoteSlide extends Slide
+  @layout: "quote"
+  
+  @toData: ->
+    props = @getProperties()
+    keys = Object.keys(props)
+    values = Object.values(props)
+    type: "quote"
+    title: @getTitle()
+    author: keys[0] or ""
+    quote: values[0] or ""
 
 # ============================================
 # Mermaid 图表幻灯片 (核心功能!)
@@ -266,6 +303,7 @@ module.exports = {
   ListSlide
   TwoColSlide
   ImageSlide
+  QuoteSlide
   MermaidSlide
   FlowchartSlide
   PDCA
@@ -289,6 +327,7 @@ module.exports = {
   TalentTeam
   Decision
   Architecture
+  ComparisonSlide
   SWOTSlide
   TimelineSlide
   ProcessSlide
