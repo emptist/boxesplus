@@ -299,8 +299,8 @@ generateHtml = (data, outputPath) ->
         </div>
       </div>
       """
-    else if slide.type is "list"
-      itemsHtml = for item, i in slide.items
+    else if slide.type is "list" or slide.type is "content"
+      itemsHtml = for item, i in (slide.items ? [])
         "<li>#{item}</li>"
       """
       <div class="slide">
@@ -346,6 +346,8 @@ generateHtml = (data, outputPath) ->
       </div>
       """
   
+  slidesHtmlStr = slidesHtml.join('')
+  
   html = """
 <!doctype html>
 <html>
@@ -359,6 +361,19 @@ generateHtml = (data, outputPath) ->
       theme: 'default'
     });
   </script>
+  <style>
+    body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+    .slide { margin-bottom: 20px; padding: 20px; border: 1px solid #ccc; }
+    .slide h1 { color: #366092; }
+    .slide h3 { color: #366092; margin-bottom: 10px; }
+    .title-slide { text-align: center; padding: 100px 20px; }
+    .title-slide h1 { font-size: 48px; }
+    .title-slide p { font-size: 24px; color: #666; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+#{slidesHtmlStr}
 </body>
 </html>
 """

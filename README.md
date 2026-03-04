@@ -261,3 +261,57 @@ class 章节 extends Section
 ### 3. 双侧编程
 - `@` (类侧) - 模板/共享配置
 - `this` (实例侧) - 具体数据
+
+## 声明式 API (新!)
+
+### 核心理念
+- **类属性 = 数据** - 直接在类上定义数据
+- **类继承 = 布局** - 改变父类就改变展示方式
+- **自动执行** - 定义类就会自动生成 PPTX
+
+### 快速开始
+
+```coffee
+{ ContentSlide, MermaidSlide, Section, Presentation, CHARTS, PDCA } = require "./api/declarative-api.coffee"
+
+# 定义幻灯片 - 类名就是标题
+class 品牌定义 extends ContentSlide
+  @定义: "品牌是一个名称、术语、符号或设计"
+  @公式: "品牌 = 产品功能 + 情感价值"
+
+# 使用 Mermaid 图表
+class PDCA循环 extends PDCA
+
+# 定义章节
+class 第一章 extends Section
+  @slides: -> [品牌定义, PDCA循环]
+
+# 定义演示文稿 - 自动生成!
+class 品牌课程 extends Presentation
+  @sections: -> [第一章]
+  @now: @newPresentation()
+```
+
+### 可用图表类型
+
+```coffee
+PDCA           # PDCA循环
+Pareto         # 柏拉图
+EventLoop      # 事件闭环
+DataLifecycle  # 数据生命周期
+BrandPyramid   # 品牌金字塔
+QualitySystem  # 质量管理体系
+PatientSafety  # 患者安全目标
+SWOT           # SWOT分析
+Surgery        # 围手术期
+Evaluation     # 学科评估
+Timeline       # 时间线
+Mindmap        # 思维导图
+Gantt          # 甘特图
+```
+
+### 运行
+
+```bash
+coffee Demo/demo-declarative.coffee
+```
