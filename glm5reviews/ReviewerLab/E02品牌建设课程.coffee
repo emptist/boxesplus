@@ -7,8 +7,9 @@
     Slide, TitleSlide, ContentSlide, TwoColumnSlide, TableSlide, CardSlide,
     ImageSlide, ImageTextSlide, TimelineSlide, QuoteSlide, NumberSlide,
     ProcessSlide, GanttSlide, ComparisonSlide, PyramidSlide, MindmapSlide, SWOTSlide,
+    SectionSlide, EndSlide, PDCASlide, OrgChartSlide, BoxSlide, MatrixSlide,
     Section, Chapter, Presentation 
-} = require "./framework-v2"
+} = require "./declarative-pptx-api/index"
 
 # ============================================
 # 演示文稿
