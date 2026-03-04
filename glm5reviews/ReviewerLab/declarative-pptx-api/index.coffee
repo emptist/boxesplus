@@ -839,27 +839,27 @@ class PDCASlide extends Slide
         
         properties = @getProperties()
         
-        # PDCA四个象限
         colors = ["E8F5E9", "E3F2FD", "FFF3E0", "FFEBEE"]
         labels = ["P - Plan", "D - Do", "C - Check", "A - Act"]
         keys = ["P", "D", "C", "A"]
         
         for i in [0..3]
             x = if i % 2 == 0 then 0.5 else 5
-            y = if i < 2 then 1.2 else 3.8
+            y = if i < 2 then 1.1 else 4.0
             
             slide.addShape "rect",
-                x: x, y: y, w: 4.5, h: 2.4
+                x: x, y: y, w: 4.5, h: 2.6
                 fill: { color: colors[i] }
             
             slide.addText labels[i],
-                x: x, y: y + 0.2, w: 4.5, h: 0.5
-                fontSize: 18, bold: true, align: "center"
+                x: x, y: y + 0.1, w: 4.5, h: 0.4
+                fontSize: 16, bold: true, align: "center"
             
             if properties[keys[i]]
+                fontSize = SmartLayout.calculateFontSize(properties[keys[i]], 4.1, 1.8)
                 slide.addText properties[keys[i]],
-                    x: x + 0.2, y: y + 0.8, w: 4.1, h: 1.4
-                    fontSize: 14
+                    x: x + 0.2, y: y + 0.6, w: 4.1, h: 1.8
+                    fontSize: fontSize
 
 # ============================================
 # OrgChartSlide - 组织架构图页
@@ -1015,12 +1015,11 @@ class MatrixSlide extends Slide
         
         properties = @getProperties()
         
-        # 2x2矩阵
         positions = [
-            {x: 0.5, y: 1.2}
-            {x: 5, y: 1.2}
-            {x: 0.5, y: 3.8}
-            {x: 5, y: 3.8}
+            {x: 0.5, y: 1.1}
+            {x: 5, y: 1.1}
+            {x: 0.5, y: 4.0}
+            {x: 5, y: 4.0}
         ]
         
         colors = ["E8F5E9", "E3F2FD", "FFF3E0", "FFEBEE"]
@@ -1032,16 +1031,17 @@ class MatrixSlide extends Slide
             pos = positions[i]
             
             slide.addShape "rect",
-                x: pos.x, y: pos.y, w: 4.5, h: 2.4
+                x: pos.x, y: pos.y, w: 4.5, h: 2.6
                 fill: { color: colors[i] }
             
             slide.addText key,
-                x: pos.x, y: pos.y + 0.2, w: 4.5, h: 0.5
-                fontSize: 18, bold: true, align: "center"
+                x: pos.x, y: pos.y + 0.1, w: 4.5, h: 0.4
+                fontSize: 16, bold: true, align: "center"
             
+            fontSize = SmartLayout.calculateFontSize(value, 4.1, 1.8)
             slide.addText value,
-                x: pos.x + 0.2, y: pos.y + 0.8, w: 4.1, h: 1.4
-                fontSize: 14
+                x: pos.x + 0.2, y: pos.y + 0.6, w: 4.1, h: 1.8
+                fontSize: fontSize
 
 # ============================================
 # Section - 节类（声明式）
