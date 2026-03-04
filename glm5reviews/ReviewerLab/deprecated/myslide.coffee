@@ -1,0 +1,39 @@
+# 用户文件：myslide.coffee
+# 用户只需要定义类，不需要调用任何东西
+
+# 引入框架
+{ Slide, Section, Chapter, Presentation } = require "./declarative-framework-final"
+
+# 用户定义的幻灯片
+class AI革命前教学平台定义 extends Slide
+    @AI革命前: "那是一个美好的时代，我们在这个时代里，有很多的创新，有很多的突破，有很多的变化。"
+    @AI革命后: "AI革命后，教学平台发生了翻天覆地的变化。"
+    @插图: "AI革命前教学平台定义.png"
+
+class AI革命后教学平台定义 extends Slide
+    @图文: {
+        图: "AI革命后教学平台定义.png"
+        文: "那是一个美好的时代，我们在这个时代里，有很多的创新，有很多的突破，有很多的变化。"
+    }
+
+# 用户定义的节
+class 国际学科平台定义 extends Section
+    @幻灯片: [
+        AI革命前教学平台定义
+        AI革命后教学平台定义
+    ]
+
+# 用户定义的章
+class 学科平台定义 extends Chapter
+    @节: [
+        国际学科平台定义
+    ]
+
+# 用户定义的演示文稿
+class 我的幻灯片 extends Presentation
+    @sections: [
+        学科平台定义
+    ]
+
+# 完成！不需要调用任何东西
+# coffee myslide.coffee 就会自动生成 HTML

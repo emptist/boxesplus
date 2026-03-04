@@ -13,6 +13,18 @@
 - **工作空间**：`glm5reviews`（用于review和探索）
 - **真正的项目**：`/Users/jk/gits/hub/consult_strategy/boxesplus`
 
+### 相关项目
+
+#### BoxesPlus（当前项目）
+- **位置**：`/Users/jk/gits/hub/consult_strategy/boxesplus`
+- **用途**：PPTX和RevealJS演示文稿自动生成
+
+#### HQCoffee（参考项目）
+- **位置**：`~/gits/gitee/hqcoffee`
+- **用途**：CoffeeScript实践项目
+- **推荐研究文件**：`~/gits/gitee/hqcoffee/cases/goodhospital2021/self.coffee`
+- **说明**：这是之前做的项目，展示了CoffeeScript的优秀实践
+
 ### 项目关系
 
 ```
@@ -25,12 +37,13 @@ boxesplus/                    # 真正的项目
 │   │       └── project_rules.md
 │   ├── AI_REVIEWS/           # 📋 报告目录
 │   │   └── boxesplus-comprehensive-review.md
-│   ├── ReviewerLab/              # 🔬 ReviewerLab目录
-│   │   ├── my-workspace/      # 之前的my-workspace
-│   │   ├── reviewer-workspace/ # 之前的reviewer-workspace
-│   │   └── src/             # 之前的src
-│   ├── README.md
-│   └── project_rules.md
+│   └── ReviewerLab/          # 🔬 ReviewerLab目录
+│       ├── my-workspace/      # Mermaid图表生成和PPTX转换实验
+│       ├── reviewer-workspace/ # 数据和审查实验
+│       ├── src/             # 代码副本和示例
+│       ├── README.md
+│       ├── project_rules.md
+│       └── .gitignore
 ├── md_sources/
 ├── resources/
 └── scripts/

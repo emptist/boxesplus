@@ -21,7 +21,7 @@ boxesplus/                    # 真正的项目
 ├── Demo/                      # 项目示例代码
 ├── glm5reviews/              # reviewer AI工作空间（本目录）
 │   ├── AI_REVIEWS/           # 📋 报告目录
-│   └── ReviewerLab/              # 🔬 ReviewerLab目录
+│   └── ReviewerLab/          # 🔬 ReviewerLab目录
 ├── md_sources/
 ├── resources/
 └── scripts/
@@ -42,13 +42,10 @@ boxesplus/                    # 真正的项目
 glm5reviews/
 ├── AI_REVIEWS/               # 📋 报告目录
 │   └── boxesplus-comprehensive-review.md
-└── ReviewerLab/                  # 🔬 ReviewerLab目录
-    ├── my-workspace/          # 之前的my-workspace
-    ├── reviewer-workspace/     # 之前的reviewer-workspace
-    ├── src/                 # 之前的src
-    ├── .trae/
-    │   └── rules/
-    │       └── project_rules.md
+└── ReviewerLab/             # 🔬 ReviewerLab目录
+    ├── my-workspace/      # Mermaid图表生成和PPTX转换实验
+    ├── reviewer-workspace/ # 数据和审查实验
+    ├── src/             # 代码副本和示例
     ├── README.md
     ├── project_rules.md
     └── .gitignore
