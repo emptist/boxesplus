@@ -15,6 +15,17 @@
 - 适合宽屏幕（16:9）
 - 缩放后保持好看
 
+## 🖼️ 图片尺寸优化
+
+**问题**：生成的图片太小（1200 x 61px），在PPTX中放大导致模糊
+
+**解决方案**：使用CSS `transform: scale(2)`放大图片
+
+**效果**：
+- 图片尺寸从1200 x 61px提升到4696 x 166px
+- 避免在PPTX中放大导致模糊
+- 图片质量更高，更清晰
+
 ## 📂 目录结构
 
 ```
@@ -56,11 +67,18 @@ my-workspace/
 ### 主要文档
 - [Mermaid图表生成PDF_PPTX方案.md](docs/Mermaid图表生成PDF_PPTX方案.md) - 完整的方案文档，包含：
   - 核心秘籍：纵横交换
+  - 图片尺寸优化（CSS transform放大）
   - 实际测试结果
   - 完整工作流程
   - 其他技巧（对角线布局、改变图表类型等）
 
 ### 辅助文档
+- [Mermaid用户友好API使用指南.md](docs/Mermaid用户友好API使用指南.md) - 用户友好API文档，包含：
+  - 快速开始指南
+  - 图表类型说明
+  - 完整示例代码
+  - 生成PPTX中的图片
+  - API参考
 - [工作空间整理说明.md](docs/工作空间整理说明.md) - 工作空间整理说明，包含：
   - 整理后的目录结构
   - 输出文件说明
@@ -146,6 +164,23 @@ coffee 方案1-完整流程.coffee
 
 **结论**：所有图表都适合宽屏幕，CSS自动缩放即可！
 
+## 📊 实际成果
+
+### 图片尺寸对比
+
+| 项目 | 优化前 | 优化后 | 说明 |
+|------|--------|--------|------|
+| 宽度 | 1200px | 4696px | 使用CSS transform scale(2)放大 |
+| 高度 | 61px | 166px | 图表高度也相应放大 |
+| 文件大小 | 小 | 9.5KB | 图片质量更好 |
+
+### PPTX文件
+
+| 课程 | 页数 | 文件大小 | 图表数量 |
+|------|------|----------|----------|
+| E02医院品牌建设课程 | 59页 | 485KB | 15个 |
+| C01医疗质量与安全管理课程 | 37页 | 268KB | 3个 |
+
 ## 💡 技巧总结
 
 ### 技巧1：纵横交换（最简单）
@@ -173,6 +208,33 @@ sequenceDiagram  ← 更适合展示交互
 - 减少节点数量
 - 简化节点文本
 - 减少不必要的连接
+
+### 技巧5：图片尺寸优化
+```css
+.mermaid-container {
+  min-width: 1200px;
+  min-height: 800px;
+}
+.mermaid {
+  transform: scale(2);
+  transform-origin: top center;
+  display: inline-block;
+}
+```
+
+### 技巧6：Mermaid配置优化
+```javascript
+mermaid.initialize({
+  flowchart: {
+    useMaxWidth: false,
+    htmlLabels: true,
+    curve: 'basis',
+    padding: 20,
+    nodeSpacing: 50,
+    rankSpacing: 80
+  }
+});
+```
 
 ## 📈 方案对比
 
@@ -263,13 +325,30 @@ await browser.close();
 2. **类图**：可以考虑改为flowchart LR，更简洁
 3. **状态图**：可以考虑改为flowchart LR，更直观
 4. **复杂图表**：考虑拆分为多个小图表
+5. **图片尺寸**：使用CSS transform放大图片，避免在PPTX中放大导致模糊
+6. **容器尺寸**：设置min-width和min-height确保图表有足够空间渲染
 
-## 📞 联系方式
+## 🎓 总结
 
-如有问题或建议，请通过以下方式联系：
-- 提交Issue
-- 发送Pull Request
+**核心秘籍**：
+1. 纵横交换（TD→LR）
+2. 图片尺寸优化（CSS transform放大）
+
+**工作流程**：
+1. 生成Mermaid图（使用LR布局）
+2. 截图保存（使用CSS transform放大）
+3. 生成打印HTML（CSS自动缩放）
+4. 导出PDF/PPTX
+
+**关键点**：
+- ✅ 简单高效
+- ✅ 不需要预先计算尺寸
+- ✅ CSS自动缩放
+- ✅ 适合所有图表
+- ✅ 高瘦图通过纵横交换解决
+- ✅ 使用CSS transform放大图片，避免在PPTX中放大
+- ✅ 设置容器min-width和min-height确保足够空间
 
 ---
 
-**最后更新**: 2026-03-02
+**最后更新**: 2026-03-04

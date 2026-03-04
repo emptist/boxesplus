@@ -2,7 +2,48 @@
 
 ## 📋 项目概述
 
-本项目是代码审查和工具开发的工作空间，专注于PPTX和RevealJS演示文稿的自动生成。
+本项目是**reviewer AI的工作空间**，专注于PPTX和RevealJS演示文稿的自动生成。
+
+## ⚠️ 重要说明
+
+### 身份和位置
+
+- **当前工作目录**：`/Users/jk/gits/hub/consult_strategy/boxesplus/glm5reviews`
+- **身份**：reviewer AI助手
+- **工作空间**：`glm5reviews`（用于review和探索）
+- **真正的项目**：`/Users/jk/gits/hub/consult_strategy/boxesplus`
+
+### 项目关系
+
+```
+boxesplus/                    # 真正的项目
+├── api/                      # 项目核心代码
+├── Demo/                      # 项目示例代码
+├── glm5reviews/              # reviewer AI工作空间（本目录）
+│   ├── .trae/
+│   │   └── rules/
+│   │       └── project_rules.md
+│   ├── AI_REVIEWS/           # 📋 报告目录
+│   │   └── boxesplus-comprehensive-review.md
+│   ├── ReviewerLab/              # 🔬 ReviewerLab目录
+│   │   ├── my-workspace/      # 之前的my-workspace
+│   │   ├── reviewer-workspace/ # 之前的reviewer-workspace
+│   │   └── src/             # 之前的src
+│   ├── README.md
+│   └── project_rules.md
+├── md_sources/
+├── resources/
+└── scripts/
+```
+
+### 注意事项
+
+1. **glm5reviews是工作空间**：不是真正的项目，是reviewer AI用于review和探索的目录
+2. **真正的项目在上级目录**：`/Users/jk/gits/hub/consult_strategy/boxesplus`
+3. **review报告针对真正的项目**：review报告中的代码路径应该指向`boxesplus`项目
+4. **不要混淆工作空间和项目**：工作空间是为了review和探索，项目是真正的代码库
+5. **review报告存放位置**：`AI_REVIEWS/` 目录，所有review报告都应该放在这里
+6. **review报告命名规范**：使用描述性的文件名，如`boxesplus-comprehensive-review.md`
 
 ## 🚀 核心工具链
 

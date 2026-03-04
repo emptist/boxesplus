@@ -18,26 +18,60 @@ Markdown教案 → 自动判断 → CSON数据 → PPTX输出
 
 ```
 glm5reviews/
-├── AI_REVIEWS/                  # 代码审查报告
-│   ├── README.md               # 审查报告索引
-│   ├── boxesplus-comprehensive-review.md  # 深入全面审查
-│   ├── review-methodology.md   # 审查方法论
-│   └── html-conversion-methods.md  # HTML转换方法
-├── my-workspace/               # 工具开发工作区
-│   ├── api/                   # API实现
-│   │   ├── mermaid-enhanced.coffee      # 核心Mermaid API
-│   │   └── mermaid-enhanced-fixed.coffee # 修复版HTML生成器
-│   ├── demo/                  # 演示代码
-│   ├── output/                # 输出文件
-│   └── README.md             # 工具开发文档
-├── reviewer-workspace/         # 审查工作区
-│   ├── data/                 # 数据文件
-│   └── data2/                # CSON数据文件
-├── notes/                    # 笔记和教案
-├── issues/                   # 问题追踪
-├── templates/                # 模板文件
-├── project_rules.md           # 本文件
-└── README.md                # 主文档
+├── AI_REVIEWS/               # 📋 报告目录
+│   ├── README.md
+│   ├── boxesplus-comprehensive-review.md
+│   ├── review-methodology.md
+│   ├── html-conversion-methods.md
+│   └── pdf-pptx-generation-review.md
+└── ReviewerLab/                  # 🔬 ReviewerLab目录
+    ├── my-workspace/          # 之前的my-workspace
+    │   ├── api/             # API实现
+    │   │   ├── hybrid-generator-v2.coffee
+    │   │   ├── hybrid-generator.coffee
+    │   │   ├── mermaid-enhanced-complete.coffee
+    │   │   ├── mermaid-enhanced-fixed.coffee
+    │   │   ├── mermaid-enhanced-v2.coffee
+    │   │   ├── mermaid-enhanced-v3.coffee
+    │   │   ├── mermaid-enhanced.coffee
+    │   │   ├── mermaid-to-pptx-html.coffee
+    │   │   └── mermaid-user-friendly.coffee
+    │   ├── demo/            # 演示代码
+    │   │   ├── C01课程PPTX-完整版.coffee
+    │   │   ├── C01课程图表-一次成型版.coffee
+    │   │   ├── C01课程图表-优化版.coffee
+    │   │   ├── C01课程图表-尺寸优化版.coffee
+    │   │   ├── C01课程图表-简化测试版.coffee
+    │   │   ├── E02课程PPTX-完整版.coffee
+    │   │   ├── 方案1-Puppeteer截图.coffee
+    │   │   ├── 方案1-完整流程.coffee
+    │   │   ├── 方案1-简化版.coffee
+    │   │   ├── 测试一次成型尺寸.coffee
+    │   │   ├── 测试优化版尺寸.coffee
+    │   │   └── 用户友好API使用示例.coffee
+    │   ├── deprecated/       # 过时的代码
+    │   └── README.md
+    ├── reviewer-workspace/   # 之前的reviewer-workspace
+    │   ├── data/           # 数据文件（JSON格式）
+    │   └── data2/          # 数据文件（CSON格式）
+    ├── src/                # 之前的src
+    │   ├── code/           # 核心代码
+    │   │   ├── markdown转换器.coffee
+    │   │   ├── boxesplus.coffee
+    │   │   ├── 中文表达.coffee
+    │   │   ├── 双侧编程.coffee
+    │   │   ├── 真正的诗式PPTX.coffee
+    │   │   ├── 散文式PPTX.coffee
+    │   │   ├── 极简诗式PPTX.coffee
+    │   │   ├── JSON定义解析.coffee
+    │   │   ├── 自然语言表达.coffee
+    │   │   ├── csv-to-json.coffee
+    │   │   ├── json-to-pptx.coffee
+    │   │   └── revealjs生成器.coffee
+    │   └── examples/       # 示例代码
+    ├── project_rules.md
+    ├── README.md
+    └── .gitignore
 ```
 
 ## 🎯 工作内容
