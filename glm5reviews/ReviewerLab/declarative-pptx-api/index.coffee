@@ -41,9 +41,15 @@ class Slide
     @getProperties: ->
         props = {}
         for key, value of this
-            unless key in ['name', 'length', 'prototype', 'toPptx', 'getProperties', 'renderPropertyToPptx']
+            unless key in ['name', 'length', 'prototype', 'toPptx', 'getProperties', 'renderPropertyToPptx', 'autoFontSize', 'fitText']
                 props[key] = value
         props
+    
+    @autoFontSize: (text, width, height, maxFontSize = 18, minFontSize = 10) ->
+        SmartLayout.calculateFontSize(text, width, height)
+    
+    @fitText: (text, width, height) ->
+        SmartLayout.adjustFontSize(text, width, height, 18, 10)
     
     @renderPropertyToPptx: (slide, key, value, y) ->
         if typeof value is 'string'
@@ -140,7 +146,7 @@ class ContentSlide extends Slide
         y = 1.2
         
         for key, value of properties
-            fontSize = SmartLayout.calculateFontSize(value, 9, 0.4)
+            fontSize = @autoFontSize(value, 9, 0.4)
             
             slide.addText "• #{value}",
                 x: 0.5, y: y, w: 9, h: 0.4
@@ -223,7 +229,7 @@ class CardSlide extends Slide
             value = properties[key]
             x = 0.75 + i * cardWidth
             
-            fontSize = SmartLayout.calculateFontSize(value, cardWidth - 0.4, 1.2)
+            fontSize = @autoFontSize(value, cardWidth - 0.4, 1.2)
             
             slide.addShape "rect",
                 x: x, y: 1.2, w: cardWidth - 0.2, h: 1.8
@@ -856,7 +862,7 @@ class PDCASlide extends Slide
                 fontSize: 16, bold: true, align: "center"
             
             if properties[keys[i]]
-                fontSize = SmartLayout.calculateFontSize(properties[keys[i]], 4.1, 1.8)
+                fontSize = @autoFontSize(properties[keys[i]], 4.1, 1.8)
                 slide.addText properties[keys[i]],
                     x: x + 0.2, y: y + 0.6, w: 4.1, h: 1.8
                     fontSize: fontSize
@@ -1038,7 +1044,7 @@ class MatrixSlide extends Slide
                 x: pos.x, y: pos.y + 0.1, w: 4.5, h: 0.4
                 fontSize: 16, bold: true, align: "center"
             
-            fontSize = SmartLayout.calculateFontSize(value, 4.1, 1.8)
+            fontSize = @autoFontSize(value, 4.1, 1.8)
             slide.addText value,
                 x: pos.x + 0.2, y: pos.y + 0.6, w: 4.1, h: 1.8
                 fontSize: fontSize
