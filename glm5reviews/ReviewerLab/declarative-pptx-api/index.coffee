@@ -737,6 +737,313 @@ class SWOTSlide extends Slide
             @createErrorSlide(pptx, error)
 
 # ============================================
+# SectionSlide - 章节页
+# ============================================
+# 章节页 - 用于章节分隔
+#
+# 支持属性：
+# - @编号: string - 章节编号（可选）
+# - @副标题: string - 副标题文本（可选）
+#
+# 示例：
+# class 第一章 extends SectionSlide
+#     @编号: "01"
+#     @副标题: "品牌建设基础"
+# ============================================
+
+class SectionSlide extends Slide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addShape "rect",
+            x: 0, y: 0, w: 10, h: 7.5
+            fill: { color: "366092" }
+        
+        if @编号
+            slide.addText @编号,
+                x: 0.5, y: 2.5, w: 9, h: 0.8
+                fontSize: 48, bold: true, color: "FFFFFF", align: "center"
+        
+        slide.addText @name,
+            x: 0.5, y: 3.5, w: 9, h: 1
+            fontSize: 44, bold: true, color: "FFFFFF", align: "center"
+        
+        if @副标题
+            slide.addText @副标题,
+                x: 0.5, y: 4.5, w: 9, h: 0.5
+                fontSize: 24, color: "E8F4FD", align: "center"
+
+# ============================================
+# EndSlide - 结束页
+# ============================================
+# 结束页 - 用于课程结束
+#
+# 支持属性：
+# - @感谢语: string - 感谢语（可选）
+# - @联系方式: string - 联系方式（可选）
+#
+# 示例：
+# class 谢谢 extends EndSlide
+#     @感谢语: "感谢聆听"
+#     @联系方式: "contact@example.com"
+# ============================================
+
+class EndSlide extends Slide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addShape "rect",
+            x: 0, y: 0, w: 10, h: 7.5
+            fill: { color: "366092" }
+        
+        slide.addText @name,
+            x: 0.5, y: 2.5, w: 9, h: 1
+            fontSize: 48, bold: true, color: "FFFFFF", align: "center"
+        
+        if @感谢语
+            slide.addText @感谢语,
+                x: 0.5, y: 3.8, w: 9, h: 0.5
+                fontSize: 24, color: "E8F4FD", align: "center"
+        
+        if @联系方式
+            slide.addText @联系方式,
+                x: 0.5, y: 4.5, w: 9, h: 0.5
+                fontSize: 18, color: "B4D7F0", align: "center"
+
+# ============================================
+# PDCASlide - PDCA循环页
+# ============================================
+# PDCA循环页 - 用于质量管理
+#
+# 支持属性：
+# - @P: string - Plan计划
+# - @D: string - Do执行
+# - @C: string - Check检查
+# - @A: string - Act处理
+#
+# 示例：
+# class 质量管理PDCA extends PDCASlide
+#     @P: "制定质量目标和计划"
+#     @D: "执行质量计划"
+#     @C: "检查质量结果"
+#     @A: "处理质量问题"
+# ============================================
+
+class PDCASlide extends Slide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addText @name,
+            x: 0.5, y: 0.3, w: 9, h: 0.6
+            fontSize: 28, bold: true, color: "366092"
+        
+        properties = @getProperties()
+        
+        # PDCA四个象限
+        colors = ["E8F5E9", "E3F2FD", "FFF3E0", "FFEBEE"]
+        labels = ["P - Plan", "D - Do", "C - Check", "A - Act"]
+        keys = ["P", "D", "C", "A"]
+        
+        for i in [0..3]
+            x = if i % 2 == 0 then 0.5 else 5
+            y = if i < 2 then 1.2 else 3.8
+            
+            slide.addShape "rect",
+                x: x, y: y, w: 4.5, h: 2.4
+                fill: { color: colors[i] }
+            
+            slide.addText labels[i],
+                x: x, y: y + 0.2, w: 4.5, h: 0.5
+                fontSize: 18, bold: true, align: "center"
+            
+            if properties[keys[i]]
+                slide.addText properties[keys[i]],
+                    x: x + 0.2, y: y + 0.8, w: 4.1, h: 1.4
+                    fontSize: 14
+
+# ============================================
+# OrgChartSlide - 组织架构图页
+# ============================================
+# 组织架构图页 - 用于组织结构
+#
+# 支持属性：
+# - @顶层: string - 顶层领导
+# - @中层: string - 中层管理（多个用逗号分隔）
+# - @基层: string - 基层员工（多个用逗号分隔）
+#
+# 示例：
+# class 医院组织架构 extends OrgChartSlide
+#     @顶层: "院长"
+#     @中层: "副院长, 科室主任"
+#     @基层: "医生, 护士, 行政人员"
+# ============================================
+
+class OrgChartSlide extends Slide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addText @name,
+            x: 0.5, y: 0.3, w: 9, h: 0.6
+            fontSize: 28, bold: true, color: "366092"
+        
+        properties = @getProperties()
+        
+        # 顶层
+        if properties['顶层']
+            slide.addShape "rect",
+                x: 3.5, y: 1.2, w: 3, h: 0.8
+                fill: { color: "366092" }
+            
+            slide.addText properties['顶层'],
+                x: 3.5, y: 1.3, w: 3, h: 0.6
+                fontSize: 16, bold: true, color: "FFFFFF", align: "center"
+        
+        # 中层
+        if properties['中层']
+            middle = properties['中层'].split(',').map (s) -> s.trim()
+            middleWidth = 8 / middle.length
+            startX = 1
+            
+            for person, i in middle
+                x = startX + i * middleWidth
+                
+                # 连接线
+                slide.addShape "line",
+                    x: 5, y: 2, w: x + middleWidth / 2 - 5, h: 0.8
+                    line: { color: "CCCCCC", width: 1 }
+                
+                slide.addShape "rect",
+                    x: x, y: 2.8, w: middleWidth - 0.2, h: 0.8
+                    fill: { color: "4472C4" }
+                
+                slide.addText person,
+                    x: x, y: 2.9, w: middleWidth - 0.2, h: 0.6
+                    fontSize: 14, color: "FFFFFF", align: "center"
+        
+        # 基层
+        if properties['基层']
+            bottom = properties['基层'].split(',').map (s) -> s.trim()
+            bottomWidth = 8 / bottom.length
+            startX = 1
+            
+            for person, i in bottom
+                x = startX + i * bottomWidth
+                
+                # 连接线
+                slide.addShape "line",
+                    x: 5, y: 3.6, w: x + bottomWidth / 2 - 5, h: 0.8
+                    line: { color: "CCCCCC", width: 1 }
+                
+                slide.addShape "rect",
+                    x: x, y: 4.4, w: bottomWidth - 0.2, h: 0.8
+                    fill: { color: "70AD47" }
+                
+                slide.addText person,
+                    x: x, y: 4.5, w: bottomWidth - 0.2, h: 0.6
+                    fontSize: 12, color: "FFFFFF", align: "center"
+
+# ============================================
+# BoxSlide - 盒子图页
+# ============================================
+# 盒子图页 - 用于概念关系
+#
+# 支持属性：
+# - @属性名: string - 盒子内容
+# - 支持多个属性，每个属性显示为一个盒子
+#
+# 示例：
+# class 品牌建设要素 extends BoxSlide
+#     @品牌定位: "明确品牌定位"
+#     @品牌传播: "制定传播策略"
+#     @品牌管理: "建立管理体系"
+#     @品牌评估: "定期评估效果"
+# ============================================
+
+class BoxSlide extends Slide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addText @name,
+            x: 0.5, y: 0.3, w: 9, h: 0.6
+            fontSize: 28, bold: true, color: "366092"
+        
+        properties = @getProperties()
+        boxes = Object.keys(properties)
+        boxWidth = 8.5 / boxes.length
+        
+        for key, i in boxes
+            value = properties[key]
+            x = 0.75 + i * boxWidth
+            
+            slide.addShape "rect",
+                x: x, y: 2, w: boxWidth - 0.2, h: 2
+                fill: { color: "E8F4FD" }
+                line: { color: "366092", width: 2 }
+            
+            slide.addText key,
+                x: x, y: 2.2, w: boxWidth - 0.2, h: 0.5
+                fontSize: 16, bold: true, color: "366092", align: "center"
+            
+            slide.addText value,
+                x: x + 0.1, y: 2.8, w: boxWidth - 0.4, h: 1
+                fontSize: 14, align: "center"
+
+# ============================================
+# MatrixSlide - 矩阵图页
+# ============================================
+# 矩阵图页 - 用于分析框架
+#
+# 支持属性：
+# - @属性名: string - 矩阵内容
+# - 支持多个属性，每个属性显示为一个矩阵元素
+#
+# 示例：
+# class 波士顿矩阵 extends MatrixSlide
+#     @明星: "高增长高市场份额"
+#     @金牛: "低增长高市场份额"
+#     @问题: "高增长低市场份额"
+#     @瘦狗: "低增长低市场份额"
+# ============================================
+
+class MatrixSlide extends Slide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addText @name,
+            x: 0.5, y: 0.3, w: 9, h: 0.6
+            fontSize: 28, bold: true, color: "366092"
+        
+        properties = @getProperties()
+        
+        # 2x2矩阵
+        positions = [
+            {x: 0.5, y: 1.2}
+            {x: 5, y: 1.2}
+            {x: 0.5, y: 3.8}
+            {x: 5, y: 3.8}
+        ]
+        
+        colors = ["E8F5E9", "E3F2FD", "FFF3E0", "FFEBEE"]
+        keys = Object.keys(properties)
+        
+        for i in [0..Math.min(3, keys.length - 1)]
+            key = keys[i]
+            value = properties[key]
+            pos = positions[i]
+            
+            slide.addShape "rect",
+                x: pos.x, y: pos.y, w: 4.5, h: 2.4
+                fill: { color: colors[i] }
+            
+            slide.addText key,
+                x: pos.x, y: pos.y + 0.2, w: 4.5, h: 0.5
+                fontSize: 18, bold: true, align: "center"
+            
+            slide.addText value,
+                x: pos.x + 0.2, y: pos.y + 0.8, w: 4.1, h: 1.4
+                fontSize: 14
+
+# ============================================
 # Section - 节类（声明式）
 # ============================================
 
@@ -813,6 +1120,12 @@ module.exports = {
     PyramidSlide
     MindmapSlide
     SWOTSlide
+    SectionSlide
+    EndSlide
+    PDCASlide
+    OrgChartSlide
+    BoxSlide
+    MatrixSlide
     Section
     Chapter
     Presentation
