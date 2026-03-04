@@ -4,7 +4,7 @@
 
 { 
     SectionSlide, EndSlide, PDCASlide, OrgChartSlide, BoxSlide, MatrixSlide,
-    Presentation 
+    Section, Presentation 
 } = require "./index"
 
 console.log "🧪 Testing New Slide Types...\n"
@@ -55,7 +55,7 @@ class 波士顿矩阵 extends MatrixSlide
 # Generate test presentation
 console.log "\nGenerating test presentation..."
 
-class TestSection
+class TestSection extends Section
     @幻灯片: -> [
         第一章
         质量管理PDCA
