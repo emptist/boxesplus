@@ -55,18 +55,18 @@ class 波士顿矩阵 extends MatrixSlide
 # Generate test presentation
 console.log "\nGenerating test presentation..."
 
-class TestNewSlideTypes extends Presentation
-    @sections: -> [
-        class TestSection
-            @幻灯片: -> [
-                第一章
-                质量管理PDCA
-                医院组织架构
-                品牌建设要素
-                波士顿矩阵
-                谢谢聆听
-            ]
+class TestSection
+    @幻灯片: -> [
+        第一章
+        质量管理PDCA
+        医院组织架构
+        品牌建设要素
+        波士顿矩阵
+        谢谢聆听
     ]
+
+class TestNewSlideTypes extends Presentation
+    @sections: -> [TestSection]
     @nowYou: @newPresentation()
 
 console.log "\n🎉 Test completed!"
