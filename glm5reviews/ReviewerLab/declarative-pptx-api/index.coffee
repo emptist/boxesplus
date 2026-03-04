@@ -140,9 +140,11 @@ class ContentSlide extends Slide
         y = 1.2
         
         for key, value of properties
+            fontSize = SmartLayout.calculateFontSize(value, 9, 0.4)
+            
             slide.addText "• #{value}",
                 x: 0.5, y: y, w: 9, h: 0.4
-                fontSize: 18, color: "333333"
+                fontSize: fontSize, color: "333333"
             y += 0.5
 
 # ============================================
@@ -221,6 +223,8 @@ class CardSlide extends Slide
             value = properties[key]
             x = 0.75 + i * cardWidth
             
+            fontSize = SmartLayout.calculateFontSize(value, cardWidth - 0.4, 1.2)
+            
             slide.addShape "rect",
                 x: x, y: 1.2, w: cardWidth - 0.2, h: 1.8
                 fill: { color: "F0F0F0" }
@@ -231,7 +235,7 @@ class CardSlide extends Slide
             
             slide.addText value,
                 x: x + 0.1, y: 1.8, w: cardWidth - 0.4, h: 1.2
-                fontSize: 12, color: "333333"
+                fontSize: fontSize, color: "333333"
 
 # ============================================
 # ImageSlide - 图片页
