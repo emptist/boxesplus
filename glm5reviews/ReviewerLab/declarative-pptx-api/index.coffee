@@ -198,6 +198,26 @@ class TableSlide extends Slide
             fontSize: 28, bold: true, color: "366092"
         
         properties = @getProperties()
+        
+        maxKeyLength = 0
+        maxValueLength = 0
+        
+        for key, value of properties
+            keyLen = key.length
+            valLen = value?.length or 0
+            maxKeyLength = Math.max(maxKeyLength, keyLen)
+            maxValueLength = Math.max(maxValueLength, valLen)
+        
+        totalLength = maxKeyLength + maxValueLength
+        if totalLength > 0
+            keyRatio = maxKeyLength / totalLength
+            valueRatio = maxValueLength / totalLength
+            keyWidth = Math.max(1.5, Math.min(3, 9 * keyRatio))
+            valueWidth = 9 - keyWidth
+        else
+            keyWidth = 2.5
+            valueWidth = 6.5
+        
         rows = [["项目", "内容"]]
         
         for key, value of properties
@@ -208,6 +228,7 @@ class TableSlide extends Slide
             fontSize: 14
             border: { pt: 1, color: "CCCCCC" }
             fill: { color: "F5F5F5" }
+            colW: [keyWidth, valueWidth]
 
 # ============================================
 # CardSlide - 卡片页

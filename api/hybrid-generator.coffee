@@ -493,23 +493,71 @@ generateHtml = (data, outputPath) ->
     });
   </script>
   <style>
-    body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
-    .slide { margin-bottom: 20px; padding: 20px; border: 1px solid #ccc; }
-    .slide h1 { color: #366092; }
-    .slide h3 { color: #366092; margin-bottom: 10px; }
-    .title-slide { text-align: center; padding: 100px 20px; }
-    .title-slide h1 { font-size: 48px; }
-    .title-slide p { font-size: 24px; color: #666; }
-    ul { padding-left: 20px; }
-    .comparison { display: flex; align-items: center; justify-content: center; margin-top: 20px; }
-    .comparison-left, .comparison-right { flex: 1; padding: 20px; margin: 10px; border-radius: 10px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; background: #333; }
+    .slide { 
+      width: 1000px; 
+      height: 562px; 
+      margin: 10px auto;
+      padding: 30px 40px;
+      background: white;
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide h1 { color: #366092; font-size: 36px; margin: 0 0 20px 0; }
+    .slide h3 { color: #366092; font-size: 28px; margin: 0 0 15px 0; }
+    .slide h4 { color: #366092; font-size: 20px; margin: 0 0 10px 0; }
+    .slide p { font-size: 16px; color: #333; margin: 5px 0; }
+    .slide li { font-size: 16px; color: #333; margin: 8px 0; }
+    .title-slide { 
+      text-align: center; 
+      padding-top: 150px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .title-slide h1 { color: white; font-size: 48px; }
+    .title-slide p { color: #e0e0e0; font-size: 24px; }
+    ul { padding-left: 25px; }
+    .comparison { display: flex; align-items: stretch; justify-content: center; margin-top: 30px; height: 300px; }
+    .comparison-left, .comparison-right { flex: 1; padding: 25px; margin: 5px; border-radius: 8px; display: flex; flex-direction: column; }
     .comparison-left { background: #E8F4FD; }
     .comparison-right { background: #FFF4E6; }
-    .comparison-left h4, .comparison-right h4 { margin: 0 0 10px 0; color: #366092; }
-    .comparison-vs { font-size: 24px; font-weight: bold; color: #FF6B6B; margin: 0 10px; }
-    .quote-container { margin: 40px auto; max-width: 800px; text-align: center; }
-    .quote-container blockquote { font-size: 28px; font-style: italic; color: #666; border-left: 4px solid #366092; padding-left: 20px; margin: 20px 0; }
-    .quote-author { font-size: 18px; color: #999; }
+    .comparison-left h4, .comparison-right h4 { text-align: center; }
+    .comparison-vs { 
+      display: flex; align-items: center; 
+      font-size: 28px; font-weight: bold; color: #FF6B6B; 
+      margin: 0 10px; 
+    }
+    .quote-container { 
+      margin: 80px auto; 
+      max-width: 900px; 
+      text-align: center; 
+      padding: 40px;
+      background: #f9f9f9;
+      border-left: 5px solid #366092;
+      border-radius: 0 10px 10px 0;
+    }
+    .quote-container blockquote { 
+      font-size: 32px; 
+      font-style: italic; 
+      color: #366092; 
+      margin: 20px 0; 
+      line-height: 1.4;
+    }
+    .quote-author { font-size: 20px; color: #666; text-align: right; }
+    .mermaid-container { 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 380px; 
+    }
+    .mermaid-container pre { 
+      transform-origin: center center; 
+      transform: scale(0.9); 
+    }
+    .card-container { display: flex; gap: 15px; margin-top: 30px; }
+    .card { flex: 1; padding: 20px; background: #f5f5f5; border-radius: 8px; text-align: center; }
+    .card h4 { color: #366092; }
   </style>
 </head>
 <body>
