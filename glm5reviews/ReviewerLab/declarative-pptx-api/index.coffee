@@ -10,18 +10,32 @@ pptxgen = require "pptxgenjs"
 
 class Slide
     @toPptx: (pptx) ->
+        try
+            slide = pptx.addSlide()
+            
+            slide.addText @name,
+                x: 0.5, y: 0.3, w: 9, h: 0.6
+                fontSize: 28, bold: true, color: "366092"
+            
+            properties = @getProperties()
+            y = 1.2
+            
+            for key, value of properties
+                @renderPropertyToPptx(slide, key, value, y)
+                y += 1.0
+        catch error
+            console.error "❌ Error in slide '#{@name}':", error.message
+            console.error "   Stack:", error.stack
+            @createErrorSlide(pptx, error)
+    
+    @createErrorSlide: (pptx, error) ->
         slide = pptx.addSlide()
-        
-        slide.addText @name,
-            x: 0.5, y: 0.3, w: 9, h: 0.6
-            fontSize: 28, bold: true, color: "366092"
-        
-        properties = @getProperties()
-        y = 1.2
-        
-        for key, value of properties
-            @renderPropertyToPptx(slide, key, value, y)
-            y += 1.0
+        slide.addText "Error in #{@name}",
+            x: 0.5, y: 2, w: 9, h: 1
+            fontSize: 32, color: "FF0000", align: "center", bold: true
+        slide.addText error.message,
+            x: 0.5, y: 3.2, w: 9, h: 0.5
+            fontSize: 18, color: "666666", align: "center"
     
     @getProperties: ->
         props = {}
@@ -64,17 +78,30 @@ class Slide
 # ============================================
 
 class TitleSlide extends Slide
+    @validate: ->
+        unless @name
+            throw new Error "TitleSlide must have a name"
+        if @副标题 and typeof @副标题 isnt 'string'
+            throw new Error "副标题 must be a string in TitleSlide '#{@name}'"
+        true
+    
     @toPptx: (pptx) ->
-        slide = pptx.addSlide()
-        
-        slide.addText @name,
-            x: 0.5, y: 2.5, w: 9, h: 1
-            fontSize: 44, bold: true, color: "366092", align: "center"
-        
-        if @副标题
-            slide.addText @副标题,
-                x: 0.5, y: 3.5, w: 9, h: 0.5
-                fontSize: 24, color: "666666", align: "center"
+        try
+            @validate()
+            slide = pptx.addSlide()
+            
+            slide.addText @name,
+                x: 0.5, y: 2.5, w: 9, h: 1
+                fontSize: 44, bold: true, color: "366092", align: "center"
+            
+            if @副标题
+                slide.addText @副标题,
+                    x: 0.5, y: 3.5, w: 9, h: 0.5
+                    fontSize: 24, color: "666666", align: "center"
+        catch error
+            console.error "❌ Error in TitleSlide '#{@name}':", error.message
+            console.error "   Stack:", error.stack
+            @createErrorSlide(pptx, error)
 
 # ============================================
 # ContentSlide - 内容页
@@ -581,74 +608,92 @@ class MindmapSlide extends Slide
 # ============================================
 
 class SWOTSlide extends Slide
-    @toPptx: (pptx) ->
-        slide = pptx.addSlide()
-        
-        slide.addText @name,
-            x: 0.5, y: 0.3, w: 9, h: 0.6
-            fontSize: 28, bold: true, color: "366092"
-        
+    @validate: ->
+        unless @name
+            throw new Error "SWOTSlide must have a name"
         properties = @getProperties()
-        
-        # S - 优势
-        if properties['优势'] or properties['S']
-            value = properties['优势'] or properties['S']
-            slide.addShape "rect",
-                x: 0.5, y: 1.2, w: 4.5, h: 2
-                fill: { color: "E8F5E9" }
+        hasSWOT = properties['优势'] or properties['S'] or 
+                  properties['劣势'] or properties['W'] or
+                  properties['机会'] or properties['O'] or
+                  properties['威胁'] or properties['T']
+        unless hasSWOT
+            throw new Error "SWOTSlide '#{@name}' must have at least one of: 优势/S, 劣势/W, 机会/O, 威胁/T"
+        true
+    
+    @toPptx: (pptx) ->
+        try
+            @validate()
+            slide = pptx.addSlide()
             
-            slide.addText "优势 (Strengths)",
-                x: 0.5, y: 1.3, w: 4.5, h: 0.4
-                fontSize: 16, bold: true, align: "center"
+            slide.addText @name,
+                x: 0.5, y: 0.3, w: 9, h: 0.6
+                fontSize: 28, bold: true, color: "366092"
             
-            slide.addText value,
-                x: 0.7, y: 1.8, w: 4.1, h: 1.2
-                fontSize: 12
-        
-        # W - 劣势
-        if properties['劣势'] or properties['W']
-            value = properties['劣势'] or properties['W']
-            slide.addShape "rect",
-                x: 5, y: 1.2, w: 4.5, h: 2
-                fill: { color: "FFEBEE" }
+            properties = @getProperties()
             
-            slide.addText "劣势 (Weaknesses)",
-                x: 5, y: 1.3, w: 4.5, h: 0.4
-                fontSize: 16, bold: true, align: "center"
+            # S - 优势
+            if properties['优势'] or properties['S']
+                value = properties['优势'] or properties['S']
+                slide.addShape "rect",
+                    x: 0.5, y: 1.2, w: 4.5, h: 2
+                    fill: { color: "E8F5E9" }
+                
+                slide.addText "优势 (Strengths)",
+                    x: 0.5, y: 1.3, w: 4.5, h: 0.4
+                    fontSize: 16, bold: true, align: "center"
+                
+                slide.addText value,
+                    x: 0.7, y: 1.8, w: 4.1, h: 1.2
+                    fontSize: 12
             
-            slide.addText value,
-                x: 5.2, y: 1.8, w: 4.1, h: 1.2
-                fontSize: 12
-        
-        # O - 机会
-        if properties['机会'] or properties['O']
-            value = properties['机会'] or properties['O']
-            slide.addShape "rect",
-                x: 0.5, y: 3.4, w: 4.5, h: 2
-                fill: { color: "E3F2FD" }
+            # W - 劣势
+            if properties['劣势'] or properties['W']
+                value = properties['劣势'] or properties['W']
+                slide.addShape "rect",
+                    x: 5, y: 1.2, w: 4.5, h: 2
+                    fill: { color: "FFEBEE" }
+                
+                slide.addText "劣势 (Weaknesses)",
+                    x: 5, y: 1.3, w: 4.5, h: 0.4
+                    fontSize: 16, bold: true, align: "center"
+                
+                slide.addText value,
+                    x: 5.2, y: 1.8, w: 4.1, h: 1.2
+                    fontSize: 12
             
-            slide.addText "机会 (Opportunities)",
-                x: 0.5, y: 3.5, w: 4.5, h: 0.4
-                fontSize: 16, bold: true, align: "center"
+            # O - 机会
+            if properties['机会'] or properties['O']
+                value = properties['机会'] or properties['O']
+                slide.addShape "rect",
+                    x: 0.5, y: 3.4, w: 4.5, h: 2
+                    fill: { color: "E3F2FD" }
+                
+                slide.addText "机会 (Opportunities)",
+                    x: 0.5, y: 3.5, w: 4.5, h: 0.4
+                    fontSize: 16, bold: true, align: "center"
+                
+                slide.addText value,
+                    x: 0.7, y: 4, w: 4.1, h: 1.2
+                    fontSize: 12
             
-            slide.addText value,
-                x: 0.7, y: 4, w: 4.1, h: 1.2
-                fontSize: 12
-        
-        # T - 威胁
-        if properties['威胁'] or properties['T']
-            value = properties['威胁'] or properties['T']
-            slide.addShape "rect",
-                x: 5, y: 3.4, w: 4.5, h: 2
-                fill: { color: "FFF3E0" }
-            
-            slide.addText "威胁 (Threats)",
-                x: 5, y: 3.5, w: 4.5, h: 0.4
-                fontSize: 16, bold: true, align: "center"
-            
-            slide.addText value,
-                x: 5.2, y: 4, w: 4.1, h: 1.2
-                fontSize: 12
+            # T - 威胁
+            if properties['威胁'] or properties['T']
+                value = properties['威胁'] or properties['T']
+                slide.addShape "rect",
+                    x: 5, y: 3.4, w: 4.5, h: 2
+                    fill: { color: "FFF3E0" }
+                
+                slide.addText "威胁 (Threats)",
+                    x: 5, y: 3.5, w: 4.5, h: 0.4
+                    fontSize: 16, bold: true, align: "center"
+                
+                slide.addText value,
+                    x: 5.2, y: 4, w: 4.1, h: 1.2
+                    fontSize: 12
+        catch error
+            console.error "❌ Error in SWOTSlide '#{@name}':", error.message
+            console.error "   Stack:", error.stack
+            @createErrorSlide(pptx, error)
 
 # ============================================
 # Section - 节类（声明式）
@@ -680,22 +725,27 @@ class Chapter
 
 class Presentation
     @generate: ->
-        outputPath = "outputs/#{@name}.pptx"
-        
-        console.log "\n🚀 Generating presentation: #{@name}\n"
-        
-        pptx = new pptxgen()
-        pptx.title = @name
-        pptx.author = "BoxesPlus"
-        
-        # 支持函数和数组两种方式
-        sections = if typeof @sections is 'function' then @sections() else @sections ? []
-        
-        for section in sections
-            section.toPptx?(pptx)
-        
-        pptx.writeFile({ fileName: outputPath })
-        console.log "✅ Generated: #{outputPath}\n"
+        try
+            outputPath = "outputs/#{@name}.pptx"
+            
+            console.log "\n🚀 Generating presentation: #{@name}\n"
+            
+            pptx = new pptxgen()
+            pptx.title = @name
+            pptx.author = "BoxesPlus"
+            
+            sections = if typeof @sections is 'function' then @sections() else @sections ? []
+            
+            for section in sections
+                section.toPptx?(pptx)
+            
+            pptx.writeFile({ fileName: outputPath })
+            console.log "✅ Generated: #{outputPath}\n"
+        catch error
+            console.error "❌ Error in presentation '#{@name}':", error.message
+            console.error "   Stack:", error.stack
+            console.error "   Please check your slide definitions and try again.\n"
+            process.exit(1)
     
     @newPresentation: ->
         setImmediate => @generate()
