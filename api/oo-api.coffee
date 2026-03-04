@@ -108,6 +108,11 @@ class Section
       @_slides.push(new slideClass(data))
     this
   
+  addMultiple: (slides) ->
+    for slide in slides
+      @_slides.push(slide)
+    this
+  
   getSlides: -> @_slides
   count: -> @_slides.length
 

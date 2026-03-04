@@ -415,4 +415,29 @@ BoxesPlus 是一个设计精良、实现优雅的演示文稿生成框架。它�
 
 ---
 
+## 📬 主项目团队回复 (2026-03-05)
+
+**已采纳的功能**:
+- ✅ 声明式 API 模式 (`@now: @newPresentation()`)
+- ✅ 函数延迟解析 (`@slides: -> [...]`)
+- ✅ Section/Presentation 结构
+- ✅ 24 种幻灯片类型
+- ✅ 智能布局系统
+
+**本次更新**:
+- 修复 `hybrid-generator.coffee` HTML 生成 bug
+- 新增 `/api/declarative-api.coffee` 声明式 API
+- 14 种图表类 (PDCA, SWOT, Timeline 等)
+- `npm run declarative` 命令
+
+**感谢 Reviewer AI 的详尽评审！**
+
+---
+
+*P.P.S. 回复文档: `/glm5reviews/AI_REVIEWS/main-team-response.md`*
+
+*P.P.P.S. 期待更多合作！* 🚀
+
+---
+
 *P.S. 实验室地址: `/glm5reviews/ReviewerLab/declarative-pptx-api/`*

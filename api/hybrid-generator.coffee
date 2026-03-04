@@ -242,6 +242,110 @@ flowchart TB
     style Data fill:#feebc8,stroke:#d69e2e
 """
 
+  # 患者安全目标
+  patientSafety: """
+flowchart LR
+    G1[正确识别患者] --> G2[强化手术安全]
+    G3[提高用药安全] --> G4[提升护理安全]
+    G5[预防院内感染] --> G6[鼓励不良上报]
+    G7[预防跌倒] --> G8[加强器械管理]
+    style G1,G2 fill:#bee3f8,stroke:#3182ce
+    style G3,G4 fill:#c6f6d5,stroke:#38a169
+    style G5,G6 fill:#feebc8,stroke:#d69e2e
+    style G7,G8 fill:#e9d8fd,stroke:#805ad5
+"""
+
+  # 医院等级评审
+  hospitalReview: """
+flowchart LR
+    A[医院自评] --> B[数据收集]
+    B --> C[专家评审]
+    C --> D{评审结果}
+    D -->|通过| E[持续改进]
+    D -->|整改| F[限期整改]
+    F --> B
+    style A fill:#e6f3ff,stroke:#3182ce
+    style B fill:#e6ffed,stroke:#38a169
+    style C fill:#fffaf0,stroke:#d69e2e
+    style D fill:#f5f5f5,stroke:#666666
+    style E fill:#e8f5e9,stroke:#2e7d32
+    style F fill:#ffebee,stroke:#c62828
+"""
+
+  # 医患沟通
+  doctorPatient: """
+flowchart LR
+    A[入院沟通] --> B[诊疗沟通]
+    B --> C[手术沟通] 
+    C --> D[出院沟通]
+    D --> E[随访沟通]
+    A -.->|持续| B
+    B -.->|持续| C
+    C -.->|持续| D
+    D -.->|持续| E
+    style A fill:#bee3f8,stroke:#3182ce
+    style B fill:#c6f6d5,stroke:#38a169
+    style C fill:#feebc8,stroke:#d69e2e
+    style D fill:#e9d8fd,stroke:#805ad5
+    style E fill:#fed7d7,stroke:#e53e3e
+"""
+
+  # 绩效管理
+  performance: """
+flowchart LR
+    A[目标设定] --> B[过程管理]
+    B --> C[绩效考核]
+    C --> D[结果应用]
+    D -.->|反馈| A
+    style A fill:#3182ce,color:#fff
+    style B fill:#38a169,color:#fff
+    style C fill:#d69e2e,color:#fff
+    style D fill:#e53e3e,color:#fff
+"""
+
+  # 教学培训流程
+  training: """
+flowchart LR
+    A[需求分析] --> B[计划制定]
+    B --> C[组织实施]
+    C --> D[效果评估]
+    D --> E[持续改进]
+    style A fill:#e6f3ff,stroke:#3182ce
+    style B fill:#e6ffed,stroke:#38a169
+    style C fill:#fffaf0,stroke:#d69e2e
+    style D fill:#f3e5f5,stroke:#805ad5
+    style E fill:#ffebee,stroke:#e53e3e
+"""
+
+  # 科研项目流程
+  research: """
+flowchart LR
+    A[选题立项] --> B[文献综述]
+    B --> C[研究设计]
+    C --> D[项目实施]
+    D --> E[数据分析]
+    E --> F[论文发表]
+    style A fill:#bee3f8,stroke:#3182ce
+    style B fill:#c6f6d5,stroke:#38a169
+    style C fill:#feebc8,stroke:#d69e2e
+    style D fill:#e9d8fd,stroke:#805ad5
+    style E fill:#fed7d7,stroke:#e53e3e
+    style F fill:#e6f3ff,stroke:#3182ce
+"""
+
+  # 人才梯队
+  talentTeam: """
+flowchart TB
+    高层[高层管理] --> 中层[中层管理]
+    中层 --> 基层[基层员工]
+    高层 --- 高层梯队[人才梯队建设]
+    中层 --- 中层梯队[储备干部培养]
+    基层 --- 基层梯队[技能培训]
+    style 高层 fill:#3182ce,color:#fff
+    style 中层 fill:#38a169,color:#fff
+    style 基层 fill:#d69e2e,color:#fff
+"""
+
 # ============================================
 # 课程数据生成器
 # ============================================
