@@ -400,23 +400,27 @@ class QuoteSlide extends Slide
             fontSize: 28, bold: true, color: "366092"
         
         properties = @getProperties()
-        y = 1.5
+        propertyCount = Object.keys(properties).length
+        availableHeight = 7.5 - 1.2
+        quoteHeight = availableHeight / propertyCount
+        
+        y = 1.2
         
         for key, value of properties
             slide.addShape "rect",
-                x: 0.5, y: y, w: 9, h: 1.5
+                x: 0.5, y: y, w: 9, h: quoteHeight
                 fill: { color: "F5F5F5" }
             
-            fontSize = @autoFontSize(value, 8, 0.8)
+            fontSize = @autoFontSize(value, 8, quoteHeight * 0.6)
             slide.addText "\"#{value}\"",
-                x: 1, y: y + 0.3, w: 8, h: 0.8
+                x: 1, y: y + quoteHeight * 0.2, w: 8, h: quoteHeight * 0.6
                 fontSize: fontSize, italic: true, color: "666666"
             
             slide.addText "— #{key}",
-                x: 1, y: y + 1.1, w: 8, h: 0.3
-                fontSize: 14, align: "right", color: "999999"
+                x: 1, y: y + quoteHeight * 0.8, w: 8, h: quoteHeight * 0.2
+                fontSize: Math.min(14, fontSize), align: "right", color: "999999"
             
-            y += 2
+            y += quoteHeight
 
 # ============================================
 # NumberSlide - 数字页
