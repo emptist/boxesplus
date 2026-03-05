@@ -6,6 +6,12 @@ pptxgen = require "pptxgenjs"
 SmartLayout = require "./smart-layout"
 
 # ============================================
+# 全局配置
+# ============================================
+
+OUTPUT_DIR = "#{__dirname}/outputs"
+
+# ============================================
 # Slide - 幻灯片基类（声明式）
 # ============================================
 
@@ -1248,7 +1254,7 @@ class Node
 class Presentation
     @generate: ->
         try
-            outputPath = "#{__dirname}/outputs/#{@name}.pptx"
+            outputPath = "#{OUTPUT_DIR}/#{@name}.pptx"
             
             console.log "\n🚀 Generating presentation: #{@name}\n"
             
@@ -1287,7 +1293,7 @@ class Presentation
     
     @generateHtml: ->
         try
-            outputPath = "#{__dirname}/outputs/#{@name}.html"
+            outputPath = "#{OUTPUT_DIR}/#{@name}.html"
             
             console.log "\n🌐 Generating HTML presentation: #{@name}\n"
             
