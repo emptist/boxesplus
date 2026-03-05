@@ -41,12 +41,13 @@ class Item
   # 展平所有子项目
   @flatten: (items = [], includeSelf = false) ->
     including = @getIncluding()
+    isContainer = @_isContainer ? false
     
     # 如果是容器类型且有子项目，只展平子项目
     # 如果是容器类型且无子项目，生成自身幻灯片
     # 如果不是容器，生成自身幻灯片
     
-    if @_isContainer and including?.length > 0
+    if isContainer and including?.length > 0
       # 是容器且有子项，只处理子项
       for item in (including ? [])
         if item?.flatten

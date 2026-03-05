@@ -417,7 +417,7 @@ class QuoteSlide extends Slide
                 x: 0.5, y: y, w: 9, h: quoteHeight
                 fill: { color: "F5F5F5" }
             
-            fontSize = @autoFontSize(value, 8, quoteHeight * 0.6)
+            fontSize = @fitText(value, 8, quoteHeight * 0.6)
             slide.addText "\"#{value}\"",
                 x: 1, y: y + quoteHeight * 0.2, w: 8, h: quoteHeight * 0.6
                 fontSize: fontSize, italic: true, color: "666666"
