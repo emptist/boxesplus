@@ -4,6 +4,18 @@
 
 { generateHtml, htmlToPdf, htmlToPptx, CHARTS } = require "./hybrid-generator.coffee"
 { Theme, Themes, getTheme, createCustomTheme } = require "./themes.coffee"
+{ Logger, ErrorLogger, AuditLogger } = require "./logging.coffee"
+Errors = require "./error-types.coffee"
+
+Logger = Logger or {
+  info: (msg) -> console.log "INFO: #{msg}"
+  error: (msg) -> console.error "ERROR: #{msg}"
+  warn: (msg) -> console.warn "WARN: #{msg}"
+}
+
+AuditLogger = AuditLogger or {
+  log: (action, details) -> console.log "AUDIT: #{action}"
+}
 
 # ============================================
 # Base Item - 所有级别的基类
@@ -378,12 +390,6 @@ module.exports = {
   Themes
   getTheme
   createCustomTheme
-  createItems
   Logger
-  ErrorLogger
   AuditLogger
-  Errors
-  Validator
-  ErrorHandler
-  FallbackContent
 }
