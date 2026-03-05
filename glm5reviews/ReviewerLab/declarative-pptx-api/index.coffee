@@ -1127,14 +1127,14 @@ class MermaidSlide extends Slide
 
 class Section
     @toPptx: (pptx) ->
-        # 支持函数和数组两种方式，统一使用 @includes 属性
+        # 支持函数和数组两种方式，统一使用 @including 属性
         # 支持 Chapter、Node、Slide 任意一个类型的数组
-        includes = if typeof @includes is 'function' then @includes() else @includes ? []
+        including = if typeof @including is 'function' then @including() else @including ? []
         
-        unless includes.length > 0
-            console.warn "⚠️  Warning: Section '#{@name}' has no includes defined"
+        unless including.length > 0
+            console.warn "⚠️  Warning: Section '#{@name}' has no including defined"
         
-        for include in includes
+        for include in including
             unless include?.toPptx
                 console.warn "⚠️  Warning: '#{include?.name or include}' in Section '#{@name}' is not a valid class (did you forget to extend?)"
             include.toPptx?(pptx)
@@ -1145,11 +1145,11 @@ class Section
 
 class Chapter
     @toPptx: (pptx) ->
-        # 支持函数和数组两种方式，统一使用 @includes 属性
+        # 支持函数和数组两种方式，统一使用 @including 属性
         # 支持 Node、Slide 任意一个类型的数组
-        includes = if typeof @includes is 'function' then @includes() else @includes ? []
+        including = if typeof @including is 'function' then @including() else @including ? []
         
-        for include in includes
+        for include in including
             include.toPptx?(pptx)
 
 # ============================================
@@ -1167,14 +1167,14 @@ class Chapter
 
 class Node
     @toPptx: (pptx) ->
-        # 支持函数和数组两种方式，统一使用 @includes 属性
+        # 支持函数和数组两种方式，统一使用 @including 属性
         # 支持 Slide 类型的数组
-        includes = if typeof @includes is 'function' then @includes() else @includes ? []
+        including = if typeof @including is 'function' then @including() else @including ? []
         
-        unless includes.length > 0
-            console.warn "⚠️  Warning: Node '#{@name}' has no includes defined"
+        unless including.length > 0
+            console.warn "⚠️  Warning: Node '#{@name}' has no including defined"
         
-        for include in includes
+        for include in including
             unless include?.toPptx
                 console.warn "⚠️  Warning: '#{include?.name or include}' in Node '#{@name}' is not a valid Slide class (did you forget to extend Slide?)"
             include.toPptx?(pptx)
@@ -1203,14 +1203,14 @@ class Presentation
             pptx.title = @name
             pptx.author = "BoxesPlus"
             
-            # 支持函数和数组两种方式，统一使用 @includes 属性
+            # 支持函数和数组两种方式，统一使用 @including 属性
             # 支持 Section、Chapter、Node、Slide 任意一个类型的数组
-            includes = if typeof @includes is 'function' then @includes() else @includes ? []
+            including = if typeof @including is 'function' then @including() else @including ? []
             
-            unless includes.length > 0
-                console.warn "⚠️  Warning: Presentation '#{@name}' has no includes defined"
+            unless including.length > 0
+                console.warn "⚠️  Warning: Presentation '#{@name}' has no including defined"
             
-            for include in includes
+            for include in including
                 unless include?.toPptx
                     console.warn "⚠️  Warning: '#{include?.name or include}' in Presentation '#{@name}' is not a valid class (did you forget to extend?)"
                 include.toPptx?(pptx)

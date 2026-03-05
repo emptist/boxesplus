@@ -372,7 +372,7 @@ class 展望未来 extends QuoteSlide
 # ============================================
 
 class 第一章 extends Chapter
-  @includes: -> [
+  @including: -> [
     项目起源
     早期探索
     HQCoffee参考
@@ -380,7 +380,7 @@ class 第一章 extends Chapter
   ]
 
 class 第二章 extends Chapter
-  @includes: -> [
+  @including: -> [
     灵感来源
     第一个声明式框架
     早期代码示例
@@ -388,7 +388,7 @@ class 第二章 extends Chapter
   ]
 
 class 第三章 extends Chapter
-  @includes: -> [
+  @including: -> [
     演进时间线
     GitLog展示
     幻灯片类型演进
@@ -397,7 +397,7 @@ class 第三章 extends Chapter
   ]
 
 class 第四章 extends Chapter
-  @includes: -> [
+  @including: -> [
     AI协作开始
     协作模式
     知识共享目录
@@ -407,7 +407,7 @@ class 第四章 extends Chapter
   ]
 
 class 第五章 extends Chapter
-  @includes: -> [
+  @including: -> [
     光明顶到达
     核心特性
     换衣服机制
@@ -415,7 +415,7 @@ class 第五章 extends Chapter
   ]
 
 class 第六章 extends Chapter
-  @includes: -> [
+  @including: -> [
     函数延迟解析
     setImmediate延迟执行
     类定义时执行
@@ -423,7 +423,7 @@ class 第六章 extends Chapter
   ]
 
 class 第七章 extends Chapter
-  @includes: -> [
+  @including: -> [
     C01课程
     E02课程
     F05课程
@@ -431,21 +431,21 @@ class 第七章 extends Chapter
   ]
 
 class 第八章 extends Chapter
-  @includes: -> [
+  @including: -> [
     核心经验
     技术要点
     设计原则
   ]
 
 class 第九章 extends Chapter
-  @includes: -> [
+  @including: -> [
     未来方向
     AI集成展望
     技术演进展望
   ]
 
 class 第十章 extends Chapter
-  @includes: -> [
+  @including: -> [
     回顾历程
     核心成就
     感谢
@@ -457,7 +457,7 @@ class 第十章 extends Chapter
 # ============================================
 
 class BoxesPlus项目演进史 extends Presentation
-  @includes: -> [
+  @including: -> [
     第一章
     第二章
     第三章
