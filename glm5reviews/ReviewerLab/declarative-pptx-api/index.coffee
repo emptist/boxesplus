@@ -1248,7 +1248,7 @@ class Node
 class Presentation
     @generate: ->
         try
-            outputPath = "outputs/#{@name}.pptx"
+            outputPath = "#{__dirname}/outputs/#{@name}.pptx"
             
             console.log "\n🚀 Generating presentation: #{@name}\n"
             
@@ -1287,7 +1287,7 @@ class Presentation
     
     @generateHtml: ->
         try
-            outputPath = "outputs/#{@name}.html"
+            outputPath = "#{__dirname}/outputs/#{@name}.html"
             
             console.log "\n🌐 Generating HTML presentation: #{@name}\n"
             
