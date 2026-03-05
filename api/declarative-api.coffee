@@ -2,6 +2,8 @@
 # 结合声明式设计 + Mermaid图表支持
 
 { generateHtml, htmlToPdf, htmlToPptx, CHARTS } = require "./hybrid-generator.coffee"
+{ Theme, Themes, getTheme, createCustomTheme, getThemeColors, getThemePptxConfig } = require "./themes.coffee"
+{ SmartImage, ImageLayout, ImageGrid, ImageComparison, ImageCarousel, ImageWithText } = require "./smart-image.coffee"
 
 # ============================================
 # Slide - 基础幻灯片类
@@ -238,6 +240,7 @@ class Section
 
 class Presentation
   @sections: []
+  @theme: "default"
   
   @generate: (baseName) ->
     name = baseName or @name or @constructor.name
@@ -254,8 +257,11 @@ class Presentation
     for section in sections
       slides.push(...section.getSlides())
     
+    theme = getTheme(@theme)
+    
     data = {
       title: name
+      theme: theme
       slides: for slide in slides
         slide.toData()
     }
@@ -336,6 +342,18 @@ module.exports = {
   Section
   Presentation
   CHARTS
+  Theme
+  Themes
+  getTheme
+  createCustomTheme
+  getThemeColors
+  getThemePptxConfig
+  SmartImage
+  ImageLayout
+  ImageGrid
+  ImageComparison
+  ImageCarousel
+  ImageWithText
   createSlide
   createSlides
 }

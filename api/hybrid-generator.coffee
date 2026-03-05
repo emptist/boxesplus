@@ -346,6 +346,213 @@ flowchart TB
     style 基层 fill:#d69e2e,color:#fff
 """
 
+  # 漏斗图
+  funnel: """
+funnel
+    title 转化漏斗
+    曝光: 10000
+    点击: 5000
+    注册: 2000
+    付费: 500
+    复购: 200
+"""
+
+  # 饼图 - 满意度
+  pieSatisfaction: """
+pie title 客户满意度
+    "非常满意" : 45
+    "满意" : 30
+    "一般" : 15
+    "不满意" : 7
+    "非常不满意" : 3
+"""
+
+  # 饼图 - 预算分配
+  pieBudget: """
+pie title 预算分配
+    "人力资源" : 40
+    "设备采购" : 25
+    "市场营销" : 20
+    "研发投入" : 10
+    "其他" : 5
+"""
+
+  # 饼图 - 市场份额
+  pieMarketShare: """
+pie title 市场份额
+    "本公司" : 35
+    "竞争对手A" : 25
+    "竞争对手B" : 20
+    "其他" : 20
+"""
+
+  # 甘特图 - 项目计划
+  ganttProject: """
+gantt
+    title 项目进度计划
+    dateFormat  YYYY-MM-DD
+    section 项目管理
+    项目启动会       :2024-01-01, 2d
+    需求评审         :2024-01-03, 3d
+    section 开发
+    系统设计         :2024-01-06, 5d
+    编码实现         :2024-01-11, 10d
+    section 测试
+    测试用例编写     :2024-01-15, 3d
+    系统测试         :2024-01-18, 5d
+    上线部署         :2024-01-23, 2d
+"""
+
+  # 状态图
+  stateDiagram: """
+stateDiagram-v2
+    [*] --> 待处理
+    待处理 --> 进行中: 开始处理
+    进行中 --> 待审核: 完成任务
+    待审核 --> 进行中: 退回修改
+    待审核 --> 已完成: 审核通过
+    已完成 --> [*]
+"""
+
+  # 类图
+  classDiagram: """
+classDiagram
+    class 动物 {
+        +String 名称
+        +int 年龄
+        +进食()
+        +移动()
+    }
+    class 狗 {
+        +String 品种
+        +吠叫()
+    }
+    动物 <|-- 狗
+"""
+
+  # ER图
+  erDiagram: """
+erDiagram
+    用户 ||--o{ 订单 : "下"
+    订单 ||--|{ 订单明细 : "包含"
+    商品 ||--o{ 订单明细 : "关联"
+"""
+
+  # 流程图 - 患者就诊
+  patientFlow: """
+flowchart LR
+    subgraph 挂号[挂号]
+        现场[现场挂号]
+        线上[线上预约]
+    end
+    subgraph 候诊[候诊]
+        分诊[分诊]
+        等候[等待叫号]
+    end
+    subgraph 诊疗[诊疗]
+        问诊[医生问诊]
+        检查[检查检验]
+        诊断[诊断治疗]
+    end
+    subgraph 结束[离院]
+        取药[取药]
+        收费[费用结算]
+        出院[离院]
+    end
+    现场 --> 分诊
+    线上 --> 分诊
+    分诊 --> 等候
+    等候 --> 问诊
+    问诊 --> 检查
+    检查 --> 诊断
+    诊断 --> 取药
+    诊断 --> 收费
+    取药 --> 出院
+    收费 --> 出院
+    style 现场,线上 fill:#bee3f8
+    style 分诊,等候 fill:#c6f6d5
+    style 问诊,检查,诊断 fill:#feebc8
+    style 取药,收费,出院 fill:#e9d8fd
+"""
+
+  # 流程图 - 质量改进
+  qualityImprovement: """
+flowchart LR
+    A[识别问题] --> B[分析原因]
+    B --> C[制定措施]
+    C --> D[实施改进]
+    D --> E[效果评估]
+    E --> F{达到目标?}
+    F -->|是| G[标准化]
+    F -->|否| B
+    G --> H[持续监控]
+    H -.->|新问题| A
+    style A fill:#bee3f8
+    style B fill:#c6f6d5
+    style C fill:#feebc8
+    style D fill:#e9d8fd
+    style E fill:#fed7d7
+    style G fill:#c6f6d5
+    style H fill:#bee3f8
+"""
+
+  # 象限图 - 重要紧急
+  quadrant: """
+quadrantChart
+    title 任务优先级矩阵
+    x-axis 低紧急 --> 高紧急
+    y-axis 低重要 --> 高重要
+    quadrant-1 马上做
+    quadrant-2 计划做
+    quadrant-3 委托做
+    quadrant-4 删除
+    "危机处理": [0.9, 0.9]
+    "重要会议": [0.7, 0.8]
+    "常规工作": [0.3, 0.4]
+    "娱乐活动": [0.1, 0.2]
+    "培训学习": [0.6, 0.3]
+    "邮件处理": [0.2, 0.5]
+"""
+
+  # 桑基图
+  sankey: """
+sankey-beta
+    门诊,挂号,100
+    急诊,挂号,80
+    住院,挂号,50
+    挂号,内科,80
+    挂号,外科,70
+    挂号,儿科,50
+    挂号,其他,30
+    内科,治愈,60
+    内科,好转,15
+    内科,转院,5
+    外科,治愈,50
+    外科,好转,15
+    外科,转院,5
+"""
+
+  # 华夫饼图
+  waffle: """
+waffle
+    title 目标完成情况
+    {
+        "完全完成": 60,
+        "部分完成": 25,
+        "未完成": 15
+    }
+    100: 10
+"""
+
+  # XY图
+  xyChart: """
+xychart-beta
+    title "月度销售额趋势"
+    x-axis [1月, 2月, 3月, 4月, 5月, 6月]
+    y-axis "销售额(万元)" 0 --> 100
+    line [45, 52, 38, 65, 72, 80]
+"""
+
 # ============================================
 # 课程数据生成器
 # ============================================
@@ -558,9 +765,61 @@ generateHtml = (data, outputPath) ->
     .card-container { display: flex; gap: 15px; margin-top: 30px; }
     .card { flex: 1; padding: 20px; background: #f5f5f5; border-radius: 8px; text-align: center; }
     .card h4 { color: #366092; }
+    .theme-switcher {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: rgba(255,255,255,0.95);
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .theme-switcher label { font-size: 12px; color: #666; }
+    .theme-switcher select {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
   </style>
+<script>
+    function switchTheme(themeName) {
+      var colors = {
+        default: { bg: "#ffffff", primary: "#366092", text: "#333333" },
+        blue: { bg: "#ebf8ff", primary: "#2b6cb0", text: "#2c5282" },
+        green: { bg: "#f0fff4", primary: "#276749", text: "#22543d" },
+        dark: { bg: "#1a202c", primary: "#63b3ed", text: "#e2e8f0" },
+        purple: { bg: "#faf5ff", primary: "#6b46c1", text: "#44337a" },
+        orange: { bg: "#fffaf0", primary: "#c05621", text: "#7b341e" }
+      };
+      var c = colors[themeName] || colors.default;
+      document.querySelectorAll(".slide").forEach(function(slide) {
+        slide.style.background = c.bg;
+        slide.style.color = c.text;
+      });
+      document.querySelectorAll(".slide h1, .slide h3, .slide h4").forEach(function(el) {
+        el.style.color = c.primary;
+      });
+    }
+  </script>
 </head>
 <body>
+  <div class="theme-switcher">
+    <label>主题:</label>
+    <select onchange="switchTheme(this.value)">
+      <option value="default">默认</option>
+      <option value="blue">蓝色</option>
+      <option value="green">绿色</option>
+      <option value="dark">深色</option>
+      <option value="purple">紫色</option>
+      <option value="orange">橙色</option>
+    </select>
+  </div>
 #{slidesHtmlStr}
 </body>
 </html>
