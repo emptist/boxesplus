@@ -4,6 +4,7 @@
 { generateHtml, htmlToPdf, htmlToPptx, CHARTS } = require "./hybrid-generator.coffee"
 { Theme, Themes, getTheme, createCustomTheme, getThemeColors, getThemePptxConfig } = require "./themes.coffee"
 { SmartImage, ImageLayout, ImageGrid, ImageComparison, ImageCarousel, ImageWithText } = require "./smart-image.coffee"
+{ Animation, Transition, SlideAnimation, AnimationSequence, AnimatedSlide } = require "./animations.coffee"
 
 # ============================================
 # Slide - 基础幻灯片类
@@ -354,6 +355,11 @@ module.exports = {
   ImageComparison
   ImageCarousel
   ImageWithText
+  Animation
+  Transition
+  SlideAnimation
+  AnimationSequence
+  AnimatedSlide
   createSlide
   createSlides
 }

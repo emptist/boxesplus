@@ -786,6 +786,45 @@ generateHtml = (data, outputPath) ->
       font-size: 12px;
       cursor: pointer;
     }
+    
+    /* Animation Styles */
+    .slide { opacity: 0; animation: fadeIn 0.5s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideInUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideInDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes zoomIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-30px); } 60% { transform: translateY(-15px); } }
+    @keyframes flip { from { transform: perspective(400px) rotateY(0); } to { transform: perspective(400px) rotateY(360deg); } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); } 20%, 40%, 60%, 80% { transform: translateX(10px); } }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    .slide.fade { animation-name: fadeIn; }
+    .slide.slide-left { animation-name: slideInLeft; }
+    .slide.slide-right { animation-name: slideInRight; }
+    .slide.slide-up { animation-name: slideInUp; }
+    .slide.slide-down { animation-name: slideInDown; }
+    .slide.zoom { animation-name: zoomIn; }
+    .slide.bounce { animation-name: bounce; }
+    .slide.flip { animation-name: flip; }
+    .slide.shake { animation-name: shake; }
+    .slide.pulse { animation-name: pulse; }
+    .slide.fast { animation-duration: 0.2s; }
+    .slide.slow { animation-duration: 1s; }
+    .slide.very-slow { animation-duration: 2s; }
+    
+    /* Transition Effects */
+    .slide { transition: all 0.3s ease; }
+    .slide:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    
+    /* Stagger animations for list items */
+    .slide ul li { opacity: 0; animation: fadeIn 0.3s ease forwards; }
+    .slide ul li:nth-child(1) { animation-delay: 0.1s; }
+    .slide ul li:nth-child(2) { animation-delay: 0.2s; }
+    .slide ul li:nth-child(3) { animation-delay: 0.3s; }
+    .slide ul li:nth-child(4) { animation-delay: 0.4s; }
+    .slide ul li:nth-child(5) { animation-delay: 0.5s; }
+    .slide ul li:nth-child(6) { animation-delay: 0.6s; }
   </style>
 <script>
     function switchTheme(themeName) {
