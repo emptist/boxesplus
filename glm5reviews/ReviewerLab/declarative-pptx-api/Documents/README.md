@@ -512,6 +512,92 @@ Presentation（书）
 
 ---
 
+## 📋 API 版本和更改历史
+
+### 当前版本：v2.0（2026-03-05）
+
+#### 重大更改：统一属性名称
+
+**从 v1.0 升级到 v2.0 是不兼容的更改**
+
+##### 旧API（v1.0）
+
+```coffee
+class 我的演示文稿 extends Presentation
+    @sections: -> [第一章]  # 旧API：使用 @sections
+
+class 第一章 extends Chapter
+    @nodes: -> [第一节]  # 旧API：使用 @nodes 或 @幻灯片
+
+class 第一节 extends Node
+    @slides: -> [幻灯片1]  # 旧API：使用 @slides
+```
+
+##### 新API（v2.0）
+
+```coffee
+class 我的演示文稿 extends Presentation
+    @including: -> [第一章]  # 新API：统一使用 @including
+
+class 第一章 extends Chapter
+    @including: -> [第一节]  # 新API：统一使用 @including
+
+class 第一节 extends Node
+    @including: -> [幻灯片1]  # 新API：统一使用 @including
+```
+
+##### 更改原因
+
+1. **简化API**：所有层使用统一的属性名称 `@including`，更加一致和简洁
+2. **提高可维护性**：减少属性名称的数量，降低学习成本
+3. **增强灵活性**：统一接口使得框架更容易扩展和维护
+
+##### 升级指南
+
+**如果你使用的是旧API（v1.0）**，需要进行以下更改：
+
+1. **全局替换属性名称**：
+   - `@sections` → `@including`
+   - `@nodes` → `@including`
+   - `@幻灯片` → `@including`
+   - `@slides` → `@including`
+
+2. **示例**：
+   ```bash
+   # 在你的CoffeeScript文件中全局替换
+   sed -i '' 's/@sections:/@including:/g' *.coffee
+   sed -i '' 's/@nodes:/@including:/g' *.coffee
+   sed -i '' 's/@幻灯片:/@including:/g' *.coffee
+   sed -i '' 's/@slides:/@including:/g' *.coffee
+   ```
+
+3. **测试**：
+   - 运行 `coffee your-file.coffee` 确保没有错误
+   - 检查生成的PPTX文件是否正确
+
+##### 受影响的文件
+
+以下文件可能需要更新（使用旧API）：
+- `examples/E02品牌建设课程.coffee`
+- `examples/F05数据资产管理课程.coffee`
+- `coffee-works/项目演进史.coffee`（已更新）
+- 其他使用旧API的案例文件
+
+##### 向后兼容性
+
+**当前版本不提供向后兼容**。如果你需要使用旧API，请：
+1. 使用 v1.0 版本的框架
+2. 或者手动更新你的代码以使用新API
+
+##### 未来计划
+
+未来可能会考虑：
+1. 提供向后兼容模式（同时支持新旧API）
+2. 提供自动迁移工具
+3. 提供详细的迁移指南
+
+---
+
 ## 🔧 已知问题和改进方案
 
 ### QuoteSlide 布局问题
