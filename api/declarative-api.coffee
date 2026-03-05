@@ -7,6 +7,8 @@
 { Animation, Transition, SlideAnimation, AnimationSequence, AnimatedSlide } = require "./animations.coffee"
 { PdfConfig, PdfHeader, PdfFooter, PdfWatermark, PdfExport } = require "./pdf-config.coffee"
 { ValidationError, ValidationResult, Validator, ErrorHandler, FallbackContent, ErrorSlide, RetryHandler, ErrorBoundary } = require "./error-handling.coffee"
+{ Logger, ErrorLogger, AuditLogger } = require "./logging.coffee"
+Errors = require "./error-types.coffee"
 
 # ============================================
 # Slide - 基础幻灯片类
@@ -254,11 +256,27 @@ class Presentation
     
     console.log "\n🚀 Generating: #{name}\n"
     
+    Logger.info "Starting presentation generation", { name, theme: @theme }
+    
     sections = if typeof @sections is 'function' then @sections() else @sections ? []
+    
+    validationResult = Validator.validatePresentation({ sections })
+    unless validationResult.isValid()
+      for warning in validationResult.getWarningMessages()
+        Logger.warn "Validation warning: #{warning}"
+      if validationResult.hasErrors()
+        for error in validationResult.getErrorMessages()
+          Logger.error "Validation error: #{error}"
     
     slides = []
     for section in sections
       slides.push(...section.getSlides())
+    
+    for slide, i in slides
+      slideResult = Validator.validateSlide(slide.toData())
+      unless slideResult.isValid()
+        for warning in slideResult.getWarningMessages()
+          Logger.warn "Slide #{i} warning: #{warning}"
     
     theme = getTheme(@theme)
     
@@ -269,11 +287,29 @@ class Presentation
         slide.toData()
     }
     
-    generateHtml(data, htmlPath)
-    htmlToPdf(htmlPath, pdfPath)
-    htmlToPptx(htmlPath, pptxPath)
+    try
+      generateHtml(data, htmlPath)
+      Logger.info "HTML generated successfully", { path: htmlPath }
+    catch error
+      Logger.error "HTML generation failed", { error: error.message }
+      ErrorLogger.logError(error, { phase: "html", name })
+    
+    try
+      htmlToPdf(htmlPath, pdfPath)
+      Logger.info "PDF generated successfully", { path: pdfPath }
+    catch error
+      Logger.error "PDF generation failed", { error: error.message }
+      ErrorLogger.logError(error, { phase: "pdf", name })
+    
+    try
+      htmlToPptx(htmlPath, pptxPath)
+      Logger.info "PPTX generated successfully", { path: pptxPath }
+    catch error
+      Logger.error "PPTX generation failed", { error: error.message }
+      ErrorLogger.logError(error, { phase: "pptx", name })
     
     console.log "✅ Generated: #{pptxPath}\n"
+    AuditLogger.log "presentation_generated", { name, formats: ["html", "pdf", "pptx"] }
   
   @newPresentation: ->
     setImmediate => @generate()
@@ -375,6 +411,10 @@ module.exports = {
   ErrorSlide
   RetryHandler
   ErrorBoundary
+  Logger
+  ErrorLogger
+  AuditLogger
+  Errors
   createSlide
   createSlides
 }
