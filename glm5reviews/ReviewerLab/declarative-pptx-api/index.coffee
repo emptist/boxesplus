@@ -1113,21 +1113,30 @@ class MermaidSlide extends Slide
         """
 
 # ============================================
-# Section - 节类（声明式）
+# Section - 册类（声明式）
+# ============================================
+# 册类 - 用于组织章节
+#
+# 支持属性：
+# - @chapters: array - 包含的章节列表
+#
+# 示例：
+# class 第一章册 extends Section
+#     @chapters: -> [第一章章]
 # ============================================
 
 class Section
     @toPptx: (pptx) ->
         # 支持函数和数组两种方式
-        slides = if typeof @幻灯片 is 'function' then @幻灯片() else @幻灯片 ? []
+        chapters = if typeof @chapters is 'function' then @chapters() else @chapters ? []
         
-        unless slides.length > 0
-            console.warn "⚠️  Warning: Section '#{@name}' has no slides defined"
+        unless chapters.length > 0
+            console.warn "⚠️  Warning: Section '#{@name}' has no chapters defined"
         
-        for slide in slides
-            unless slide?.toPptx
-                console.warn "⚠️  Warning: '#{slide?.name or slide}' in Section '#{@name}' is not a valid Slide class (did you forget to extend Slide?)"
-            slide.toPptx?(pptx)
+        for chapter in chapters
+            unless chapter?.toPptx
+                console.warn "⚠️  Warning: '#{chapter?.name or chapter}' in Section '#{@name}' is not a valid Chapter class (did you forget to extend Chapter?)"
+            chapter.toPptx?(pptx)
 
 # ============================================
 # Chapter - 章类（声明式）
@@ -1136,13 +1145,48 @@ class Section
 class Chapter
     @toPptx: (pptx) ->
         # 支持函数和数组两种方式
-        sections = if typeof @节 is 'function' then @节() else @节 ? []
+        nodes = if typeof @nodes is 'function' then @nodes() else @nodes ? []
         
-        for section in sections
-            section.toPptx?(pptx)
+        for node in nodes
+            node.toPptx?(pptx)
 
 # ============================================
-# Presentation - 演示文稿类（声明式）
+# Node - 节类（声明式）
+# ============================================
+# 节类 - 用于组织幻灯片
+#
+# 支持属性：
+# - @slides: array - 包含的幻灯片列表
+#
+# 示例：
+# class 第一节节 extends Node
+#     @slides: -> [项目起源, 早期探索, HQCoffee参考, 早期技术栈]
+# ============================================
+
+class Node
+    @toPptx: (pptx) ->
+        # 支持函数和数组两种方式
+        slides = if typeof @slides is 'function' then @slides() else @slides ? []
+        
+        unless slides.length > 0
+            console.warn "⚠️  Warning: Node '#{@name}' has no slides defined"
+        
+        for slide in slides
+            unless slide?.toPptx
+                console.warn "⚠️  Warning: '#{slide?.name or slide}' in Node '#{@name}' is not a valid Slide class (did you forget to extend Slide?)"
+            slide.toPptx?(pptx)
+
+# ============================================
+# Presentation - 书类（声明式）
+# ============================================
+# 书类 - 用于组织册
+#
+# 支持属性：
+# - @sections: array - 包含的册列表
+#
+# 示例：
+# class BoxesPlus项目演进史 extends Presentation
+#     @sections: -> [封面册, 第一章册]
 # ============================================
 
 class Presentation
@@ -1285,5 +1329,6 @@ module.exports = {
     MermaidSlide
     Section
     Chapter
+    Node
     Presentation
 }
