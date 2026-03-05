@@ -5,6 +5,8 @@
 { Theme, Themes, getTheme, createCustomTheme, getThemeColors, getThemePptxConfig } = require "./themes.coffee"
 { SmartImage, ImageLayout, ImageGrid, ImageComparison, ImageCarousel, ImageWithText } = require "./smart-image.coffee"
 { Animation, Transition, SlideAnimation, AnimationSequence, AnimatedSlide } = require "./animations.coffee"
+{ PdfConfig, PdfHeader, PdfFooter, PdfWatermark, PdfExport } = require "./pdf-config.coffee"
+{ ValidationError, ValidationResult, Validator, ErrorHandler, FallbackContent, ErrorSlide, RetryHandler, ErrorBoundary } = require "./error-handling.coffee"
 
 # ============================================
 # Slide - 基础幻灯片类
@@ -360,6 +362,19 @@ module.exports = {
   SlideAnimation
   AnimationSequence
   AnimatedSlide
+  PdfConfig
+  PdfHeader
+  PdfFooter
+  PdfWatermark
+  PdfExport
+  ValidationError
+  ValidationResult
+  Validator
+  ErrorHandler
+  FallbackContent
+  ErrorSlide
+  RetryHandler
+  ErrorBoundary
   createSlide
   createSlides
 }
