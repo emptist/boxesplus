@@ -417,13 +417,13 @@ class QuoteSlide extends Slide
                 x: 0.5, y: y, w: 9, h: quoteHeight
                 fill: { color: "F5F5F5" }
             
-            fontSize = @fitText(value, 8, quoteHeight * 0.6)
+            fontSize = @fitText(value, 8, quoteHeight * 0.75)
             slide.addText "\"#{value}\"",
-                x: 1, y: y + quoteHeight * 0.2, w: 8, h: quoteHeight * 0.6
+                x: 1, y: y + quoteHeight * 0.1, w: 8, h: quoteHeight * 0.75
                 fontSize: fontSize, italic: true, color: "666666"
             
             slide.addText "— #{key}",
-                x: 1, y: y + quoteHeight * 0.8, w: 8, h: quoteHeight * 0.2
+                x: 1, y: y + quoteHeight * 0.85, w: 8, h: quoteHeight * 0.15
                 fontSize: Math.min(14, fontSize), align: "right", color: "999999"
             
             y += quoteHeight
