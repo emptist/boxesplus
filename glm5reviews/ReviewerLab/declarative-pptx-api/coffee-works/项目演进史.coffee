@@ -2,7 +2,7 @@
 # 展示我们如何一步一步走到 declarative-pptx-api
 
 { 
-  Slide, TitleSlide, ContentSlide, TwoColumnSlide, TableSlide, CardSlide,
+  Slide, TitleSlide, ContentSlide, CodeSlide, TwoColumnSlide, TableSlide, CardSlide,
   ImageSlide, QuoteSlide, NumberSlide, TimelineSlide, ProcessSlide,
   ComparisonSlide, Section, Chapter, Node, Presentation 
 } = require "../index"
@@ -63,7 +63,7 @@ class 第一个声明式框架 extends QuoteSlide
   @关键特性: "类定义顺序无关"
   @实现方式: "函数延迟解析 + setImmediate延迟执行"
 
-class 早期代码示例 extends ContentSlide
+class 早期代码示例 extends CodeSlide
   @代码: """
 class 我的幻灯片 extends Presentation
     @sections: -> [学科平台定义]
@@ -199,7 +199,7 @@ class 品牌定义 extends CardSlide
 """
   @价值: "大大提高代码复用性和灵活性"
 
-class 完整示例 extends ContentSlide
+class 完整示例 extends CodeSlide
   @代码: """
 { 
     Slide, TitleSlide, ContentSlide, Section, Presentation 
@@ -225,7 +225,7 @@ class 课程信息 extends ContentSlide
 # 第六章：技术细节
 # ============================================
 
-class 函数延迟解析 extends ContentSlide
+class 函数延迟解析 extends CodeSlide
   @问题: "类定义时，其他类可能还未定义"
   @解决方案: "使用函数延迟解析"
   @代码: """
@@ -233,7 +233,7 @@ class 函数延迟解析 extends ContentSlide
 """
   @效果: "类定义顺序无关"
 
-class setImmediate延迟执行 extends ContentSlide
+class setImmediate延迟执行 extends CodeSlide
   @问题: "类定义时立即执行，可能导致错误"
   @解决方案: "使用setImmediate延迟到下一个事件循环"
   @代码: """
@@ -242,7 +242,7 @@ class setImmediate延迟执行 extends ContentSlide
 """
   @效果: "确保所有类都已定义"
 
-class 类定义时执行 extends ContentSlide
+class 类定义时执行 extends CodeSlide
   @特性: "CoffeeScript的类定义时会执行代码"
   @代码: """
 class 我的幻灯片 extends Presentation
@@ -250,7 +250,7 @@ class 我的幻灯片 extends Presentation
 """
   @效果: "自动触发生成"
 
-class 智能布局实现 extends ContentSlide
+class 智能布局实现 extends CodeSlide
   @算法: "根据文本长度、可用宽度、可用高度计算字体大小"
   @代码: """
 @autoFontSize: (text, width, height, maxFontSize = 18, minFontSize = 10) ->

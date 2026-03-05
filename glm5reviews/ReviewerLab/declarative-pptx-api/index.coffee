@@ -154,6 +154,37 @@ class ContentSlide extends Slide
             y += 0.5
 
 # ============================================
+# CodeSlide - 代码页
+# ============================================
+
+class CodeSlide extends ContentSlide
+    @toPptx: (pptx) ->
+        slide = pptx.addSlide()
+        
+        slide.addText @name,
+            x: 0.5, y: 0.3, w: 9, h: 0.6
+            fontSize: 28, bold: true, color: "366092"
+        
+        properties = @getProperties()
+        y = 1.2
+        
+        for key, value of properties
+            if key is '代码'
+                fontSize = @autoFontSize(value, 9, 5)
+                
+                slide.addText value,
+                    x: 0.5, y: y, w: 9, h: 5
+                    fontSize: fontSize, color: "333333", align: "left"
+                y += 5.2
+            else
+                fontSize = @autoFontSize(value, 9, 0.4)
+                
+                slide.addText "• #{value}",
+                    x: 0.5, y: y, w: 9, h: 0.4
+                    fontSize: fontSize, color: "333333"
+                y += 0.5
+
+# ============================================
 # TwoColumnSlide - 两栏页
 # ============================================
 
@@ -1335,6 +1366,7 @@ module.exports = {
     Slide
     TitleSlide
     ContentSlide
+    CodeSlide
     TwoColumnSlide
     TableSlide
     CardSlide
