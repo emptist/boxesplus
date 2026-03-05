@@ -1127,16 +1127,17 @@ class MermaidSlide extends Slide
 
 class Section
     @toPptx: (pptx) ->
-        # 支持函数和数组两种方式
-        chapters = if typeof @chapters is 'function' then @chapters() else @chapters ? []
+        # 支持函数和数组两种方式，统一使用 @includes 属性
+        # 支持 Chapter、Node、Slide 任意一个类型的数组
+        includes = if typeof @includes is 'function' then @includes() else @includes ? []
         
-        unless chapters.length > 0
-            console.warn "⚠️  Warning: Section '#{@name}' has no chapters defined"
+        unless includes.length > 0
+            console.warn "⚠️  Warning: Section '#{@name}' has no includes defined"
         
-        for chapter in chapters
-            unless chapter?.toPptx
-                console.warn "⚠️  Warning: '#{chapter?.name or chapter}' in Section '#{@name}' is not a valid Chapter class (did you forget to extend Chapter?)"
-            chapter.toPptx?(pptx)
+        for include in includes
+            unless include?.toPptx
+                console.warn "⚠️  Warning: '#{include?.name or include}' in Section '#{@name}' is not a valid class (did you forget to extend?)"
+            include.toPptx?(pptx)
 
 # ============================================
 # Chapter - 章类（声明式）
@@ -1144,11 +1145,12 @@ class Section
 
 class Chapter
     @toPptx: (pptx) ->
-        # 支持函数和数组两种方式
-        nodes = if typeof @nodes is 'function' then @nodes() else @nodes ? []
+        # 支持函数和数组两种方式，统一使用 @includes 属性
+        # 支持 Node、Slide 任意一个类型的数组
+        includes = if typeof @includes is 'function' then @includes() else @includes ? []
         
-        for node in nodes
-            node.toPptx?(pptx)
+        for include in includes
+            include.toPptx?(pptx)
 
 # ============================================
 # Node - 节类（声明式）
@@ -1165,16 +1167,17 @@ class Chapter
 
 class Node
     @toPptx: (pptx) ->
-        # 支持函数和数组两种方式
-        slides = if typeof @slides is 'function' then @slides() else @slides ? []
+        # 支持函数和数组两种方式，统一使用 @includes 属性
+        # 支持 Slide 类型的数组
+        includes = if typeof @includes is 'function' then @includes() else @includes ? []
         
-        unless slides.length > 0
-            console.warn "⚠️  Warning: Node '#{@name}' has no slides defined"
+        unless includes.length > 0
+            console.warn "⚠️  Warning: Node '#{@name}' has no includes defined"
         
-        for slide in slides
-            unless slide?.toPptx
-                console.warn "⚠️  Warning: '#{slide?.name or slide}' in Node '#{@name}' is not a valid Slide class (did you forget to extend Slide?)"
-            slide.toPptx?(pptx)
+        for include in includes
+            unless include?.toPptx
+                console.warn "⚠️  Warning: '#{include?.name or include}' in Node '#{@name}' is not a valid Slide class (did you forget to extend Slide?)"
+            include.toPptx?(pptx)
 
 # ============================================
 # Presentation - 书类（声明式）
@@ -1200,15 +1203,17 @@ class Presentation
             pptx.title = @name
             pptx.author = "BoxesPlus"
             
-            sections = if typeof @sections is 'function' then @sections() else @sections ? []
+            # 支持函数和数组两种方式，统一使用 @includes 属性
+            # 支持 Section、Chapter、Node、Slide 任意一个类型的数组
+            includes = if typeof @includes is 'function' then @includes() else @includes ? []
             
-            unless sections.length > 0
-                console.warn "⚠️  Warning: Presentation '#{@name}' has no sections defined"
+            unless includes.length > 0
+                console.warn "⚠️  Warning: Presentation '#{@name}' has no includes defined"
             
-            for section in sections
-                unless section?.toPptx
-                    console.warn "⚠️  Warning: '#{section?.name or section}' in Presentation '#{@name}' is not a valid Section class (did you forget to extend Section?)"
-                section.toPptx?(pptx)
+            for include in includes
+                unless include?.toPptx
+                    console.warn "⚠️  Warning: '#{include?.name or include}' in Presentation '#{@name}' is not a valid class (did you forget to extend?)"
+                include.toPptx?(pptx)
             
             pptx.writeFile({ fileName: outputPath })
             console.log "✅ Generated: #{outputPath}\n"

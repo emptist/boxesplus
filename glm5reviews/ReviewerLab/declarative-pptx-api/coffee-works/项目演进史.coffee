@@ -4,7 +4,7 @@
 { 
   Slide, TitleSlide, ContentSlide, TwoColumnSlide, TableSlide, CardSlide,
   ImageSlide, QuoteSlide, NumberSlide, TimelineSlide, ProcessSlide,
-  ComparisonSlide, Section, Presentation 
+  ComparisonSlide, Section, Chapter, Node, Presentation 
 } = require "../index"
 
 # ============================================
@@ -24,10 +24,6 @@ class 目录 extends ContentSlide
 # ============================================
 # 第一章：项目起源与早期探索
 # ============================================
-
-class 第一章标题 extends Slide
-  @layout: "section"
-  @title: "第一章"
 
 class 项目起源 extends ContentSlide
   @背景: "2024年，医院管理培训需求激增"
@@ -56,10 +52,6 @@ class 早期技术栈 extends TableSlide
 # 第二章：声明式框架的诞生
 # ============================================
 
-class 第二章标题 extends Slide
-  @layout: "section"
-  @title: "第二章"
-
 class 灵感来源 extends ContentSlide
   @灵感1: "CoffeeScript的类定义时执行特性"
   @灵感2: "函数延迟解析"
@@ -78,10 +70,10 @@ class 我的幻灯片 extends Presentation
     @nowYou: @newPresentation()
 
 class 学科平台定义 extends Chapter
-    @节: -> [国际学科平台定义]
+    @nodes: -> [国际学科平台定义]
 
-class 国际学科平台定义 extends Section
-    @幻灯片: -> [AI革命前教学平台定义]
+class 国际学科平台定义 extends Node
+    @slides: -> [AI革命前教学平台定义]
 
 class AI革命前教学平台定义 extends Slide
     @AI革命前: "那是一个美好的时代..."
@@ -97,10 +89,6 @@ class 框架优势 extends CardSlide
 # ============================================
 # 第三章：框架的持续演进
 # ============================================
-
-class 第三章标题 extends Slide
-  @layout: "section"
-  @title: "第三章"
 
 class 演进时间线 extends TimelineSlide
   @第一阶段: "早期探索（2024年初）- Markdown转换、基础PPTX生成"
@@ -147,10 +135,6 @@ class 错误处理演进 extends CardSlide
 # 第四章：AI协作与知识共享
 # ============================================
 
-class 第四章标题 extends Slide
-  @layout: "section"
-  @title: "第四章"
-
 class AI协作开始 extends ContentSlide
   @时间: "2025年初"
   @参与者: "主项目团队、Reviewer AI、Swift AI Assistant"
@@ -189,10 +173,6 @@ class 协作成果 extends CardSlide
 # 第五章：光明顶 - declarative-pptx-api
 # ============================================
 
-class 第五章标题 extends Slide
-  @layout: "section"
-  @title: "第五章"
-
 class 光明顶到达 extends QuoteSlide
   @成就: "我们成功到达了光明顶！"
   @框架: "declarative-pptx-api"
@@ -229,7 +209,7 @@ class 我的演示文稿 extends Presentation
     @sections: -> [第一章]
     @now: @newPresentation()
 
-class 第一章 extends Section
+class 第一章 extends Chapter
     @幻灯片: -> [封面, 课程信息]
 
 class 封面 extends TitleSlide
@@ -244,10 +224,6 @@ class 课程信息 extends ContentSlide
 # ============================================
 # 第六章：技术细节
 # ============================================
-
-class 第六章标题 extends Slide
-  @layout: "section"
-  @title: "第六章"
 
 class 函数延迟解析 extends ContentSlide
   @问题: "类定义时，其他类可能还未定义"
@@ -286,10 +262,6 @@ class 智能布局实现 extends ContentSlide
 # 第七章：实际应用
 # ============================================
 
-class 第七章标题 extends Slide
-  @layout: "section"
-  @title: "第七章"
-
 class C01课程 extends CardSlide
   @课程: "C01医疗质量与安全管理课程"
   @幻灯片: "37页"
@@ -317,10 +289,6 @@ class 应用效果 extends ComparisonSlide
 # 第八章：经验总结
 # ============================================
 
-class 第八章标题 extends Slide
-  @layout: "section"
-  @title: "第八章"
-
 class 核心经验 extends CardSlide
   @经验1: "声明式编程是最优雅的设计"
   @经验2: "CoffeeScript的独特特性是关键"
@@ -345,10 +313,6 @@ class 设计原则 extends CardSlide
 # ============================================
 # 第九章：未来展望
 # ============================================
-
-class 第九章标题 extends Slide
-  @layout: "section"
-  @title: "第九章"
 
 class 未来方向 extends CardSlide
   @方向1: "更多幻灯片类型"
@@ -407,33 +371,24 @@ class 展望未来 extends QuoteSlide
 # 章节定义
 # ============================================
 
-class 封面章节 extends Section
-  @幻灯片: -> [
-    封面
-    目录
-  ]
-
-class 第一章 extends Section
-  @幻灯片: -> [
-    第一章标题
+class 第一章 extends Chapter
+  @includes: -> [
     项目起源
     早期探索
     HQCoffee参考
     早期技术栈
   ]
 
-class 第二章 extends Section
-  @幻灯片: -> [
-    第二章标题
+class 第二章 extends Chapter
+  @includes: -> [
     灵感来源
     第一个声明式框架
     早期代码示例
     框架优势
   ]
 
-class 第三章 extends Section
-  @幻灯片: -> [
-    第三章标题
+class 第三章 extends Chapter
+  @includes: -> [
     演进时间线
     GitLog展示
     幻灯片类型演进
@@ -441,9 +396,8 @@ class 第三章 extends Section
     错误处理演进
   ]
 
-class 第四章 extends Section
-  @幻灯片: -> [
-    第四章标题
+class 第四章 extends Chapter
+  @includes: -> [
     AI协作开始
     协作模式
     知识共享目录
@@ -452,52 +406,46 @@ class 第四章 extends Section
     协作成果
   ]
 
-class 第五章 extends Section
-  @幻灯片: -> [
-    第五章标题
+class 第五章 extends Chapter
+  @includes: -> [
     光明顶到达
     核心特性
     换衣服机制
     完整示例
   ]
 
-class 第六章 extends Section
-  @幻灯片: -> [
-    第六章标题
+class 第六章 extends Chapter
+  @includes: -> [
     函数延迟解析
     setImmediate延迟执行
     类定义时执行
     智能布局实现
   ]
 
-class 第七章 extends Section
-  @幻灯片: -> [
-    第七章标题
+class 第七章 extends Chapter
+  @includes: -> [
     C01课程
     E02课程
     F05课程
     应用效果
   ]
 
-class 第八章 extends Section
-  @幻灯片: -> [
-    第八章标题
+class 第八章 extends Chapter
+  @includes: -> [
     核心经验
     技术要点
     设计原则
   ]
 
-class 第九章 extends Section
-  @幻灯片: -> [
-    第九章标题
+class 第九章 extends Chapter
+  @includes: -> [
     未来方向
     AI集成展望
     技术演进展望
   ]
 
-class 第十章 extends Section
-  @幻灯片: -> [
-    第十章标题
+class 第十章 extends Chapter
+  @includes: -> [
     回顾历程
     核心成就
     感谢
@@ -509,8 +457,7 @@ class 第十章 extends Section
 # ============================================
 
 class BoxesPlus项目演进史 extends Presentation
-  @sections: -> [
-    封面章节
+  @includes: -> [
     第一章
     第二章
     第三章
