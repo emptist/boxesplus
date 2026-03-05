@@ -1127,6 +1127,12 @@ class MermaidSlide extends Slide
 
 class Section
     @toPptx: (pptx) ->
+        # 渲染Section封面
+        slide = pptx.addSlide()
+        slide.addText @name,
+            x: 0.5, y: 2.5, w: 9, h: 1
+            fontSize: 44, bold: true, color: "366092", align: "center"
+        
         # 支持函数和数组两种方式，统一使用 @including 属性
         # 支持 Chapter、Node、Slide 任意一个类型的数组
         including = if typeof @including is 'function' then @including() else @including ? []
@@ -1145,6 +1151,12 @@ class Section
 
 class Chapter
     @toPptx: (pptx) ->
+        # 渲染Chapter封面
+        slide = pptx.addSlide()
+        slide.addText @name,
+            x: 0.5, y: 2.5, w: 9, h: 1
+            fontSize: 44, bold: true, color: "366092", align: "center"
+        
         # 支持函数和数组两种方式，统一使用 @including 属性
         # 支持 Node、Slide 任意一个类型的数组
         including = if typeof @including is 'function' then @including() else @including ? []
@@ -1167,6 +1179,12 @@ class Chapter
 
 class Node
     @toPptx: (pptx) ->
+        # 渲染Node封面
+        slide = pptx.addSlide()
+        slide.addText @name,
+            x: 0.5, y: 2.5, w: 9, h: 1
+            fontSize: 44, bold: true, color: "366092", align: "center"
+        
         # 支持函数和数组两种方式，统一使用 @including 属性
         # 支持 Slide 类型的数组
         including = if typeof @including is 'function' then @including() else @including ? []
@@ -1202,6 +1220,12 @@ class Presentation
             pptx = new pptxgen()
             pptx.title = @name
             pptx.author = "BoxesPlus"
+            
+            # 渲染Presentation封面
+            slide = pptx.addSlide()
+            slide.addText @name,
+                x: 0.5, y: 2.5, w: 9, h: 1
+                fontSize: 44, bold: true, color: "366092", align: "center"
             
             # 支持函数和数组两种方式，统一使用 @including 属性
             # 支持 Section、Chapter、Node、Slide 任意一个类型的数组
