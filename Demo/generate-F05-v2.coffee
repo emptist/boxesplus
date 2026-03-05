@@ -1,25 +1,24 @@
-# F05 数据资产管理课程 - 使用新的声明式 API v2
+# F05 数据资产管理课程 - 使用声明式 API v2
 # 5级层次：Presentation -> Section -> Chapter -> Node -> Slide
 # 用法: coffee Demo/generate-F05-v2.coffee
 
 { 
   Presentation, Section, Chapter, Node, Slide,
   ContentSlide, ListSlide, ComparisonSlide, MermaidSlide,
-  PDCA, SWOT, Timeline
+  PDCA, SWOT
 } = require "../api/declarative-v2.coffee"
 
 # ============================================
-# 简单幻灯片 - 直接包含在 Presentation 中
+# 简单幻灯片 - 直接在 Presentation 中
 # ============================================
 
 class AI时代的数据资产管理 extends Slide
   @layout: "title"
   @style: "title"
-  @subtitle: "医院管理保障与支撑模块"
 
 class 课程信息 extends ContentSlide
   @课程定位: "医院管理保障与支撑模块（优选课程）"
-  @课程对象: "医院院长、信息中心主任、医务部主任"
+  @课程对象: "医院院长，信息中心主任、医务部主任"
   @教学方法: "理论讲授、案例分析、课堂讨论"
 
 class 课程目标 extends ContentSlide
@@ -28,11 +27,10 @@ class 课程目标 extends ContentSlide
   @素质目标: "树立数据资产化管理理念\n提升数据驱动管理能力"
 
 # ============================================
-# 第一章：数据资产管理概述
+# 章节 - Section 容器
 # ============================================
 
-class 第一章数据资产管理概述 extends Section
-  @style: "section"
+class 数据资产管理概述 extends Section
   @including: [
     class 数据成为新型要素 extends ContentSlide
       @数据要素: "土地、劳动力、资本、技术、数据"
@@ -41,22 +39,17 @@ class 第一章数据资产管理概述 extends Section
       @政策推动: "财政部《关于加强数据资产管理的指导意见》"
     
     class 数据资产管理八要素 extends ListSlide
-      @数据确权: "明确数据归属——谁有权使用？收益如何分配？"
+      @数据确权: "明确数据归属——谁有权使用？"
       @数据治理: "标准化、清洗、整合——让数据能用"
-      @数据质量管理: "完整性、准确性、时效性——数据质量是生命线"
+      @数据质量管理: "完整性、准确性、时效性"
       @数据安全: "分类分级、访问控制、加密脱敏"
       @数据采集存储: "规范采集，安全存储"
-      @数据应用: "分析、挖掘、AI建模——用起来才有价值"
-      @数据流通: "共享、交易——让数据流动创造价值"
+      @数据应用: "分析、挖掘、AI建模"
+      @数据流通: "共享、交易——让数据流动"
       @数据估值: "资产定价——数据值多少钱？"
   ]
 
-# ============================================
-# 第二章：医院数据资产特点
-# ============================================
-
-class 第二章医院数据资产特点 extends Section
-  @style: "section"
+class 医院数据资产特点 extends Section
   @including: [
     class 医院数据类型 extends ListSlide
       @临床数据: "病历、检验、检查、用药——核心资产"
@@ -66,9 +59,9 @@ class 第二章医院数据资产特点 extends Section
     
     class 医院数据价值 extends ListSlide
       @临床价值: "辅助诊断、精准医疗、疾病预测"
-      @管理价值: "运营分析、质量监控、绩效评价"
+      @管理价值: "运营分析，质量监控、绩效评价"
       @科研价值: "临床研究、药物研发、真实世界研究"
-      @AI价值: "模型训练、智能应用——没有数据就没有AI"
+      @AI价值: "模型训练，智能应用——没有数据就没有AI"
     
     class 数据管理特殊性 extends ContentSlide
       @敏感性强: "患者隐私保护是高压线"
@@ -81,12 +74,7 @@ class 第二章医院数据资产特点 extends Section
       @劣势: "数据孤岛严重\n数据标准不统一\n数据质量参差不齐\n数据确权不清晰"
   ]
 
-# ============================================
-# 第三章：数据治理
-# ============================================
-
-class 第三章数据治理 extends Section
-  @style: "section"
+class 数据治理 extends Section
   @including: [
     class 数据治理体系 extends ContentSlide
       @组织架构: "数据管理委员会、数据管理部门、业务部门协同"
@@ -119,32 +107,22 @@ flowchart LR
 """
   ]
 
-# ============================================
-# 第四章：数据安全与合规
-# ============================================
-
-class 第四章数据安全与合规 extends Section
-  @style: "section"
+class 数据安全与合规 extends Section
   @including: [
     class 数据安全体系 extends ListSlide
       @分类分级: "核心数据、重要数据、敏感数据、一般数据"
-      @技术措施: "访问控制、加密存储、脱敏处理"
+      @技术措施: "访问控制、加密存储，脱敏处理"
       @管理措施: "安全制度、培训演练、应急响应"
     
     class 医疗数据合规 extends ContentSlide
       @核心法规: "《数据安全法》《个人信息保护法》"
-      @合规要求: "知情同意、最小必要、安全保护"
+      @合规要求: "知情同意，最小必要，安全保护"
       @合规红线: "严禁未经授权收集、超范围使用、私自提供"
     
     class 数据安全SWOT extends SWOT
   ]
 
-# ============================================
-# 第五章：数据应用与创新
-# ============================================
-
-class 第五章数据应用与创新 extends Section
-  @style: "section"
+class 数据应用与创新 extends Section
   @including: [
     class 临床数据应用 extends ListSlide
       @辅助诊断: "AI影像识别、智能读片"
@@ -152,7 +130,7 @@ class 第五章数据应用与创新 extends Section
       @决策支持: "诊疗建议、风险预警"
     
     class 管理数据应用 extends ListSlide
-      @运营分析: "业务量、收入结构、成本效益"
+      @运营分析: "业务量、收入结构，成本效益"
       @质量监控: "医疗质量、护理质量、院感监控"
       @决策支持: "院长驾驶舱、科室运营分析"
     
@@ -164,12 +142,7 @@ class 第五章数据应用与创新 extends Section
     class PDCA循环 extends PDCA
   ]
 
-# ============================================
-# 第六章：案例研讨
-# ============================================
-
-class 第六章案例研讨 extends Section
-  @style: "section"
+class 案例研讨 extends Section
   @including: [
     class 案例一 extends ContentSlide
       @案例名称: "某三甲医院数据治理体系建设"
@@ -182,12 +155,7 @@ class 第六章案例研讨 extends Section
       @合规重点: "患者隐私保护、数据跨境管控"
   ]
 
-# ============================================
-# 总结
-# ============================================
-
 class 课程特色与工具箱 extends Section
-  @style: "section"
   @including: [
     class 课程特色 extends ComparisonSlide
       @前沿性强: "紧跟AI和数据经济发展趋势"
@@ -207,7 +175,7 @@ class 课程特色与工具箱 extends Section
   ]
 
 # ============================================
-# 演示文稿 - 直接包含所有章节
+# 演示文稿 - 顶级容器
 # ============================================
 
 class F05数据资产管理课程 extends Presentation
@@ -215,20 +183,20 @@ class F05数据资产管理课程 extends Presentation
   @author: "医院管理培训"
   @date: "2026"
   @including: [
-    # 直接包含幻灯片
+    # 直接幻灯片
     AI时代的数据资产管理
     课程信息
     课程目标
-    # 包含章节（章节包含幻灯片）
-    第一章数据资产管理概述
-    第二章医院数据资产特点
-    第三章数据治理
-    第四章数据安全与合规
-    第五章数据应用与创新
-    第六章案例研讨
+    # 章节（包含多个幻灯片）
+    数据资产管理概述
+    医院数据资产特点
+    数据治理
+    数据安全与合规
+    数据应用与创新
+    案例研讨
     课程特色与工具箱
   ]
   
   @now: @newPresentation()
 
-console.log "✅ F05数据资产管理课程 (v2) 准备就绪!"
+console.log "✅ F05数据资产管理课程准备就绪!"

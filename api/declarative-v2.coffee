@@ -4,12 +4,6 @@
 
 { generateHtml, htmlToPdf, htmlToPptx, CHARTS } = require "./hybrid-generator.coffee"
 { Theme, Themes, getTheme, createCustomTheme } = require "./themes.coffee"
-{ SmartImage, ImageLayout, ImageGrid, ImageComparison, ImageCarousel, ImageWithText } = require "./smart-image.coffee"
-{ Animation, Transition, SlideAnimation } = require "./animations.coffee"
-{ PdfConfig, PdfHeader, PdfFooter, PdfWatermark, PdfExport } = require "./pdf-config.coffee"
-{ ValidationError, ValidationResult, Validator, ErrorHandler, FallbackContent, ErrorSlide, RetryHandler, ErrorBoundary } = require "./error-handling.coffee"
-{ Logger, ErrorLogger, AuditLogger } = require "./logging.coffee"
-Errors = require "./error-types.coffee"
 
 # ============================================
 # Base Item - 所有级别的基类
@@ -20,6 +14,7 @@ class Item
   @style: "default"
   @including: []
   @theme: "default"
+  @_isContainer: false  # 是否是容器（不生成自身幻灯片）
   
   @getTitle: -> @name or @constructor.name
   
@@ -31,33 +26,36 @@ class Item
   @getIncluding: ->
     if typeof @including is 'function' then @including() else @including ? []
 
-  @flatten: (items = []) ->
+  # 展平所有子项目
+  @flatten: (items = [], includeSelf = false) ->
     including = @getIncluding()
-    for item in (including ? [])
-      hasGetIncluding = item?.getIncluding?
-      hasToData = item?.toData?
-      
-      # Check if item has nested content
-      if hasGetIncluding
-        nestedIncluding = item.getIncluding()
-        if nestedIncluding and nestedIncluding.length > 0
-          # Has nested content, recurse
-          item.flatten(items)
-        else
-          # No nested content, treat as slide
-          if hasToData
-            items.push(item)
-      else if hasToData
-        items.push(item)
+    
+    # 如果是容器类型且有子项目，只展平子项目
+    # 如果是容器类型且无子项目，生成自身幻灯片
+    # 如果不是容器，生成自身幻灯片
+    
+    if @_isContainer and including?.length > 0
+      # 是容器且有子项，只处理子项
+      for item in (including ? [])
+        if item?.flatten
+          item.flatten(items, true)
+        else if item?.toData
+          items.push(item)
+    else
+      # 不是容器 或 无子项，生成自身
+      if @toData
+        items.push(this)
+    
     items
 
 # ============================================
-# Slide - 最小级别
+# Slide - 最小级别（叶子节点）
 # ============================================
 
 class Slide extends Item
   @layout: "content"
-  @content: {}
+  @style: "content"
+  @_isContainer: false
   
   @toData: ->
     props = @getProperties()
@@ -70,33 +68,47 @@ class Slide extends Item
   @getProperties: ->
     props = {}
     for key, value of this
-      unless key in ['name', 'length', 'prototype', 'toData', 'getProperties', 'getTitle', 'getIncluding', 'flatten', 'layout', 'style', 'including', 'theme', 'content', 'chart']
+      unless key in ['name', 'length', 'prototype', 'toData', 'getProperties', 'getTitle', 'getIncluding', 'flatten', 'layout', 'style', 'including', 'theme', 'content', 'chart', '_isContainer']
         props[key] = value
     props
 
 # ============================================
-# Node - 可以包含 Slide
+# Container Classes - 不生成自身幻灯片，只包含子项
 # ============================================
 
 class Node extends Item
   @layout: "node"
   @style: "card"
-
-# ============================================
-# Chapter - 可以包含 Node 或 Slide
-# ============================================
+  @_isContainer: true
 
 class Chapter extends Item
   @layout: "chapter"
-  @style: "section"
-
-# ============================================
-# Section - 可以包含 Chapter, Node 或 Slide
-# ============================================
+  @style: "chapter"
+  @_isContainer: true
 
 class Section extends Item
   @layout: "section"
   @style: "section"
+  @_isContainer: true
+
+# ============================================
+# Special Containers - 可以生成章节封面
+# ============================================
+
+class Part extends Item
+  @layout: "part"
+  @style: "part"
+  @_isContainer: true
+
+class ChapterCover extends Slide
+  @layout: "chapter"
+  @style: "chapter"
+  @_isContainer: false
+
+class SectionCover extends Slide
+  @layout: "section"
+  @style: "section"
+  @_isContainer: false
 
 # ============================================
 # Presentation - 最高级别，可以包含任何
