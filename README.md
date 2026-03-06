@@ -208,7 +208,13 @@ flowchart TB
 boxesplus/
 ├── api/                    # 核心 API
 │   ├── hybrid-generator.coffee   # 主生成器
-│   └── oo-api.coffee            # OO API
+│   ├── oo-api.coffee            # OO API
+│   └── ...
+├── shared/                  # 共享组件 (ReviewerLab 共用)
+│   ├── animations.coffee         # 动画系统
+│   ├── smart-image.coffee      # 智能图片
+│   ├── themes.coffee           # 主题系统
+│   └── error-handling.coffee   # 错误处理
 ├── cli/                    # CLI 工具
 │   └── boxesplus.coffee
 ├── Demo/                   # 演示文件
@@ -219,6 +225,8 @@ boxesplus/
 ├── scripts/                # 工具脚本
 │   └── serve.coffee        # 本地服务器
 ├── resources/              # 资源文件
+├── glm5reviews/            # AI 协作空间
+│   └── AI_REVIEWS/         # 评审记录
 ├── Deprecated/              # 已废弃的文件
 └── package.json
 ```
@@ -339,3 +347,129 @@ class 方案对比 extends ComparisonSlide
 ```bash
 coffee Demo/demo-declarative.coffee
 ```
+
+## 动画系统
+
+```bash
+npm run animations  # 查看动画演示
+```
+
+```coffee
+{ AnimatedSlide } = require "./api/animations.coffee"
+
+# 方式1: 在父类添加动画
+class 动画演示 extends ContentSlide
+  @animation: "slideInLeft"  # 动画类型
+  @animationSpeed: "slow"    # 速度: fast, normal, slow, verySlow
+
+# 方式2: 列表项交错动画
+class 交错列表 extends ListSlide
+  @stagger: true              # 启用交错动画
+  @items: ["项目一", "项目二", "项目三"]
+```
+
+### 动画类型
+
+| 类型 | 效果 |
+|------|------|
+| `fade` | 淡入 |
+| `slideInLeft/Right/Up/Down` | 滑入 |
+| `zoom` | 缩放 |
+| `bounce` | 弹跳 |
+| `flip` | 翻转 |
+| `pulse` | 脉冲 |
+
+## 智能图片
+
+```bash
+npm run images  # 查看智能图片演示
+```
+
+```coffee
+{ ImageLayout, ImageGrid, ImageComparison } = require "./api/smart-image.coffee"
+
+# 单图布局
+img = new ImageLayout("photo.jpg")
+  .layout("Half")        # Full, Half, Third, Quarter, Left, Right
+  .position("Center")    # Center, Left, Right, Top, Bottom
+  .fit("Cover")         # Cover, Contain, Fill, ScaleDown
+
+# 多图网格
+grid = new ImageGrid(["1.jpg", "2.jpg", "3.jpg", "4.jpg"])
+  .cols(2)
+
+# 图片对比
+compare = new ImageComparison("before.jpg", "after.jpg")
+```
+
+## 主题系统
+
+```bash
+npm run themes  # 查看主题演示
+```
+
+```coffee
+{ Theme, setTheme } = require "./api/themes.coffee"
+
+# 预设主题
+setTheme("medical")   # 医疗主题
+setTheme("corporate") # 企业主题
+setTheme("dark")      # 深色主题
+
+# 自定义主题
+custom = new Theme("myTheme")
+  .primaryColor("#ff0000")
+  .backgroundColor("#ffffff")
+  .fontSize(18)
+```
+
+### 预设主题
+
+- `default` - 默认主题
+- `blue` - 蓝色主题  
+- `green` - 绿色主题
+- `purple` - 紫色主题
+- `orange` - 橙色主题
+- `dark` - 深色主题
+- `corporate` - 企业主题
+- `medical` - 医疗主题
+
+---
+
+## AI 协作
+
+本项目采用多 AI 团队协作模式：
+
+- **主项目团队** - 负责核心功能开发与整合
+- **Reviewer AI** - 负责代码评审与探索
+- **Swift AI Assistant** - 负责 Swift 声明式 API 设计探索
+
+### 协作流程
+
+```
+探索 (ReviewerLab) → 验证 → 整合 (主项目) → 发布
+```
+
+详见 `glm5reviews/AI_REVIEWS/`
+
+---
+
+## 输出文件
+
+运行后在 `outputs/` 目录生成：
+
+| 文件 | 格式 | 用途 |
+|------|------|------|
+| `*.html` | HTML | Reveal.js 演示 |
+| `*.pdf` | PDF | 文档/打印 |
+| `*.pptx` | PPTX | PowerPoint 演示 |
+
+---
+
+## 依赖版本
+
+- CoffeeScript: ^2.7.0
+- PptxGenJS: ^4.0.1
+- Puppeteer: ^24.37.5
+- Mermaid: ^11.12.3
+- Reveal.js: ^3.9.2

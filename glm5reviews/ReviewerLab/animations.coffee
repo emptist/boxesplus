@@ -39,6 +39,7 @@ class Animation
     timing: ease
 
   @getCss: (type, direction = "left") ->
+    dir = if direction is 'right' then '100%' else '-100%'
     animations = {
       fadeIn: """
         @keyframes fadeIn {
@@ -49,10 +50,24 @@ class Animation
       """,
       slideIn: """
         @keyframes slideIn {
-          from { transform: translateX(#{if direction is 'right' then '100%' else '-100%'}); opacity: 0; }
+          from { transform: translateX(#{dir}); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
         }
         .slideIn { animation: slideIn @duration @timing forwards; }
+      """,
+      slideLeft: """
+        @keyframes slideLeft {
+          from { transform: translateX(-100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        .slideLeft { animation: slideLeft @duration @timing forwards; }
+      """,
+      slideRight: """
+        @keyframes slideRight {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        .slideRight { animation: slideRight @duration @timing forwards; }
       """,
       slideUp: """
         @keyframes slideUp {
@@ -108,8 +123,9 @@ class Animation
       """
     }
     
-    (animations[type] or animations.fadeIn)
-      .replace(/@duration/g, @durations[type] or "0.5s")
+    animName = @types[type] or "fadeIn"
+    (animations[animName] or animations.fadeIn)
+      .replace(/@duration/g, @durations.normal)
       .replace(/@timing/g, @easings.ease)
 
   @generateAllCss: ->
